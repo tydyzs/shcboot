@@ -19,6 +19,7 @@
         <module>guns-base</module>
         <module>guns-base-auth</module>
         <module>guns-sys</module>
+        <module>guns-business</module>
         <module>guns-dbctn</module>
     </modules>
 

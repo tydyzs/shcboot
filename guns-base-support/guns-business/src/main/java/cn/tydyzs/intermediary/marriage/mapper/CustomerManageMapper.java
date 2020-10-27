@@ -20,7 +20,7 @@ public interface CustomerManageMapper extends BaseMapper<CustomerManage> {
 	 * @param crd
 	 * @return
 	 */
-	List<CrdVO> selectCrdPage(IPage page, CrdVO crd);
+	List<CustomerManage> selectCrdPage(IPage page, CustomerManage crd);
 	int selectCrdProduct(String crdProductNum);
 	String getCrdMaxId(String crdId);
 
