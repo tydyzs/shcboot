@@ -14,12 +14,12 @@
  *  this software without specific prior written permission.
  *  Author: Chill 庄骞 (smallchill@163.com)
  */
-package org.git.modules.clm.param.vo;
+package cn.tydyzs.intermediary.marriage.vo;
 
-import org.git.modules.clm.param.entity.Product;
+import cn.tydyzs.intermediary.marriage.entity.CustomerManage;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import io.swagger.annotations.ApiModel;
 
 /**
  * 视图实体类
@@ -29,9 +29,21 @@ import io.swagger.annotations.ApiModel;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@ApiModel(value = "ProductVO对象", description = "ProductVO对象")
-public class ProductVO extends Product {
+@ApiModel(value = "CrdProductVO对象", description = "CrdProductVO对象")
+public class CustomerManageVO extends CustomerManage {
 	private static final long serialVersionUID = 1L;
+	/**
+	 * 业务品种编号
+	 */
+	private String productNum;
+	/**
+	 * 业务品种名称
+	 */
+	private String productName;
+	/**
+	 * 业务品种描述
+	 */
+	private String productDescr;
 	/**
 	 * 创建用户名称
 	 */
@@ -48,29 +60,19 @@ public class ProductVO extends Product {
 	 * 更新时间格式化
 	 */
 	private String updateTimeStr;
-
 	/**
-	 * 业务种类-名称
+	 * 业务种类名称
 	 */
 	private String productTypeName;
-
 	/**
-	 * 产品状态-名称
+	 * 项目类型名称
 	 */
-	private String productStatusCdName;
-
+	private String projectTypeName;
 	/**
-	 * 产品额度占用方式-名称
+	 * 担保方式名称
 	 */
-	private String limitUsedTypeName;
+	private String mainGuaranteeTypeName;
 
-	/**
-	 * 风险暴露类型-名称
-	 */
-	private String riskExposureTypeName;
 
-	/**
-	 * 表内外标志（CD000187）-名称
-	 */
-	private String inoutTableName;
+
 }
