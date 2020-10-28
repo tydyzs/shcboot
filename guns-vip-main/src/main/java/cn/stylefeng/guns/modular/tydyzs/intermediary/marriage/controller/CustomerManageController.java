@@ -18,7 +18,7 @@ public class CustomerManageController extends BaseController {
 
 	public static String CONDITION_FIELDS = "CONDITION_FIELDS";
 
-	private String PREFIX = "/modular/databaseInfo";
+	private String PREFIX = "/tydyzs/intermediary/marriage";
 
 	@Autowired
 	private ICustomerManageService iCustomerManageService;
@@ -31,7 +31,7 @@ public class CustomerManageController extends BaseController {
 	 */
 	@RequestMapping("")
 	public String index() {
-		return PREFIX + "/databaseInfo.html";
+		return PREFIX + "/peopleManage.html";
 	}
 
 
