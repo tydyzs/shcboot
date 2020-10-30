@@ -83,18 +83,23 @@ function saveData(){
     var form = layui.form;
     //校验
     form.on('submit(formDemo)', function(data){
-        $.ajax({
-            url:Feng.ctxPath + "/customer/saveData",
-            type:'POST',
-            data:data,
-            contentType:'text/json',
-            success:function(text){
-               console.log(text);
-            },
-            error:function(){
-               alert("服务器异常")
-            }
-        });
+        save(data.field);
         return false;
+    });
+}
+
+function save(data){
+    var json={"param":data};
+    $.ajax({
+        url:Feng.ctxPath + "/customer/saveData",
+        type:'POST',
+        data:json,
+        contentType:'text/json',
+        success:function(text){
+            console.log(text);
+        },
+        error:function(){
+            alert("服务器异常")
+        }
     });
 }
