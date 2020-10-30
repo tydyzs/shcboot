@@ -1,6 +1,6 @@
-layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax','upload'], function () {
+layui.use(['layer', 'peopleManage.css', 'table', 'ztree', 'laydate', 'admin', 'ax','upload'], function () {
     var layer = layui.layer;
-    var form = layui.form;
+    var form = layui.peopleManage;
     var table = layui.table;
     var $ZTree = layui.ztree;
     var $ax = layui.ax;

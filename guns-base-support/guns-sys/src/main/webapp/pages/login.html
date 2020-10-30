@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="${ctxPath}/assets/common/libs/layui/css/layui.css?v=${constants.getReleaseVersion()}"/>
     <link rel="stylesheet" href="${ctxPath}/assets/common/module/admin.css?v=${constants.getReleaseVersion()}"/>
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+   <!-- <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>-->
     <![endif]-->
 </head>
 <body>
@@ -28,11 +28,11 @@
         @}
         <div class="layui-form-item layui-input-icon-group">
             <i class="layui-icon layui-icon-username"></i>
-            <input class="layui-input" id="username" name="username" placeholder="请输入登录账号" value="admin" autocomplete="off" lay-verType="tips" lay-verify="required" required/>
+            <input class="layui-input" id="username" name="username" placeholder="请输入登录账号" value="tydyzs" autocomplete="off" lay-verType="tips" lay-verify="required" required/>
         </div>
         <div class="layui-form-item layui-input-icon-group">
             <i class="layui-icon layui-icon-password"></i>
-            <input class="layui-input" id="password" name="password" placeholder="请输入登录密码" value="111111" type="password" lay-verType="tips" lay-verify="required" required/>
+            <input class="layui-input" id="password" name="password" placeholder="请输入登录密码" value="qwer1234" type="password" lay-verType="tips" lay-verify="required" required/>
         </div>
         @if(constants.getKaptchaOpen()){
         <div class="layui-form-item layui-input-icon-group login-captcha-group">
@@ -48,12 +48,12 @@
         <div class="layui-form-item">
             <button class="layui-btn layui-btn-fluid" id="submit">登录</button>
         </div>
-        <div class="layui-form-item login-oauth-group text-center">
+        <!--<div class="layui-form-item login-oauth-group text-center">
             <a href="${ctxPath}/oauth/render/qq"><i class="layui-icon layui-icon-login-qq" style="color:#3492ed;"></i></a>&emsp;
             <a href="${ctxPath}/oauth/render/gitee">
                 <img class="layui-icon" style="height: 28px;width: 28px; margin-top: -12px !important;" src="${ctxPath}/assets/expand/images/git.png" />
             </a>
-        </div>
+        </div>-->
     </div>
 </div>
 <div class="login-copyright">copyright © 2020 stylefeng.cn all rights reserved.</div>

@@ -1,0 +1,81 @@
+@layout("/common/_container.html",{js:["/assets/tydyzs/intermediary/marriage/js/peopleManageForm.js","/assets/common/util/js/common.js"]}){
+<script src="${ctxPath}/assets/expand/plugins/jquery/jquery-3.2.1.min.js?v=${constants.getReleaseVersion()}"></script>
+<div class="layui-body-header">
+    <span class="layui-body-header-title">表单的示例-添加</span>
+</div>
+
+<div class="layui-fluid " style="">
+    <div class="layui-card">
+        <div class="layui-card-body">
+            <form id="egFormForm" class="layui-form" >
+                <div class="layui-form-item">
+                    <table style="width:100%;height:100%;border-collapse:separate; border-spacing:10px;" >
+                        <tr>
+                            <td ><label class="layui-form-label"><span style="color: red;">*</span>姓名:</label></td>
+                            <td colspan="3">
+                                <input type="text" id="customerName" name="customerName" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                            </td>
+                            <td ><label class="layui-form-label"><span style="color: red;">*</span>性别:</label></td>
+                            <td colspan="3">
+                                <input type="radio" required  lay-verify="required"  name="gender" value="M" title="男" checked="">
+                                <input type="radio" required  lay-verify="required"  name="gender" value="F" title="女">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td ><label class="layui-form-label"><span style="color: red;">*</span>出生日期:</label></td>
+                            <td colspan="3">
+                                <input id="birthdate" name="birthdate" placeholder="请输入出生日期" type="text" class="layui-input"/>
+                            </td>
+                            <td ><label class="layui-form-label">年龄:</label></td>
+                            <td>
+                                <input id="customerAge" type="tel" name="customerAge" autocomplete="off" class="layui-input" disabled=""/>
+                            </td>
+                            <td><label class="layui-form-label">生肖:</label></td>
+                            <td>
+                                <input id="zodiac" type="tel" name="zodiac"  autocomplete="off" class="layui-input" disabled=""/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td ><label class="layui-form-label">车房资产：</label></td>
+                            <td style="text-align: right;" colspan="3">
+                                <input type="checkbox" id="room" name="room" style="margin: auto;" lay-skin="switch" lay-text="有房|无房"/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="checkbox" id="vehicle" name="vehicle" lay-skin="switch" lay-text="有车|无车"/>
+                            </td>
+                            <td ><label class="layui-form-label">资产说明：</label></td>
+                            <td colspan="3">
+                                <input type="tel" name="customerName"  autocomplete="off" class="layui-input">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td ><label class="layui-form-label">照片：</label></td>
+                            <td colspan="7">
+                                <input id="pictureInputHidden" name="pictureInputHidden" type="hidden" class="layui-input"/>
+                                <div class="layui-upload-list">
+                                    <button type="button" class="layui-btn layui-btn-sm" id="picBtn"><i class="layui-icon"></i>选择图片</button>
+                                    <img class="layui-upload-img" id="img1" width="92px" height="92px">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td ><label class="layui-form-label">备注：</label></td>
+                            <td colspan="7">
+                                <textarea id="longText" name="longText" placeholder="请输入备足说明" class="layui-textarea"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="8">
+                                <div style="float:right">
+                                    <button class="layui-btn" onclick="saveData()" lay-submit lay-filter="formDemo">保存</button>
+                                    <button id="backuppage" onclick="closeWindow()" type="reset" class="layui-btn layui-btn-primary">关闭</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@}
