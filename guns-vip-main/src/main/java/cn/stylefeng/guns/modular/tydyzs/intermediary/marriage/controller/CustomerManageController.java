@@ -5,8 +5,9 @@ import cn.stylefeng.roses.core.base.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -39,7 +40,7 @@ public class CustomerManageController extends BaseController {
 	/**
 	 * 表单页面
 	 */
-	@RequestMapping("/form")
+	@RequestMapping("/peopleManageForm")
 	public String form(String type) {
 		return PREFIX + "/peopleManageForm.html";
 	}
@@ -50,9 +51,33 @@ public class CustomerManageController extends BaseController {
 	 * @Date 2019-02-18
 	 */
 	@RequestMapping("/saveData")
-	public void saveData(Map param) {
-		System.out.println(param);
+	@ResponseBody
+	public String saveData(String userName) {
+		System.out.println(userName);
+		return userName;
 	}
+
+	/**
+	 * 保存数据
+	 *
+	 * @author stylefeng
+	 * @Date 2019-02-18
+	 */
+	@RequestMapping(value="/getdata",method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap getdata(@RequestBody HashMap params) {
+		System.out.println(params);
+		return params;
+	}
+
+
+
+	/*@RequestMapping(value="/getdata",method = RequestMethod.GET)
+	@ResponseBody
+	public Map getdata(@RequestParam(value = "params")Map params) {
+		System.out.println(params);
+		return params;
+	}*/
 }
 
 

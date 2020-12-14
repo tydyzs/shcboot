@@ -101,7 +101,7 @@ public class EgFormController extends BaseController {
 
         Page<EgForm> egFormPage = new Page<>();
         egFormPage.setSize(10);
-        egFormPage.setTotal(2);
+        egFormPage.setTotal(1);
         egFormPage.setRecords(records);
 
         return LayuiPageFactory.createPageInfo(egFormPage);

@@ -29,6 +29,10 @@ layui.use(['form', 'admin', 'ax', 'upload', 'laydate', 'selectPlus'], function (
     //初始化时间选择器
     laydate.render({
         elem: '#birthdate'
+        ,trigger:'click'
+        ,done: function(value, date, endDate){
+            dateChange(value,date)
+        }
     });
 
     //上传文件
@@ -87,14 +91,18 @@ function saveData(){
         return false;
     });
 }
-
 function save(data){
-    var json={"param":data};
+    var form = layui.form;
+    var data1 = form.val("egFormForm");
+    console.log(data1);return;
+    var params={userName:"123"};
+    var json=JSON.stringify(params);
     $.ajax({
-        url:Feng.ctxPath + "/customer/saveData",
-        type:'POST',
+        url:Feng.ctxPath + "/customer/getdata",
         data:json,
-        contentType:'text/json',
+        type:'POST',
+        dataType:"json",
+        contentType:'application/json',
         success:function(text){
             console.log(text);
         },

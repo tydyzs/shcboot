@@ -29,7 +29,7 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
             {
                 align: 'center', templet: function (d) {
                     // var url = d.imgUrl;
-                    var url = 'https://pic.qqtn.com/up/2018-9/15367146917869444.jpg';
+                    var url = 'https://pic.qqtn.com/up/2018-9/15367146917869444123.jpg';
                     return '<img src="' + url + '" class="tdImg" />';
                 }, title: '缩略图', width: 90, unresize: true
             },
@@ -118,9 +118,9 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
     // 添加按钮点击事件
     $('#btnAdd').click(function () {
         func.open({
-            height: 520,
+            height: 530,
             title: '新增客户',
-            content:  Feng.ctxPath + "/customer/form?type=add",
+            content:  Feng.ctxPath + "/customer/peopleManageForm?type=add",
             tableId: "peopleManageAdd"
         });
     });
@@ -139,4 +139,7 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
             EgForm.onDeleteItem(data);
         }
     });
+    $(function(){
+
+    })
 });
