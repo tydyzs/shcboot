@@ -1,0 +1,9 @@
+官方文档：
+https://doc.stylefeng.cn/guns_layui/
+
+1.访问：
+http://localhost:8081/global/sessionError
+admin/qwer1234
+tydyzs/qwer1234
+2.添加模块
+    在guns-vip-main模块下添加业务模块
