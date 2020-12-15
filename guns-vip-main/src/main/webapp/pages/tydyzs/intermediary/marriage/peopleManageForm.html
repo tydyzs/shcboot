@@ -1,5 +1,6 @@
 @layout("/common/_container.html",{js:["/assets/tydyzs/intermediary/marriage/js/peopleManageForm.js","/assets/common/util/js/common.js"]}){
 <script src="${ctxPath}/assets/expand/plugins/jquery/jquery-3.2.1.min.js?v=${constants.getReleaseVersion()}"></script>
+<script type="text/javascript" src="/assets/common/util/js/common.js"></script>
 <div class="layui-body-header">
     <span class="layui-body-header-title">表单的示例-添加</span>
 </div>
@@ -13,48 +14,48 @@
                         <tr>
                             <td ><label class="layui-form-label"><span style="color: red;">*</span>姓名:</label></td>
                             <td colspan="5">
-                                <input type="text" id="customer.name" name="customer.name" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                                <input type="text" id="name" name="name" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
                             </td>
                             <td ><label class="layui-form-label"><span style="color: red;">*</span>性别:</label></td>
                             <td colspan="5">
-                                <input type="radio" required  lay-verify="required"  name="customer.gender" value="M" title="男" checked="">
-                                <input type="radio" required  lay-verify="required"  name="customer.gender" value="F" title="女">
+                                <input type="radio" required  lay-verify="required"  name="gender" value="M" title="男" checked="">
+                                <input type="radio" required  lay-verify="required"  name="gender" value="F" title="女">
                             </td>
                         </tr>
                         <tr>
                             <td ><label class="layui-form-label"><span style="color: red;">*</span>出生日期:</label></td>
                             <td colspan="5">
-                                <input id="birthdate" name="customer.birthdate" readonly  lay-verify="date"  value="" onchange="birthdateChange" placeholder="请输入出生日期" type="text" class="layui-input"/>
+                                <input id="birthdate" name="birthdate" readonly  lay-verify="date"  value="" onchange="birthdateChange" placeholder="请输入出生日期" type="text" class="layui-input"/>
                             </td>
                             <td ><label class="layui-form-label">年龄:</label></td>
                             <td>
-                                <input id="customerAge" type="tel" style="width:60px;" name="customer.age" autocomplete="off" class="layui-input" disabled=""/>
+                                <input id="customerAge" type="tel" style="width:60px;" name="age" autocomplete="off" class="layui-input" disabled=""/>
                             </td>
                             <td><label class="layui-form-label">生肖:</label></td>
                             <td>
-                                <input id="customerZodiac" type="tel" style="width:60px;" name="customer.zodiac"  autocomplete="off" class="layui-input" disabled=""/>
+                                <input id="customerZodiac" type="tel" style="width:60px;" name="zodiac"  autocomplete="off" class="layui-input" disabled=""/>
                             </td>
                             <td><label class="layui-form-label">星座:</label></td>
                             <td>
-                                <input id="customerConstellation" type="tel" style="width:60px;" name="customer.constellation"  autocomplete="off" class="layui-input" disabled=""/>
+                                <input id="customerConstellation" type="tel" style="width:60px;" name="constellation"  autocomplete="off" class="layui-input" disabled=""/>
                             </td>
                         </tr>
                         <tr>
                             <td ><label class="layui-form-label">车房资产：</label></td>
                             <td style="text-align: right;" colspan="5">
-                                <input type="checkbox" id="customer.room" name="customer.room" style="margin: auto;" lay-skin="switch" lay-text="有房|无房"/>
+                                <input type="checkbox" id="room" name="room" style="margin: auto;" lay-skin="switch" lay-text="有房|无房"/>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="checkbox" id="customer.vehicle" name="customer.vehicle" lay-skin="switch" lay-text="有车|无车"/>
+                                <input type="checkbox" id="vehicle" name="vehicle" lay-skin="switch" lay-text="有车|无车"/>
                             </td>
                             <td ><label class="layui-form-label">资产说明：</label></td>
                             <td colspan="5">
-                                <input type="tel" id="customer.assetsExplain" name="customer.assetsExplain"  autocomplete="off" class="layui-input">
+                                <input type="tel" id="assetsExplain" name="assetsExplain"  autocomplete="off" class="layui-input">
                             </td>
                         </tr>
                         <tr>
                             <td ><label class="layui-form-label">照片：</label></td>
                             <td colspan="11">
-                                <input id="pictureInputHidden" name="pictureInputHidden" type="hidden" class="layui-input"/>
+                                <input id="pictureInputHidden"  type="hidden" class="layui-input"/>
                                 <div class="layui-upload-list">
                                     <button type="button" class="layui-btn layui-btn-sm" id="picBtn"><i class="layui-icon"></i>选择图片</button>
                                     <img class="layui-upload-img" id="img1" width="92px" height="92px">
@@ -64,7 +65,7 @@
                         <tr>
                             <td ><label class="layui-form-label">备注：</label></td>
                             <td colspan="11">
-                                <textarea id="customer.remarks" name="customer.remarks" placeholder="请输入备注说明..." class="layui-textarea"></textarea>
+                                <textarea id="remarks" name="remarks" placeholder="请输入备注说明..." class="layui-textarea"></textarea>
                             </td>
                         </tr>
                         <tr>
@@ -83,82 +84,32 @@
 </div>
 <script type="text/javascript">
         $(function(){
-            //alert(2134)
-            alert(getConstellation(4,1))
+            // 获取前n年
+            var newDate= new Date();
+            var year = newDate.getFullYear()-30;
+            var beginStr= year+'-01-01';
+            var beginDate={year:year,month:"1",date:"1"};
+            $("#birthdate").val(beginStr);
+            dateChange(beginStr,beginDate);
         })
-        function dateChange(value,date){
-            var age=getAge(value)+"岁";
-            var zodiac=getZodiac(date.year);
-            var constellation=getConstellation(date.month,date.date)
-            $("#customerAge").val(age);
-            $("#customerZodiac").val(zodiac);
-            $("#customerConstellation").val(constellation);
-        }
-   
 
-        function getConstellation(month1,day1){
-            var xingzuo = ["魔羯座","水瓶座", "双鱼座", "白羊座",
-                "金牛座", "双子座", "巨蟹座", "狮子座", "处女座", "天秤座", "天蝎座", "射手座" ];
-            var month22 = [22, 20, 19, 21, 21, 21, 22, 23, 23, 23, 23, 22];  // 两个星座分割日
-            var index = month1;
-            // 所查询日期在分割日之前，索引-1，否则不变
-            if (day1 < month22[month1 - 1]) {
-                index = index - 1;
-            }
-            // 返回索引指向的星座string
-            return xingzuo[index-1];
+        function save(data){
+            var json=JSON.stringify(data);
+            $.ajax({
+                url:Feng.ctxPath + "/customer/saveData",
+                data:json,
+                type:'POST',
+                dataType:"json",
+                //contentType:'text/json',
+                contentType:'application/json',
+                success:function(text){
+                    console.log(text);
+                },
+                error:function(){
+                    alert("服务器异常")
+                }
+            });
         }
-        function getZodiac(year) {
-            var year1 = Number(year);
-            year1 = year1 % 12;
-            switch (year1) {
-                case 1:
-                    return '鸡';
-                    break;
-                case 2:
-                    return '狗';
-                    break;
-                case 3:
-                    return '猪';
-                    break;
-                case 4:
-                    return '鼠';
-                    break;
-                case 5:
-                    return '牛';
-                    break;
-                case 6:
-                    return '虎';
-                    break;
-                case 7:
-                    return '兔';
-                    break;
-                case 8:
-                    return '龙';
-                    break;
-                case 9:
-                    return '蛇';
-                    break;
-                case 10:
-                    return '马';
-                    break;
-                case 11:
-                    return '羊';
-                    break;
-                case 0:
-                    return '候';
-                    break;
-            }
-        }
-    function getAge(birthday)
-    {
-        //出生时间 毫秒
-        var birthDayTime = new Date(birthday).getTime();
-        //当前时间 毫秒
-        var nowTime = new Date().getTime();
-        //一年毫秒数(365 * 86400000 = 31536000000)
-        return Math.ceil((nowTime-birthDayTime)/31536000000);
-    }
 </script>
 
 @}

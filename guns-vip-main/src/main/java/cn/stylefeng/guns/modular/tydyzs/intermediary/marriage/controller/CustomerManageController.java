@@ -63,7 +63,7 @@ public class CustomerManageController extends BaseController {
 	 * @author stylefeng
 	 * @Date 2019-02-18
 	 */
-	@RequestMapping(value="/getdata",method = RequestMethod.POST)
+	@RequestMapping(value="/saveData",method = RequestMethod.POST)
 	@ResponseBody
 	public HashMap getdata(@RequestBody HashMap params) {
 		System.out.println(params);
