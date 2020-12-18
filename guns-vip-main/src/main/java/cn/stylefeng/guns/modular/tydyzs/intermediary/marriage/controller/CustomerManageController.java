@@ -1,5 +1,6 @@
 package cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.controller;
 
+import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.entity.CustomerManage;
 import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.service.ICustomerManageService;
 import cn.stylefeng.roses.core.base.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.Map;
 
 
 /**
@@ -65,19 +65,11 @@ public class CustomerManageController extends BaseController {
 	 */
 	@RequestMapping(value="/saveData",method = RequestMethod.POST)
 	@ResponseBody
-	public HashMap getdata(@RequestBody HashMap params) {
-		System.out.println(params);
-		return params;
+	public CustomerManage getdata(@RequestBody CustomerManage customer) {
+		iCustomerManageService.saveCustomer(customer);
+		return customer;
 	}
 
-
-
-	/*@RequestMapping(value="/getdata",method = RequestMethod.GET)
-	@ResponseBody
-	public Map getdata(@RequestParam(value = "params")Map params) {
-		System.out.println(params);
-		return params;
-	}*/
 }
 
 

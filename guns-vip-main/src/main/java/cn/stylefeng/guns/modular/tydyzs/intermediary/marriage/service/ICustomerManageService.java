@@ -13,10 +13,9 @@ public interface ICustomerManageService extends IService<CustomerManage> {
 
 	/**
 	 * 自定义分页
-	 *
-	 * @param page
 	 * @return
 	 */
 	//IPage<CustomerManage> selectCrdProductPage(IPage<CustomerManage> page, CustomerManage customerManage);
 
+	public void saveCustomer(CustomerManage customerManage);
 }

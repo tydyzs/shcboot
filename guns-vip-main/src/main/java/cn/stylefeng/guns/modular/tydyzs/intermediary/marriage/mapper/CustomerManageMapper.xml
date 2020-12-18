@@ -4,11 +4,6 @@
 
 
 
-    <delete id="deletecrd" >
-        delete from TB_PAR_CRD where
-        crd_product_num=#{crd.crdProductNum} OR
-        super_list_num LIKE #{crd.superListNum}
-    </delete>
     <select id="selectCrdProduct" resultType="int">
          select count(0) from tb_par_crd t1,tb_par_crd_product t2,TB_CRD_APPROVE t3
         where t1.crd_product_num=t2.crd_product_num and t2.PRODUCT_NUM=t3.PRODUCT_NUM
@@ -18,9 +13,6 @@
         select max(CRD_PRODUCT_NUM) from tb_par_crd where SUPER_CRD_NUM=#{crdId}
     </select>
 
-    <select id="getCrdByName" resultType="cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.entity.CustomerManage">
-        select * from tb_par_crd where crd_product_name=#{crdProductName}
-    </select>
   <!--  <delete id="deleteCrdProduct" resultType="int">
         delete from
     </delete>-->
