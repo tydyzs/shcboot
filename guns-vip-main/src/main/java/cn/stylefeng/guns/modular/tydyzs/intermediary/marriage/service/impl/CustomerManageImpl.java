@@ -1,11 +1,14 @@
 package cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.service.impl;
 
+import cn.stylefeng.guns.modular.common.util.CommonUtil;
+import cn.stylefeng.guns.modular.common.util.LoginUtil;
 import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.entity.CustomerManage;
 import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.mapper.CustomerManageMapper;
 import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.service.ICustomerManageService;
-import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 
 /**
@@ -22,9 +25,31 @@ public class CustomerManageImpl extends ServiceImpl<CustomerManageMapper, Custom
 	}*/
 
     public void saveCustomer(CustomerManage customerManage) {
+        String customerId=CommonUtil.getUuid();
+        customerId="fdg3w432gsdfy6";
+
+        //baseMapper.insert(customerManage);
+        customerManage.setCustomerId(customerId);
+        if(CommonUtil.checknull(customerManage.getVehicle())){
+            customerManage.setVehicle("off");
+        }
+        if(CommonUtil.checknull(customerManage.getRoom())){
+            customerManage.setRoom("off");
+        }
+        //获取登入信息
+        String userId= LoginUtil.getUserId();
+        String orgId= LoginUtil.getOrgId();
+        Date date=new Date();
+        //新增时保存当前登入人信息
+        customerManage.setCreateUserId(userId);
+        customerManage.setCreateOrgId(orgId);
+        customerManage.setCreateDate(date);
         customerManage.setIsDelete("1");
-        //customerManage.setCreateUserId(FieldFill.INSERT);
-        this.save(customerManage);
+        //最后更新信息
+        customerManage.setUpdateUserId(userId);
+        customerManage.setUpdateOrgId(orgId);
+        customerManage.setUpdateDate(date);
+        this.saveOrUpdate(customerManage);
     }
 
 

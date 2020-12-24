@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 实体类
@@ -31,13 +32,12 @@ public class CustomerManage implements Serializable {
 	private String vehicle;
 	private String assetsexplain;
 	private String photo;
-	@TableField(value = "CREATE_USER_ID", fill = FieldFill.INSERT)
 	private String createUserId;
 	private String createOrgId;
-	private String createDate;
+	private Date createDate;
 	private String updateUserId;
 	private String updateOrgId;
-	private String updateDate;
+	private Date updateDate;
 	private String isDelete;
 
 
