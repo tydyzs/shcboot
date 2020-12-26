@@ -2,6 +2,7 @@ package cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.service.impl;
 
 import cn.stylefeng.guns.modular.common.util.CommonUtil;
 import cn.stylefeng.guns.modular.common.util.LoginUtil;
+import cn.stylefeng.guns.modular.common.util.Result;
 import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.entity.CustomerManage;
 import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.mapper.CustomerManageMapper;
 import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.service.ICustomerManageService;
@@ -24,10 +25,12 @@ public class CustomerManageImpl extends ServiceImpl<CustomerManageMapper, Custom
 		return null;
 	}*/
 
-    public void saveCustomer(CustomerManage customerManage) {
+    /**
+     * 保存/编辑客户数据
+     * @param customerManage
+     */
+    public Result saveCustomer(CustomerManage customerManage) {
         String customerId=CommonUtil.getUuid();
-        customerId="fdg3w432gsdfy6";
-
         //baseMapper.insert(customerManage);
         customerManage.setCustomerId(customerId);
         if(CommonUtil.checknull(customerManage.getVehicle())){
@@ -50,6 +53,10 @@ public class CustomerManageImpl extends ServiceImpl<CustomerManageMapper, Custom
         customerManage.setUpdateOrgId(orgId);
         customerManage.setUpdateDate(date);
         this.saveOrUpdate(customerManage);
+        Result res=new Result();
+        res.setState("0");
+        res.setMsg("保存成功！");
+        return res;
     }
 
 

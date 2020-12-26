@@ -1,5 +1,8 @@
 package cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.controller;
 
+import cn.hutool.db.Page;
+import cn.stylefeng.guns.modular.common.util.Result;
+import cn.stylefeng.guns.modular.form.model.EgFormParam;
 import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.entity.CustomerManage;
 import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.service.ICustomerManageService;
 import cn.stylefeng.roses.core.base.controller.BaseController;
@@ -8,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -45,16 +50,12 @@ public class CustomerManageController extends BaseController {
 		return PREFIX + "/peopleManageForm.html";
 	}
 	/**
-	 * 保存数据
-	 *
-	 * @author stylefeng
-	 * @Date 2019-02-18
+	 * 列表
 	 */
-	@RequestMapping("/saveData")
 	@ResponseBody
-	public String saveData(String userName) {
-		System.out.println(userName);
-		return userName;
+	@RequestMapping("/list")
+	public void list(Page page, @RequestParam Map<String, String> params) {
+		System.out.println(params);
 	}
 
 	/**
@@ -65,9 +66,8 @@ public class CustomerManageController extends BaseController {
 	 */
 	@RequestMapping(value="/saveData",method = RequestMethod.POST)
 	@ResponseBody
-	public CustomerManage getdata(@RequestBody CustomerManage customer) {
-		iCustomerManageService.saveCustomer(customer);
-		return customer;
+	public Result getdata(@RequestBody CustomerManage customer) {
+		return iCustomerManageService.saveCustomer(customer);
 	}
 
 }

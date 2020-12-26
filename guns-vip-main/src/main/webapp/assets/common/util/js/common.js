@@ -13,7 +13,6 @@ function getUrlParam(variable)
 var nullTips="未找到满足条件的数据！";//数据为空导出提示
 
 
-
 //二、方法
 //1.生成uuid
 function uuid2(len, radix) {
@@ -269,4 +268,12 @@ function getKeyValList(listObj,keyList){
         }
     }
     return resObj;
+}
+
+//18,json和str互相转换
+function objToStr(obj){
+    return JSON.stringify(obj);
+}
+function strToObj(str){
+    return JSON.parse(str);
 }

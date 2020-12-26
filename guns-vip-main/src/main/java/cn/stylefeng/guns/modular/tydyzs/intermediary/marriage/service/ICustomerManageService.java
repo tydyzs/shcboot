@@ -1,5 +1,6 @@
 package cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.service;
 
+import cn.stylefeng.guns.modular.common.util.Result;
 import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.entity.CustomerManage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -17,5 +18,5 @@ public interface ICustomerManageService extends IService<CustomerManage> {
 	 */
 	//IPage<CustomerManage> selectCrdProductPage(IPage<CustomerManage> page, CustomerManage customerManage);
 
-	public void saveCustomer(CustomerManage customerManage);
+	public Result saveCustomer(CustomerManage customerManage);
 }

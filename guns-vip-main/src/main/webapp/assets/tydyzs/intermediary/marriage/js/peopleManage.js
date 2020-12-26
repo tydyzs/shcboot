@@ -4,12 +4,11 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
     var $ax = layui.ax;
     var admin = layui.admin;
     var func = layui.func;
-
-
     // 渲染表格
     var tableResult = table.render({
         elem: '#egFormTable',
-        url: Feng.ctxPath + '/egForm/list',
+        id:'egFormTable',
+        url: Feng.ctxPath + '/customer/list',
         page: true,
         height: "full-98",
         cellMinWidth: 100,
@@ -36,21 +35,8 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
         ]]
     });
 
-    // 搜索按钮点击事件
-    $('#btnSearch').click(function () {
-        search();
-    });
-    //查询方法
-    function search (){
-        var queryData = {};
-        queryData['condition'] = $("#condition").val();
-        table.reload("egFormTable", {
-            where: queryData, page: {curr: 1}
-        });
-    }
-
     // 操作
-    table.on('tool(' + EgForm.tableId + ')', function (obj) {
+    table.on('tool(' + 'egFormTable' + ')', function (obj) {
         var data = obj.data;
         var layEvent = obj.event;
 
@@ -64,12 +50,23 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
     // 新增
     $('#btnAdd').click(function () {
         func.open({
-            height: 530,
+            height: 580,
             title: '新增客户',
             content:  Feng.ctxPath + "/customer/peopleManageForm?type=add",
             tableId: "peopleManageAdd"
         });
     });
 
-
 });
+//查询方法
+function search(){
+    var table = layui.table;
+    var queryData = {};
+    queryData['condition'] = $("#condition").val();
+    var json={'params1':queryData};
+    table.reload("egFormTable",
+        {
+            url:Feng.ctxPath + '/customer/list?key=qqqq',
+            where: json
+        });
+}

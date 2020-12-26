@@ -25,6 +25,8 @@ public class CustomerManage implements Serializable {
 	private String name;
 	private String gender;
 	private String birthdate;
+	private String phoneNumber;
+	private String contactInformation;
 	private String age;
 	private String zodiac;
 	private String constellation;

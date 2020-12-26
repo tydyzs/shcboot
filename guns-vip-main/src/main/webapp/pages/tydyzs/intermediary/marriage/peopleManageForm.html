@@ -1,6 +1,6 @@
 @layout("/common/_container.html",{js:["/assets/tydyzs/intermediary/marriage/js/peopleManageForm.js","/assets/common/util/js/common.js"]}){
 <script src="${ctxPath}/assets/expand/plugins/jquery/jquery-3.2.1.min.js?v=${constants.getReleaseVersion()}"></script>
-<script type="text/javascript" src="/assets/common/util/js/common.js"></script>
+<script src="${ctxPath}/assets/common/util/js/common.js"></script>
 <div class="layui-body-header">
     <span class="layui-body-header-title">表单的示例-添加</span>
 </div>
@@ -38,6 +38,16 @@
                             <td><label class="layui-form-label">星座:</label></td>
                             <td>
                                 <input id="customerConstellation" type="tel" style="width:60px;" name="constellation"  autocomplete="off" class="layui-input" disabled=""/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td ><label class="layui-form-label"><span style="color: red;">*</span>手机号码:</label></td>
+                            <td colspan="5">
+                                <input type="text" id="phoneNumber" name="phoneNumber" required  lay-verify="required" placeholder="请输入手机号码" autocomplete="off" class="layui-input">
+                            </td>
+                            <td ><label class="layui-form-label">其他联系方式:</label></td>
+                            <td colspan="5">
+                                <input type="text" id="contactInformation" name="contactInformation"  placeholder="" autocomplete="off" class="layui-input">
                             </td>
                         </tr>
                         <tr>
@@ -92,7 +102,6 @@
             $("#birthdate").val(beginStr);
             dateChange(beginStr,beginDate);
         })
-
         function save(data){
             var json=JSON.stringify(data);
             $.ajax({
@@ -102,8 +111,12 @@
                 dataType:"json",
                 //contentType:'text/json',
                 contentType:'application/json',
-                success:function(text){
-                    console.log(text);
+                success:function(res){
+                    if(res.state=="0"){
+                        alert(res.msg);
+                    }else{
+                        alert("保存失败！")
+                    }
                 },
                 error:function(){
                     alert("服务器异常")

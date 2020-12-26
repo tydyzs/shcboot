@@ -1,6 +1,6 @@
 @layout("/common/_container.html",{js:["/assets/tydyzs/intermediary/marriage/js/peopleManage.js"],css:["/assets/tydyzs/intermediary/marriage/css/peopleManage.css"]}){
 <script src="${ctxPath}/assets/expand/plugins/jquery/jquery-3.2.1.min.js?v=${constants.getReleaseVersion()}"></script>
-<script type="text/javascript" src="/assets/common/util/js/common.js"></script>
+<script src="${ctxPath}/assets/common/util/js/common.js"></script>
 <div class="layui-body-header">
     <span class="layui-body-header-title">客户管理</span>
 </div>
@@ -16,7 +16,7 @@
                                 <input id="condition" class="layui-input" type="text" placeholder="名称"/>
                             </div>
                             <div class="layui-inline">
-                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                <button id="btnSearch" class="layui-btn icon-btn" onclick="search()"><i class="layui-icon">&#xe615;</i>搜索</button>
                                 <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>新增</button>
                             </div>
                         </div>
@@ -27,9 +27,12 @@
         </div>
     </div>
 </div>
-
 <script type="text/html" id="tableBar">
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
 </script>
 @}
+<script type="text/javascript">
+    $(function(){
+    })
+</script>
