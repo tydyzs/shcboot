@@ -65,7 +65,7 @@ function search(){
     queryData['name'] = $("#condition").val();
     table.reload("egFormTable",
         {
-            url:Feng.ctxPath + '/customer/listAll',
+            url:Feng.ctxPath + '/customer/list',
             where: queryData
         });
 }

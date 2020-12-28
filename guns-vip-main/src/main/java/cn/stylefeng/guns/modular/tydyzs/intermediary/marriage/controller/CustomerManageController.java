@@ -66,6 +66,22 @@ public class CustomerManageController extends BaseController {
 	public LayuiPageInfo listAll(@RequestParam Map<String, String> params) {
 		return iCustomerManageService.queryCustomerAll(params);
 	}
+	/**
+	 * 列表（单表实体分页）
+	 */
+	@ResponseBody
+	@RequestMapping("/queryCustomerEnt")
+	public LayuiPageInfo queryCustomerEnt(@RequestParam Map<String, String> params) {
+		return iCustomerManageService.queryCustomerEnt(params);
+	}
+	/**
+	 * 列表（单表实体所有）
+	 */
+	@ResponseBody
+	@RequestMapping("/queryCustomerEntAll")
+	public LayuiPageInfo queryCustomerEntAll(@RequestParam Map<String, String> params) {
+		return iCustomerManageService.queryCustomerEntAll(params);
+	}
 
 	/**
 	 * 保存数据

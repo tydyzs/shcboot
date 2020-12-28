@@ -64,7 +64,8 @@ public class CustomerManageImpl extends ServiceImpl<CustomerManageMapper, Custom
     }
 
     /**
-     * 分页查询客户数据
+     * 自定义分页
+     * sql分页查询客户数据
      * @param param
      * @return
      */
@@ -72,11 +73,6 @@ public class CustomerManageImpl extends ServiceImpl<CustomerManageMapper, Custom
         //获取前端分页参数
         Page pageContext = LayuiPageFactory.defaultPage();
         //获取分页查询结果
-       /* //实体类方式
-       1.查询条件
-        QueryWrapper<CustomerManage> objectQueryWrapper = new QueryWrapper<>();
-        2.开始查询
-        IPage page = this.page(pageContext, objectQueryWrapper);*/
        //sql方式
         IPage page = baseMapper.queryCustomer(pageContext, param);
         //将结果转换成layui可识别的分页结果
@@ -84,7 +80,8 @@ public class CustomerManageImpl extends ServiceImpl<CustomerManageMapper, Custom
         return result;
     }
     /**
-     * 查询所有客户数据
+     * 自定义分页
+     * sql查询所有客户数据
      * @param param
      * @return
      */
@@ -98,5 +95,44 @@ public class CustomerManageImpl extends ServiceImpl<CustomerManageMapper, Custom
         return result;
     }
 
+    /**
+     * 分页查询(实体方式，一般用于单表)
+     * @param param
+     * @return
+     */
+    public LayuiPageInfo queryCustomerEnt(Map param){
+        //获取前端分页参数
+        Page pageContext = LayuiPageFactory.defaultPage();
+        //获取分页查询结果
+        //实体类方式
+       //1.查询条件
+        QueryWrapper<CustomerManage> objectQueryWrapper = new QueryWrapper<>();
+        if(!CommonUtil.checknull(param.get("name"))){
+            objectQueryWrapper.and(i -> i.eq("name", param.get("name")));
+        }
+        //2.开始查询
+        IPage page = this.page(pageContext, objectQueryWrapper);
+        //将结果转换成layui可识别的分页结果
+        LayuiPageInfo result=LayuiPageFactory.createPageInfo(page);
+        return result;
+    }
+    /**
+     * 查所有（实体方式，一般用于单表)
+     * @param param
+     * @return
+     */
+    public LayuiPageInfo queryCustomerEntAll(Map param){
+        //实体类方式
+       //1.查询条件
+        QueryWrapper<CustomerManage> objectQueryWrapper = new QueryWrapper<>();
+        if(!CommonUtil.checknull(param.get("name"))){
+            objectQueryWrapper.and(i -> i.eq("name", param.get("name")));
+        }
+        //2.开始查询
+        List data = this.list(objectQueryWrapper);
+        LayuiPageInfo result=new LayuiPageInfo();
+        result.setData(data);
+        return result;
+    }
 
 }
