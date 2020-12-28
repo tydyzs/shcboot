@@ -1,6 +1,7 @@
 package cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.controller;
 
 import cn.hutool.db.Page;
+import cn.stylefeng.guns.base.pojo.page.LayuiPageInfo;
 import cn.stylefeng.guns.modular.common.util.Result;
 import cn.stylefeng.guns.modular.form.model.EgFormParam;
 import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.entity.CustomerManage;
@@ -50,12 +51,20 @@ public class CustomerManageController extends BaseController {
 		return PREFIX + "/peopleManageForm.html";
 	}
 	/**
-	 * 列表
+	 * 分页列表
 	 */
 	@ResponseBody
 	@RequestMapping("/list")
-	public void list(Page page, @RequestParam Map<String, String> params) {
-		System.out.println(params);
+	public LayuiPageInfo list(@RequestParam Map<String, String> params) {
+		return iCustomerManageService.queryCustomer(params);
+	}
+	/**
+	 * 列表（所有）
+	 */
+	@ResponseBody
+	@RequestMapping("/listAll")
+	public LayuiPageInfo listAll(@RequestParam Map<String, String> params) {
+		return iCustomerManageService.queryCustomerAll(params);
 	}
 
 	/**

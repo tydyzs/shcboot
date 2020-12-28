@@ -3,42 +3,21 @@
 <mapper namespace="cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.mapper.CustomerManageMapper">
 
 
-
-    <select id="selectCrdProduct" resultType="int">
-         select count(0) from tb_par_crd t1,tb_par_crd_product t2,TB_CRD_APPROVE t3
-        where t1.crd_product_num=t2.crd_product_num and t2.PRODUCT_NUM=t3.PRODUCT_NUM
-        and (t1.crd_product_num=#{crdProductNum} or t1.super_crd_num=#{crdProductNum})
-    </select>
-    <select id="getCrdMaxId" resultType="string">
-        select max(CRD_PRODUCT_NUM) from tb_par_crd where SUPER_CRD_NUM=#{crdId}
-    </select>
-
-  <!--  <delete id="deleteCrdProduct" resultType="int">
-        delete from
-    </delete>-->
-    <select id="selectCrdPage" resultType="cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.entity.CustomerManage">
-        select t1.*,
-        to_char(t1.CREATE_TIME,'yyyy-MM-dd') createTimeStr,
-        to_char(t1.UPDATE_TIME,'yyyy-MM-dd') updateTimeStr
-        --         (select REAL_NAME from chain_user where id=t1.user_num) createUserName,
-        --         (select DEPT_NAME from chain_dept where id=t1.org_num) createDeptName
-        from tb_par_product t1 where is_deleted = 0
-        <if test="product.productNum != null and product.productNum != ''">
-            and t1.PRODUCT_NUM=#{product.productNum}
-        </if>
-        <if test="product.creditSystem != null and product.creditSystem != ''">
-            and t1.CREDIT_SYSTEM =#{product.creditSystem}
-        </if>
-        <if test="product.productName != null and product.productName != ''">
-            and t1.PRODUCT_NAME like CONCAT(CONCAT('%', #{product.productName}) ,'%')
-        </if>
-        <if test="product.productStatusCd != null and product.productStatusCd != ''">
-            and t1.PRODUCT_STATUS_CD =#{product.productStatusCd}
-        </if>
-        <if test="product.limitUsedType != null and product.limitUsedType != ''">
-            and t1.LIMIT_USED_TYPE =#{product.limitUsedType}
+    <!--客户列表-->
+    <select id="queryCustomer" parameterType="map" resultType="cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.entity.CustomerManage">
+        select t1.*
+        from BLIND_DATE_CUSTOMER t1 where is_delete = '1'
+        <if test="param.name != null and param.name != ''">
+            and t1.name like CONCAT('%',#{param.name},'%')
         </if>
     </select>
-
+    <!--客户列表(所有）-->
+    <select id="queryCustomerAll" parameterType="map" resultType="cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.entity.CustomerManage">
+        select t1.*
+        from BLIND_DATE_CUSTOMER t1 where is_delete = '1'
+        <if test="param.name != null and param.name != ''">
+            and t1.name like CONCAT('%',#{param.name},'%')
+        </if>
+    </select>
 
 </mapper>

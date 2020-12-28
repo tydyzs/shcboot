@@ -3,8 +3,10 @@ package cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.mapper;
 import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.entity.CustomerManage;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -14,16 +16,6 @@ import java.util.List;
  * @since 2019-10-21
  */
 public interface CustomerManageMapper extends BaseMapper<CustomerManage> {
-
-	/**
-	 * 自定义分页
-	 *
-	 * @param page
-	 * @param crd
-	 * @return
-	 */
-	List<CustomerManage> selectCrdPage(IPage page, CustomerManage crd);
-	int selectCrdProduct(String crdProductNum);
-	String getCrdMaxId(String crdId);
-
+	Page<CustomerManage> queryCustomer(IPage page, Map param);
+	List<CustomerManage> queryCustomerAll(Map param);
 }

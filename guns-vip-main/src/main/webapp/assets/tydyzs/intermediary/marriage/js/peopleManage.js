@@ -62,11 +62,10 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
 function search(){
     var table = layui.table;
     var queryData = {};
-    queryData['condition'] = $("#condition").val();
-    var json={'params1':queryData};
+    queryData['name'] = $("#condition").val();
     table.reload("egFormTable",
         {
-            url:Feng.ctxPath + '/customer/list?key=qqqq',
-            where: json
+            url:Feng.ctxPath + '/customer/listAll',
+            where: queryData
         });
 }

@@ -1,8 +1,12 @@
 package cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.service;
 
+import cn.hutool.db.Page;
+import cn.stylefeng.guns.base.pojo.page.LayuiPageInfo;
 import cn.stylefeng.guns.modular.common.util.Result;
 import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.entity.CustomerManage;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.Map;
 
 /**
  *  服务类
@@ -11,12 +15,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2019-10-21
  */
 public interface ICustomerManageService extends IService<CustomerManage> {
-
-	/**
-	 * 自定义分页
-	 * @return
-	 */
-	//IPage<CustomerManage> selectCrdProductPage(IPage<CustomerManage> page, CustomerManage customerManage);
-
 	public Result saveCustomer(CustomerManage customerManage);
+	public LayuiPageInfo queryCustomer(Map param);
+	public LayuiPageInfo queryCustomerAll(Map param);
 }

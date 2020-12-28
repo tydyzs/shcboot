@@ -34,12 +34,19 @@ public class CustomerManage implements Serializable {
 	private String vehicle;
 	private String assetsexplain;
 	private String photo;
+	@TableField("CREATE_USER_ID")
 	private String createUserId;
+	@TableField("CREATE_ORG_ID")
 	private String createOrgId;
+	@TableField("CREATE_DATE")
 	private Date createDate;
+	@TableField("UPDATE_USER_ID")
 	private String updateUserId;
+	@TableField("UPDATE_ORG_ID")
 	private String updateOrgId;
+	@TableField("UPDATE_DATE")
 	private Date updateDate;
+	@TableField("IS_DELETE")
 	private String isDelete;
 
 
