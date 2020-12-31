@@ -4,7 +4,6 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
     var $ax = layui.ax;
     var admin = layui.admin;
     var func = layui.func;
-    alert(000)
     // 渲染表格
     var tableResult = table.render({
         elem: '#egFormTable',

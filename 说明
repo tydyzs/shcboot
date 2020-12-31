@@ -54,8 +54,13 @@ tydyzs/qwer1234
 		System.out.println(params);
 	}
 
-
-
+6.静态资源配置：
+    1.静态资源放开过滤：
+    cn.stylefeng.guns.config.security.WebSecurityConfig：98行（"/pages/**",）
+    2.静态资源映射：
+    cn.stylefeng.guns.config.web.WebConfig：
+    添加：registry.addResourceHandler("/pages/**").addResourceLocations("classpath:/pages/");
+7.引入js顺序问题：将js放在最下面才能获取layui对象
 
 
 ////////////////////////数据库

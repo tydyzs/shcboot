@@ -95,6 +95,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         HttpMethod.GET,
                         "/assets/**",
+                        "/pages/**",
                         "/favicon.ico",
                         "/activiti-editor/**"
                 );
