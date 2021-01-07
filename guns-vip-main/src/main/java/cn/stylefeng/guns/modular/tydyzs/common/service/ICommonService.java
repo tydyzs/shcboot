@@ -14,5 +14,5 @@ import java.util.Map;
  * @since 2019-10-21
  */
 public interface ICommonService extends IService<Dict> {
-	public LayuiPageInfo queryDict(Map param);//实体所有查询
+	public LayuiPageInfo queryDict(Map param);//sql所有查询
 }

@@ -34,9 +34,7 @@ public class CustomerManageImpl extends ServiceImpl<CustomerManageMapper, Custom
      * @param customerManage
      */
     public Result saveCustomer(CustomerManage customerManage) {
-        String customerId=CommonUtil.getUuid();
-        //baseMapper.insert(customerManage);
-        customerManage.setCustomerId(customerId);
+        String customerId=customerManage.getCustomerId();
         if(CommonUtil.checknull(customerManage.getVehicle())){
             customerManage.setVehicle("off");
         }
@@ -48,10 +46,14 @@ public class CustomerManageImpl extends ServiceImpl<CustomerManageMapper, Custom
         String orgId= LoginUtil.getOrgId();
         Date date=new Date();
         //新增时保存当前登入人信息
-        customerManage.setCreateUserId(userId);
-        customerManage.setCreateOrgId(orgId);
-        customerManage.setCreateDate(date);
-        customerManage.setIsDelete("1");
+        if(CommonUtil.checknull(customerId)){//新增
+            customerId=CommonUtil.getUuid();
+            customerManage.setCreateUserId(userId);
+            customerManage.setCreateOrgId(orgId);
+            customerManage.setCreateDate(date);
+            customerManage.setIsDelete("1");
+        }
+        customerManage.setCustomerId(customerId);
         //最后更新信息
         customerManage.setUpdateUserId(userId);
         customerManage.setUpdateOrgId(orgId);
@@ -80,7 +82,6 @@ public class CustomerManageImpl extends ServiceImpl<CustomerManageMapper, Custom
         return result;
     }
     /**
-     * 自定义分页
      * sql查询所有客户数据
      * @param param
      * @return

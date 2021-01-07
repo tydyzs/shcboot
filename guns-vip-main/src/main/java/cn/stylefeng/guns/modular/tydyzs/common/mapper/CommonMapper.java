@@ -16,6 +16,5 @@ import java.util.Map;
  * @since 2019-10-21
  */
 public interface CommonMapper extends BaseMapper<Dict> {
-	Page<Dict> queryCustomer(IPage page, Map param);
-	List<Dict> queryCustomerAll(Map param);
+	List<Map> queryDict(Map param);
 }

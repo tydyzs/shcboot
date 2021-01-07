@@ -1,0 +1,88 @@
+
+问题：字典运用；前端缓存获取；文档上传下载；
+
+官方文档：
+https://doc.stylefeng.cn/guns_layui/
+
+
+
+////////////////////////数据库常用表
+#用户表
+select * from sys_user where user_id='';
+#机构部门
+select * from sys_dept where dept_id='';
+#角色表
+select * from sys_role
+
+#菜单角色关联关系表
+select * from sys_relation
+#菜单表
+select * from sys_menu
+
+#文件数据表
+select * from sys_file_info
+
+#字典表
+select * from sys_dict
+select * from sys_dict_type
+
+
+/////////////////////////////////////////记录/////////////////////////////////
+0.base:
+0.1:登入页面：pages/login.html
+0.2：登入（退出登入）接口：\guns-sys\src\main\java\cn\stylefeng\guns\sys\modular\system\controller\LoginController.java
+0.3：postmain测试接口。登入。获取权限
+        浏览器登入后任一接口请求通过F12查看cookie：
+    或先通过postmain模拟登入：
+        http://localhost:8081/login?username=tydyzs&password=qwer1234
+    然后测试接口。例如：
+        通过postmain测试接口时输入url和Hander：
+        http://localhost:8081/mgr/list?page=1&limit=10
+        Authorization=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjA5NDEyNDUyLCJ1c2VySWQiOjEsImlhdCI6MTYwOTMyNjA1MiwiYWNjb3VudCI6ImFkbWluIiwidXNlcktleSI6Inh4eHgifQ.Ohrgr9W62VGlP7BEHFSSYoMC-NR_wvDo7fHPoxL0iwgABnaR_x26-M-b338zy_GMNDP4Wda4Y-ntyJH2Fne01A
+
+
+
+1.访问：
+http://localhost:8081/global/sessionError
+admin/qwer1234
+tydyzs/qwer1234
+2.添加模块
+    在guns-vip-main模块下添加业务模块
+3.当前登入的用户信息获取接口：LoginContext.java
+  LoginUtil.java(获取登录信息工具类）
+4.mybatis-Plus:
+    maper层：
+        baseMapper.insert(customerManage);
+    service层：
+        this.saveOrUpdate(customerManage);
+5.表格查询：
+    前端传递：
+    function search(){
+        var table = layui.table;
+        var queryData = {};
+        queryData['condition'] = $("#condition").val();
+        var json={'params1':queryData};
+        table.reload("egFormTable",
+            {
+                url:Feng.ctxPath + '/customer/list?key=qqqq',
+                where: json
+            });
+    }
+    后端接受参数：
+	@ResponseBody
+	@RequestMapping("/list")
+	public void list(Page page, @RequestParam Map<String, String> params) {
+		System.out.println(params);
+	}
+
+6.静态资源配置：
+    1.静态资源放开过滤：
+    cn.stylefeng.guns.config.security.WebSecurityConfig：98行（"/pages/**",）
+    2.静态资源映射：
+    cn.stylefeng.guns.config.web.WebConfig：
+    添加：registry.addResourceHandler("/pages/**").addResourceLocations("classpath:/pages/");
+7.引入js顺序问题：将js放在最下面才能获取layui对象
+
+
+
+

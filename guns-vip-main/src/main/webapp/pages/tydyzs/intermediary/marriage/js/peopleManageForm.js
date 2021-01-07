@@ -1,3 +1,11 @@
+
+
+var province=[];//省直辖市字典数据
+$(function(){
+    var dictParam={params:{dictTypeCode:"city",dictParentId:"0"}};
+    var json=objToStr(dictParam);
+    province=queryDict(dictParam);
+})
 /**
  * 详情对话框
  */

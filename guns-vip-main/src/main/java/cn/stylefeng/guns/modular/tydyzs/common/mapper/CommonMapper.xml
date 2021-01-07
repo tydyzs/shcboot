@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.mapper.CustomerManageMapper">
+<mapper namespace="cn.stylefeng.guns.modular.tydyzs.common.mapper.CommonMapper">
 
 
     <!--客户列表，因为有分页参数，所以查询参数加“param.”-->
-    <select id="queryCustomer" parameterType="map" resultType="cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.entity.CustomerManage">
-        select t1.*
-        from BLIND_DATE_CUSTOMER t1 where is_delete = '1'
-        <if test="param.name != null and param.name != ''">
-            and t1.name like CONCAT('%',#{param.name},'%')
+    <select id="queryDict" parameterType="map" resultType="map">
+        SELECT
+        T1.DICT_ID,T1.CODE DICT_CODE,T1.NAME DICT_NAME,T1.PARENT_ID,T1.PARENT_IDS
+        ,T2.DICT_TYPE_ID,T2.CODE DICT_TYPE_CODE,T2.NAME TYPE_NAME
+        FROM SYS_DICT T1,SYS_DICT_TYPE T2
+        WHERE T1.DICT_TYPE_ID=T2.DICT_TYPE_ID
+        AND T1.STATUS='ENABLE'
+        AND T2.STATUS='ENABLE'
+        <if test="dictId != null and dictId != ''">
+            and t1.dict_id =#{dictId}
+        </if>
+        <if test="dictCode != null and dictCode != ''">
+            and t1.code =#{dictCode}
+        </if>
+        <if test="dictParentId != null and dictParentId != ''">
+            and t1.parent_id =#{dictParentId}
+        </if>
+        <if test="dictTypeId != null and dictTypeId != ''">
+            and t2.dict_type_id =#{dictTypeId}
+        </if>
+        <if test="dictTypeCode != null and dictTypeCode != ''">
+            and t2.code =#{dictTypeCode}
         </if>
     </select>
-    <!--客户列表(所有：此时直接写参数名，无需写“param.”）-->
-    <select id="queryCustomerAll" parameterType="map" resultType="cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.entity.CustomerManage">
-        select t1.*
-        from BLIND_DATE_CUSTOMER t1 where is_delete = '1'
-        <if test="name != null and name != ''">
-            and t1.name like CONCAT('%',#{name},'%')
-        </if>
-    </select>
-
 </mapper>

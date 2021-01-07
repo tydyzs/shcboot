@@ -17,7 +17,7 @@ import java.util.Map;
  * 客户管理
  */
 @Controller
-@RequestMapping("/common")
+@RequestMapping("/myCommon")
 @Validated
 public class CommonController extends BaseController {
 
@@ -31,8 +31,11 @@ public class CommonController extends BaseController {
 
 
 	/**
-	 * 列表（单表实体所有）
+	 * 列表（sql查所有）
 	 * 根据条件查询字典
+	 * 参数：
+	 * dictId，dictCode，dictParentId，dictTypeId，dictTypeCode
+	 * 字典id（110000：北京市）；字典编码（110101：北京市对应的码值），字典父亲id（110000：查北京市所有的区），字典类型id（1343857470531964930：城市），字典类型编码（city：城市）
 	 */
 	@ResponseBody
 	@RequestMapping("/queryDict")

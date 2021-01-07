@@ -72,76 +72,29 @@ function getDictData(parameter){
     });
     return dictList;
 }
-//3.1.获取字典数据(obj)
-function getDictObj(parameter){
-    var dictData=getDictData(parameter);
-    var dictObj={};
-    for(var i=0;i<dictData.length;i++){
-        dictObj[dictData[i].dictID]=dictData[i].dictName;
-    }
-    return dictObj;
-}
-//4.获取字典并生成条件
-function ajaxMethodDict(parameter,obj){
-    var json = nui.encode({dictTypeId:parameter});
+//4.获取字典数据 listObj
+function queryDict(param){
+    var listObj=[];
     $.ajax({
-        url:"com.primeton.components.nui.DictLoader.getDictData.biz.ext",
+        url:Feng.ctxPath + "/myCommon/queryDict",
+        data:param,
         type:'POST',
-        data:json,
-        cache: false,
+        dataType:"json",
         async:false,
-        contentType:'text/json',
-        success:function(text){
-            for(var i=0;i<text.dictList.length;i++){
-                obj.append('<dd class="left mr20" value="'+ text.dictList[i].dictID +'">'+ text.dictList[i].dictName +'</dd>');
-            };
-            initSearch(obj);
-        }
-    });
-}
-
-//带下拉的条件
-//获取下级字典
-function ajaxMethodDictSelect(json,divId){
-    $.ajax({
-        url:"com.hse.pub.commonUtil.queryDictAll.biz.ext",
-        type:'POST',
-        data:json,
-        cache: false,
-        async:false,
-        contentType:'text/json',
-        success:function(text){
-            var objlist=text.objs;
-            if(objlist.length==0){
-                return;
+        contentType:'application/json',
+        success:function(res){
+            if(res.code=="0"){
+                listObj= res.data;
+            }else{
+                alert("查询字典失败！")
             }
-            divId+="_son";
-            var divhtml='<hr class="selectShow"/><dl class="clear addClick selectShow"><dt class="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</dt>'+
-                '<div style="width:100%;height:100%;" id="'+divId+'">';
-            for(var i=0;i<objlist.length;i++){
-                divhtml+='<dd onclick="selectXzqy(this)" dictType="'+objlist[i].DICTTYPEID+'" class="left mr20" value="'+ objlist[i].DICTID +'">'+ objlist[i].DICTNAME +'</dd>';
-            };
-            divhtml+='</div></dl>';
-            var divObj=$(divhtml);
-            $("#xzqyDl").append(divObj);
+        },
+        error:function(){
+            alert("服务器异常")
         }
     });
+    return listObj;
 }
-//重新选择，先删除历史显示
-function deleteNext(divId){
-    var obj=$("#"+divId);
-    var nextObj=obj.parent().nextAll();
-    if(nextObj.size()>0){
-        nextObj.remove();
-    }
-}
-
-//5.表格字典列获取字典值
-function getDict(row){
-    var dictTypeId=row.column.dictTypeId;
-    return nui.getDictText(dictTypeId,row.value);
-}
-
 /**
  * 6.数据列名转换（驼峰和下划线转换）
  */
