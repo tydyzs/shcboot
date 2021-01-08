@@ -2,12 +2,15 @@ package cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.controller;
 
 import cn.hutool.db.Page;
 import cn.stylefeng.guns.base.pojo.page.LayuiPageInfo;
+import cn.stylefeng.guns.modular.common.util.CommonUtil;
 import cn.stylefeng.guns.modular.common.util.Result;
 import cn.stylefeng.guns.modular.form.model.EgFormParam;
 import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.entity.CustomerManage;
 import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.service.ICustomerManageService;
 import cn.stylefeng.roses.core.base.controller.BaseController;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -52,7 +56,7 @@ public class CustomerManageController extends BaseController {
 		return PREFIX + "/peopleManageForm.html";
 	}
 	/**
-	 * 分页列表
+	 * sql分页列表
 	 */
 	@ResponseBody
 	@RequestMapping("/list")
@@ -67,7 +71,7 @@ public class CustomerManageController extends BaseController {
 		return data;
 	}
 	/**
-	 * 列表（所有）
+	 * sql列表（所有）
 	 */
 	@ResponseBody
 	@RequestMapping("/listAll")
@@ -89,6 +93,21 @@ public class CustomerManageController extends BaseController {
 	@RequestMapping("/queryCustomerEntAll")
 	public LayuiPageInfo queryCustomerEntAll(@RequestParam Map<String, String> params) {
 		return iCustomerManageService.queryCustomerEntAll(params);
+	}
+	/**
+	 * 查实体
+	 */
+	@ResponseBody
+	@RequestMapping("/getCustomer")
+	public Result getCustomer(@RequestBody CustomerManage customer) {
+		//实体类方式
+		//1.查询条件
+		QueryWrapper<CustomerManage> qw=new QueryWrapper(customer);
+		CustomerManage customerManage = iCustomerManageService.getOne(qw);
+		Result result=new Result();
+		result.setState("0");
+		result.setData(customerManage);
+		return result;
 	}
 
 	/**

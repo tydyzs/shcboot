@@ -86,3 +86,13 @@ tydyzs/qwer1234
 
 
 
+
+//////////////////////////////////////////////////////layui:
+0.表单重新渲染：
+    layui.form.render();//渲染所有
+    layui.form.render("select");//渲染select控件
+1.开关动态赋值：
+    $("#room").prop("checked",true);
+2.表单赋值：
+    layui.form.val('form1',data);
+    <form id="egFormForm"  lay-filter="form1" class="layui-form" ></form>

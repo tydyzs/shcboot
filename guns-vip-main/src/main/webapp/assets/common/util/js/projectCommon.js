@@ -114,3 +114,9 @@ function setDictSlelct(id,dictTypeCode){
     var data=queryDict(json);
     setDataSlelct(id,data);
 }
+//2.关闭窗口
+function closeWindow(){
+    var index=parent.layer.getFrameIndex(window.name); //获取当前窗口的name
+    parent.layer.close(index);
+}
+

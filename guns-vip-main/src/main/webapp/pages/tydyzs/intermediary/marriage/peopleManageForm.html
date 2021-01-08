@@ -9,7 +9,7 @@
 <div class="layui-fluid " style="">
     <div class="layui-card">
         <div class="layui-card-body">
-            <form id="egFormForm" class="layui-form" >
+            <form id="egFormForm"  lay-filter="egFormForm" class="layui-form" >
                 <div class="layui-form-item">
                     <table style="width:100%;height:100%;border-collapse:separate; border-spacing:10px;" >
                         <tr>
@@ -95,7 +95,7 @@
                             </td>
                             <td ><label class="layui-form-label">资产说明：</label></td>
                             <td colspan="5">
-                                <input type="tel" id="assetsExplain" name="assetsExplain"  autocomplete="off" class="layui-input">
+                                <input type="tel" id="assetsexplain" name="assetsexplain"  autocomplete="off" class="layui-input">
                             </td>
                         </tr>
                         <tr>
@@ -131,6 +131,7 @@
 <script type="text/javascript">
         var customerId=getUrlParam("customerId");
         var formType=getUrlParam("type");
+        var form={};
         $(function(){
             // 获取前n年
             var newDate= new Date();
@@ -139,22 +140,7 @@
             var beginDate={year:year,month:"1",date:"1"};
             $("#birthdate").val(beginStr);
             dateChange(beginStr,beginDate);
-            init();
         })
-        function init(){
-            if(formType!=add){//查看或编辑时先设置数据
-                setFormData();
-            }
-            if(formType==view){
-
-            }
-            if(formType==view){
-
-            }
-        }
-        function setFormData(){
-            
-        }
 </script>
 @}
 <script type="text/javascript" src="/pages/tydyzs/intermediary/marriage/js/peopleManageForm.js"></script>
