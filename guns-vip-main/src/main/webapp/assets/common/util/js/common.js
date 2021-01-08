@@ -55,46 +55,6 @@ function checkNull(str){
         return false;
     }
 }
-//3.1.获取字典数据(list)
-function getDictData(parameter){
-    var json = nui.encode({dictTypeId:parameter});
-    var dictList=[];
-    $.ajax({
-        url:"com.primeton.components.nui.DictLoader.getDictData.biz.ext",
-        type:'POST',
-        data:json,
-        cache: false,
-        async:false,
-        contentType:'text/json',
-        success:function(text){
-            dictList=text.dictList;
-        }
-    });
-    return dictList;
-}
-//4.获取字典数据 listObj
-function queryDict(param){
-    var listObj=[];
-    $.ajax({
-        url:Feng.ctxPath + "/myCommon/queryDict",
-        data:param,
-        type:'POST',
-        dataType:"json",
-        async:false,
-        contentType:'application/json',
-        success:function(res){
-            if(res.code=="0"){
-                listObj= res.data;
-            }else{
-                alert("查询字典失败！")
-            }
-        },
-        error:function(){
-            alert("服务器异常")
-        }
-    });
-    return listObj;
-}
 /**
  * 6.数据列名转换（驼峰和下划线转换）
  */

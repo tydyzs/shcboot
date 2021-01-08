@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -39,7 +40,7 @@ public class CommonController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping("/queryDict")
-	public LayuiPageInfo queryDict(@RequestParam Map<String, String> params) {
+	public LayuiPageInfo queryDict(@RequestBody HashMap params) {
 		return iCommonService.queryDict(params);
 	}
 

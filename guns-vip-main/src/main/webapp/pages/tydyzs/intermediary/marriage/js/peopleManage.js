@@ -50,7 +50,8 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
     // 新增
     $('#btnAdd').click(function () {
         func.open({
-            height: 580,
+            height: 780,
+            width: "65%",
             title: '新增客户',
             content:  Feng.ctxPath + "/customer/peopleManageForm?type=add",
             tableId: "peopleManageAdd"

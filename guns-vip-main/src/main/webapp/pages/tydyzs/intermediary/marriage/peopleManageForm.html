@@ -1,6 +1,7 @@
 @layout("/common/_container.html",{js:[]}){
 <script src="${ctxPath}/assets/expand/plugins/jquery/jquery-3.2.1.min.js?v=${constants.getReleaseVersion()}"></script>
 <script src="${ctxPath}/assets/common/util/js/common.js"></script>
+<script src="${ctxPath}/assets/common/util/js/projectCommon.js"></script>
 <div class="layui-body-header">
     <span class="layui-body-header-title">表单的示例-添加</span>
 </div>
@@ -23,6 +24,24 @@
                             </td>
                         </tr>
                         <tr>
+                            <td colspan="1"><label class="layui-form-label"><span style="color: red;">*</span>户口所在地:</label></td>
+                            <td colspan="5">
+                                    <select name="modules" placeholder="省直辖市" id="householdProvince" name="householdProvince" onchange="provinceChange(this,'householdCity')"   lay-verify="required" lay-search=""></select>
+                            </td>
+                            <td colspan="6">
+                                    <select name="modules" id="householdCity" name="householdCity"  lay-verify="required" lay-search=""></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1"><label class="layui-form-label"><span style="color: red;">*</span>常驻地址:</label></td>
+                            <td colspan="5">
+                                <select name="modules" id="addressProvince" name="addressProvince" onchange="provinceChange(this,'addressCity')"  lay-verify="required" lay-search=""></select>
+                            </td>
+                            <td colspan="6">
+                                <select name="modules" id="addressCity" name="addressCity"  lay-verify="required" lay-search=""></select>
+                            </td>
+                        </tr>
+                        <tr>
                             <td ><label class="layui-form-label"><span style="color: red;">*</span>出生日期:</label></td>
                             <td colspan="5">
                                 <input id="birthdate" name="birthdate" readonly  lay-verify="date"  value="" onchange="birthdateChange" placeholder="请输入出生日期" type="text" class="layui-input"/>
@@ -38,6 +57,23 @@
                             <td><label class="layui-form-label">星座:</label></td>
                             <td>
                                 <input id="customerConstellation" type="tel" style="width:60px;" name="constellation"  autocomplete="off" class="layui-input" disabled=""/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td ><label class="layui-form-label"><span style="color: red;">*</span>婚姻状况</label></td>
+                            <td colspan="5" id="maritalStatusTd">
+                            </td>
+                            <td ><label class="layui-form-label">身高（CM):</label></td>
+                            <td>
+                                <input type="text" id="height" name="height" required  lay-verify="required" placeholder="请输入身高（CM)..." autocomplete="off" class="layui-input">
+                            </td>
+                            <td><label class="layui-form-label">体重(KG):</label></td>
+                            <td>
+                                <input type="text" id="weight" name="weight" required  lay-verify="required" placeholder="请输入体重(KG)..." autocomplete="off" class="layui-input">
+                            </td>
+                            <td><label class="layui-form-label">学历（文凭）:</label></td>
+                            <td>
+                                <select name="modules" id="education" name="education"  lay-verify="required" lay-search=""></select>
                             </td>
                         </tr>
                         <tr>

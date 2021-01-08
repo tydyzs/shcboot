@@ -1,11 +1,40 @@
-
-
+var form={};
+layui.use(['form', 'admin', 'ax', 'func','radio'], function () {
+    form=layui.form;
+})
 var province=[];//省直辖市字典数据
 $(function(){
-    var dictParam={params:{dictTypeCode:"city",dictParentId:"0"}};
-    var json=objToStr(dictParam);
-    province=queryDict(dictParam);
+    var json='{dictTypeCode:"city",dictParentId:"0"}';
+    province=queryDict(json);
+    setDataSlelct("householdProvince",province);
+    setDataSlelct("addressProvince",province);
+
+    var json1='{dictParentId:"110000"}';
+    var cityObj=queryDict(json1);
+    setDataSlelct("householdCity",cityObj);
+    setDataSlelct("addressCity",cityObj);
+    //学历
+    setDictSlelct("education","education");
+    //婚姻状况
+    setInput("maritalStatusTd","maritalStatus","maritalStatus","required")
+    var id=setTimeout(function(){
+        alert(1)
+        form.render('select');
+        form.render("radio");
+    },1000);
 })
+
+//省市下钻
+function provinceChange(obj,id){
+    //var id="householdCity";var id="addressCity";
+    var value=$(obj).val();
+    var json='{dictParentId:"'+value+'"}';
+    //setParamSlelct(id,json);
+    getCityOption(id,json)
+    form.render('select');
+}
+
+
 /**
  * 详情对话框
  */
@@ -211,7 +240,6 @@ function getAge(birthday)
 
 //保存
 function saveData(){
-    var form = layui.form;
     //校验
     form.on('submit(formDemo)', function(data){
         save(data.field);
