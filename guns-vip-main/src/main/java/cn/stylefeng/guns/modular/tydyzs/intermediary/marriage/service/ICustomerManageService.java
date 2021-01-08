@@ -17,6 +17,7 @@ import java.util.Map;
 public interface ICustomerManageService extends IService<CustomerManage> {
 	public Result saveCustomer(CustomerManage customerManage);
 	public LayuiPageInfo queryCustomer(Map param);//sql分页查询
+	public Result queryCustomerMy(Map param);//sql分页查询
 	public LayuiPageInfo queryCustomerAll(Map param);//sql所有查询
 	public LayuiPageInfo queryCustomerEnt(Map param);//实体分页查询
 	public LayuiPageInfo queryCustomerEntAll(Map param);//实体所有查询

@@ -7,7 +7,7 @@ function getUrlParam(variable)
         var pair = vars[i].split("=");
         if(pair[0] == variable){return pair[1];}
     }
-    return(false);
+    return("");
 }
 //一、变量
 var nullTips="未找到满足条件的数据！";//数据为空导出提示

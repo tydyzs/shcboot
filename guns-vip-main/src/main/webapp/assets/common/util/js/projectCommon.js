@@ -49,14 +49,17 @@ function getOption(objList,nameName,valueName){
  * 标签id，字典code，单选name名称，其标签他属性
  */
 function setInput(id,dictTypeCode,name,param){
-    var param="";
     var json='{dictTypeCode:"'+dictTypeCode+'"}';
     var objList=queryDict(json);
     var str="";
     for(var i=0;i<objList.length;i++){
-        var name=objList[i].DICT_NAME;
+        var nameStr=objList[i].DICT_NAME;
         var value=objList[i].DICT_CODE;
-        str+='<input type="radio"  '+param+' lay-verify="required"  name="'+name+'" value="'+value+'" title="'+name+'">'
+        if(i==0){
+            str+='<input type="radio"  checked="checked" '+param+' lay-verify="required"  name="'+name+'" value="'+value+'" title="'+nameStr+'"/>'
+        }else{
+            str+='<input type="radio"  '+param+' lay-verify="required"  name="'+name+'" value="'+value+'" title="'+nameStr+'"/>'
+        }
     }
     $("#"+id).html(str);
 }

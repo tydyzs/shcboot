@@ -4,7 +4,30 @@
 <div class="layui-body-header">
     <span class="layui-body-header-title">客户管理</span>
 </div>
-
+<script type="text/javascript">
+    //值重构
+    function restructureValue(data,key){
+        var str="";
+        var value=data[key];
+        if(key=="genderValue"){
+            if(value=="男"){
+                str='<p  style="font-size:18px; color:#0000ff;">'+value+'</p>';
+            }else{
+                str='<p style="font-size:18px; color:#ff0000;">'+value+'</p>';
+            }
+        }else if(key=='roomValue'||key=='vehicleValue'){
+            if(value=="有"){
+                str='<p style="font-size:18px; color:#0a0;">'+value+'</p>';
+            }else{
+                str=value;
+            }
+        }else if(key=='photo'){
+           /* var url = '';
+            str= '<img src="' + url + '" class="tdImg" />';*/
+        }
+        return str;
+    }
+</script>
 <div class="layui-fluid">
     <div class="layui-row layui-col-space15">
         <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
@@ -21,14 +44,33 @@
                             </div>
                         </div>
                     </div>
-                    <table class="layui-table" id="egFormTable" lay-filter="egFormTable"></table>
+                    <table class="layui-table" id="egFormTable" lay-data="{page: true,height: 'full-98',cellMinWidth: 100}" lay-filter="egFormTable" >
+                        <thead>
+                            <tr>
+                                <th lay-data="{field: 'name', align: 'center', sort: true, minWidth: 40}">姓名</th>
+                                <th lay-data="{field: 'genderValue', align: 'center',templet:function (d){return restructureValue(d,'genderValue');} , minWidth: 20}">性别</th>
+                                <th lay-data="{field: 'birthdate', align: 'center', minWidth: 120}">出生日期</th>
+                                <th lay-data="{field: 'age', align: 'center'}">年龄</th>
+                                <th lay-data="{field: 'householdValue', align: 'center', minWidth: 150}">户口所在地</th>
+                                <th lay-data="{field: 'addressValue', align: 'center', minWidth: 150}">常驻地</th>
+                                <th lay-data="{field: 'photo', align: 'center', templet:function (d){return restructureValue(d,'photo');} , width: 150, unresize: true}">头像</th>
+                                <th lay-data="{field: 'maritalStatusValue', align: 'center'}">婚姻状况</th>
+                                <th lay-data="{field: 'educationValue', align: 'center'}">学历</th>
+                                <th lay-data="{field: 'roomValue', align: 'center' ,templet:function (d){return restructureValue(d,'roomValue');}}">是否有房</th>
+                                <th lay-data="{field: 'vehicleValue', align: 'center',templet:function (d){return restructureValue(d,'vehicleValue');}}">是否有车</th>
+                                <th lay-data="{field: 'createDate', align: 'center', minWidth: 120}">登记日期</th>
+                                <th lay-data="{align: 'center', toolbar: '#tableBar', minWidth: 200}">操作</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <script type="text/html" id="tableBar">
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="view">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
 </script>
 @}

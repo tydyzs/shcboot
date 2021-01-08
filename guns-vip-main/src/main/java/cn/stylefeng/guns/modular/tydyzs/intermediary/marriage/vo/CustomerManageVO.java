@@ -32,46 +32,15 @@ import lombok.EqualsAndHashCode;
 @ApiModel(value = "CrdProductVO对象", description = "CrdProductVO对象")
 public class CustomerManageVO extends CustomerManage {
 	private static final long serialVersionUID = 1L;
-	/**
-	 * 业务品种编号
-	 */
-	private String productNum;
-	/**
-	 * 业务品种名称
-	 */
-	private String productName;
-	/**
-	 * 业务品种描述
-	 */
-	private String productDescr;
-	/**
-	 * 创建用户名称
-	 */
-	private String createUserName;
-	/**
-	 * 创建机构名称
-	 */
-	private String createDeptName;
-	/**
-	 * 创建时间格式化
-	 */
-	private String createTimeStr;
-	/**
-	 * 更新时间格式化
-	 */
-	private String updateTimeStr;
-	/**
-	 * 业务种类名称
-	 */
-	private String productTypeName;
-	/**
-	 * 项目类型名称
-	 */
-	private String projectTypeName;
-	/**
-	 * 担保方式名称
-	 */
-	private String mainGuaranteeTypeName;
+
+	private String genderValue;//性别字典
+	private String maritalStatusValue;//婚姻状况字典
+	private String educationValue;//学历字典
+	private String roomValue;//是否有房字典
+	private String vehicleValue;//是否有车字典
+	private String householdValue;//户口所在地字典
+	private String addressValue;//常驻地址字典
+
 
 
 

@@ -11,6 +11,38 @@
             and t1.name like CONCAT('%',#{param.name},'%')
         </if>
     </select>
+    <!--客户列表，因为有分页参数，所以查询参数加“param.”-->
+    <select id="queryCustomerValue" parameterType="map" resultType="cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.vo.CustomerManageVO">
+        select
+        (select d1.name from sys_dict d1,sys_dict_type d2 where d2.dict_type_id=d1.dict_type_id and d1.code=t1.GENDER and d2.code='SEX'
+        ) GENDER_VALUE,
+        (select d1.name from sys_dict d1,sys_dict_type d2 where d2.dict_type_id=d1.dict_type_id and d1.code=t1.MARITAL_STATUS and d2.code='maritalStatus'
+        ) MARITAL_STATUS_VALUE,
+        (select d1.name from sys_dict d1,sys_dict_type d2 where d2.dict_type_id=d1.dict_type_id and d1.code=t1.EDUCATION and d2.code='education'
+        ) EDUCATION_VALUE,
+        (
+        case t1.ROOM when 'on' then '有' else '无' end
+        ) ROOM_VALUE,
+        (
+        case t1.VEHICLE when 'on' then '有' else '无' end
+        ) VEHICLE_VALUE,
+        concat(
+        (select d1.name from sys_dict d1,sys_dict_type d2 where d2.dict_type_id=d1.dict_type_id and d1.code=t1.HOUSEHOLD_PROVINCE and d2.code='city'),
+        '-',
+        (select d1.name from sys_dict d1,sys_dict_type d2 where d2.dict_type_id=d1.dict_type_id and d1.code=t1.HOUSEHOLD_CITY and d2.code='city')
+        ) HOUSEHOLD_VALUE,
+        concat(
+        (select d1.name from sys_dict d1,sys_dict_type d2 where d2.dict_type_id=d1.dict_type_id and d1.code=t1.ADDRESS_PROVINCE and d2.code='city'),
+        '-',
+        (select d1.name from sys_dict d1,sys_dict_type d2 where d2.dict_type_id=d1.dict_type_id and d1.code=t1.ADDRESS_CITY and d2.code='city')
+        ) ADDRESS_VALUE,
+        date_format(t1.create_date, '%Y-%m-%d') CREATE_DATE,
+        t1.*
+        from BLIND_DATE_CUSTOMER t1 where is_delete = '1'
+        <if test="param.name != null and param.name != ''">
+            and t1.name like CONCAT('%',#{param.name},'%')
+        </if>
+    </select>
     <!--客户列表(所有：此时直接写参数名，无需写“param.”）-->
     <select id="queryCustomerAll" parameterType="map" resultType="cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.entity.CustomerManage">
         select t1.*

@@ -1,5 +1,5 @@
 var form={};
-layui.use(['form', 'admin', 'ax', 'func','radio'], function () {
+layui.use(['form', 'admin', 'ax', 'func'], function () {
     form=layui.form;
 })
 var province=[];//省直辖市字典数据
@@ -18,10 +18,8 @@ $(function(){
     //婚姻状况
     setInput("maritalStatusTd","maritalStatus","maritalStatus","required")
     var id=setTimeout(function(){
-        alert(1)
-        form.render('select');
-        form.render("radio");
-    },1000);
+        form.render();
+    },500);
 })
 
 //省市下钻
@@ -246,7 +244,28 @@ function saveData(){
         return false;
     });
 }
-
-
+//保存数据
+function save(data){
+    data.customerId=customerId;
+    var json=JSON.stringify(data);
+    $.ajax({
+        url:Feng.ctxPath + "/customer/saveData",
+        data:json,
+        type:'POST',
+        dataType:"json",
+        //contentType:'text/json',
+        contentType:'application/json',
+        success:function(res){
+            if(res.state=="0"){
+                alert(res.msg);
+            }else{
+                alert("保存失败！")
+            }
+        },
+        error:function(){
+            alert("服务器异常")
+        }
+    });
+}
 
 

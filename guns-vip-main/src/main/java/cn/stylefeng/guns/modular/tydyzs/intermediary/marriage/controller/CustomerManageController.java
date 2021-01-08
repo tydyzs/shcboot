@@ -7,6 +7,7 @@ import cn.stylefeng.guns.modular.form.model.EgFormParam;
 import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.entity.CustomerManage;
 import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.service.ICustomerManageService;
 import cn.stylefeng.roses.core.base.controller.BaseController;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
@@ -56,7 +57,14 @@ public class CustomerManageController extends BaseController {
 	@ResponseBody
 	@RequestMapping("/list")
 	public LayuiPageInfo list(@RequestParam Map<String, String> params) {
-		return iCustomerManageService.queryCustomer(params);
+		LayuiPageInfo data=iCustomerManageService.queryCustomer(params);
+		return data;
+	}
+	@ResponseBody
+	@RequestMapping("/listMy")
+	public Result listMy(@RequestParam Map<String, String> params) {
+		Result data=iCustomerManageService.queryCustomerMy(params);
+		return data;
 	}
 	/**
 	 * 列表（所有）
@@ -91,7 +99,7 @@ public class CustomerManageController extends BaseController {
 	 */
 	@RequestMapping(value="/saveData",method = RequestMethod.POST)
 	@ResponseBody
-	public Result getdata(@RequestBody CustomerManage customer) {
+	public Result saveData(@RequestBody CustomerManage customer) {
 		return iCustomerManageService.saveCustomer(customer);
 	}
 

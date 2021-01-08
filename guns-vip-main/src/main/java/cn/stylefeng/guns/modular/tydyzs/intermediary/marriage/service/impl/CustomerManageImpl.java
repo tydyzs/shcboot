@@ -5,6 +5,7 @@ import cn.stylefeng.guns.base.pojo.page.LayuiPageInfo;
 import cn.stylefeng.guns.modular.common.util.CommonUtil;
 import cn.stylefeng.guns.modular.common.util.LoginUtil;
 import cn.stylefeng.guns.modular.common.util.Result;
+import cn.stylefeng.guns.modular.common.util.ProjectCommon;
 import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.entity.CustomerManage;
 import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.mapper.CustomerManageMapper;
 import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.service.ICustomerManageService;
@@ -76,9 +77,27 @@ public class CustomerManageImpl extends ServiceImpl<CustomerManageMapper, Custom
         Page pageContext = LayuiPageFactory.defaultPage();
         //获取分页查询结果
        //sql方式
-        IPage page = baseMapper.queryCustomer(pageContext, param);
+        //IPage page = baseMapper.queryCustomer(pageContext, param);
+        IPage page = baseMapper.queryCustomerValue(pageContext, param);
         //将结果转换成layui可识别的分页结果
         LayuiPageInfo result=LayuiPageFactory.createPageInfo(page);
+        return result;
+    }
+    /**
+     * 自定义分页
+     * sql分页查询客户数据
+     * @param param
+     * @return
+     */
+    public Result queryCustomerMy(Map param){
+        //获取前端分页参数
+        Page pageContext = LayuiPageFactory.defaultPage();
+        //获取分页查询结果
+       //sql方式
+        //IPage page = baseMapper.queryCustomer(pageContext, param);
+        IPage page = baseMapper.queryCustomerValue(pageContext, param);
+        //将结果转换成layui可识别的分页结果
+        Result result= ProjectCommon.createPageInfo(page);
         return result;
     }
     /**

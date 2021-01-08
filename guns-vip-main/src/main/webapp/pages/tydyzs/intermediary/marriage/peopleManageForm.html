@@ -26,19 +26,19 @@
                         <tr>
                             <td colspan="1"><label class="layui-form-label"><span style="color: red;">*</span>户口所在地:</label></td>
                             <td colspan="5">
-                                    <select name="modules" placeholder="省直辖市" id="householdProvince" name="householdProvince" onchange="provinceChange(this,'householdCity')"   lay-verify="required" lay-search=""></select>
+                                    <select  placeholder="省直辖市" id="householdProvince" name="householdProvince" onchange="provinceChange(this,'householdCity')"   lay-verify="required" lay-search=""></select>
                             </td>
                             <td colspan="6">
-                                    <select name="modules" id="householdCity" name="householdCity"  lay-verify="required" lay-search=""></select>
+                                    <select  id="householdCity" name="householdCity"  lay-verify="required" lay-search=""></select>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="1"><label class="layui-form-label"><span style="color: red;">*</span>常驻地址:</label></td>
                             <td colspan="5">
-                                <select name="modules" id="addressProvince" name="addressProvince" onchange="provinceChange(this,'addressCity')"  lay-verify="required" lay-search=""></select>
+                                <select  id="addressProvince" name="addressProvince" onchange="provinceChange(this,'addressCity')"  lay-verify="required" lay-search=""></select>
                             </td>
                             <td colspan="6">
-                                <select name="modules" id="addressCity" name="addressCity"  lay-verify="required" lay-search=""></select>
+                                <select  id="addressCity" name="addressCity"  lay-verify="required" lay-search=""></select>
                             </td>
                         </tr>
                         <tr>
@@ -65,15 +65,15 @@
                             </td>
                             <td ><label class="layui-form-label">身高（CM):</label></td>
                             <td>
-                                <input type="text" id="height" name="height" required  lay-verify="required" placeholder="请输入身高（CM)..." autocomplete="off" class="layui-input">
+                                <input type="number" id="height" name="height" required  lay-verify="required" placeholder="请输入身高（CM)..." autocomplete="off" class="layui-input">
                             </td>
                             <td><label class="layui-form-label">体重(KG):</label></td>
                             <td>
-                                <input type="text" id="weight" name="weight" required  lay-verify="required" placeholder="请输入体重(KG)..." autocomplete="off" class="layui-input">
+                                <input type="number" id="weight" name="weight" required  lay-verify="required" placeholder="请输入体重(KG)..." autocomplete="off" class="layui-input">
                             </td>
                             <td><label class="layui-form-label">学历（文凭）:</label></td>
                             <td>
-                                <select name="modules" id="education" name="education"  lay-verify="required" lay-search=""></select>
+                                <select  id="education" name="education"  lay-verify="required" lay-search=""></select>
                             </td>
                         </tr>
                         <tr>
@@ -88,9 +88,9 @@
                         </tr>
                         <tr>
                             <td ><label class="layui-form-label">车房资产：</label></td>
-                            <td style="text-align: right;" colspan="5">
+                            <td colspan="5">
                                 <input type="checkbox" id="room" name="room" style="margin: auto;" lay-skin="switch" lay-text="有房|无房"/>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;
                                 <input type="checkbox" id="vehicle" name="vehicle" lay-skin="switch" lay-text="有车|无车"/>
                             </td>
                             <td ><label class="layui-form-label">资产说明：</label></td>
@@ -129,6 +129,8 @@
     </div>
 </div>
 <script type="text/javascript">
+        var customerId=getUrlParam("customerId");
+        var formType=getUrlParam("type");
         $(function(){
             // 获取前n年
             var newDate= new Date();
@@ -137,27 +139,21 @@
             var beginDate={year:year,month:"1",date:"1"};
             $("#birthdate").val(beginStr);
             dateChange(beginStr,beginDate);
+            init();
         })
-        function save(data){
-            var json=JSON.stringify(data);
-            $.ajax({
-                url:Feng.ctxPath + "/customer/saveData",
-                data:json,
-                type:'POST',
-                dataType:"json",
-                //contentType:'text/json',
-                contentType:'application/json',
-                success:function(res){
-                    if(res.state=="0"){
-                        alert(res.msg);
-                    }else{
-                        alert("保存失败！")
-                    }
-                },
-                error:function(){
-                    alert("服务器异常")
-                }
-            });
+        function init(){
+            if(formType!=add){//查看或编辑时先设置数据
+                setFormData();
+            }
+            if(formType==view){
+
+            }
+            if(formType==view){
+
+            }
+        }
+        function setFormData(){
+            
         }
 </script>
 @}

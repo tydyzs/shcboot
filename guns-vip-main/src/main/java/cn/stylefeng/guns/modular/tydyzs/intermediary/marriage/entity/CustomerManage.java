@@ -25,14 +25,30 @@ public class CustomerManage implements Serializable {
 	private String name;
 	private String gender;
 	private String birthdate;
+	@TableField("PHONE_NUMBER")
 	private String phoneNumber;
+	@TableField("CONTACT_INFORMATION")
 	private String contactInformation;
+	@TableField("HOUSEHOLD_PROVINCE")
+	private String householdProvince;
+	@TableField("HOUSEHOLD_CITY")
+	private String householdCity;
+	@TableField("ADDRESS_PROVINCE")
+	private String addressProvince;
+	@TableField("ADDRESS_CITY")
+	private String addressCity;
+	@TableField("MARITAL_STATUS")
+	private String maritalStatus;
+	private String height;
+	private String weight;
+	private String education;
 	private String age;
 	private String zodiac;
 	private String constellation;
 	private String room;
 	private String vehicle;
 	private String assetsexplain;
+	private String remarks;
 	private String photo;
 	@TableField("CREATE_USER_ID")
 	private String createUserId;
