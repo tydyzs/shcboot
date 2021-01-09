@@ -5,11 +5,10 @@
 <div class="layui-body-header">
     <span class="layui-body-header-title">表单的示例-添加</span>
 </div>
-
 <div class="layui-fluid " style="">
     <div class="layui-card">
         <div class="layui-card-body">
-            <form id="egFormForm"  lay-filter="egFormForm" class="layui-form" >
+            <form id="egFormForm"  lay-filter="egFormForm" disabled class="layui-form" >
                 <div class="layui-form-item">
                     <table style="width:100%;height:100%;border-collapse:separate; border-spacing:10px;" >
                         <tr>
@@ -26,7 +25,7 @@
                         <tr>
                             <td colspan="1"><label class="layui-form-label"><span style="color: red;">*</span>户口所在地:</label></td>
                             <td colspan="5">
-                                    <select  placeholder="省直辖市" id="householdProvince" name="householdProvince" onchange="provinceChange(this,'householdCity')"   lay-verify="required" lay-search=""></select>
+                                    <select  id="householdProvince" name="householdProvince" onchange="provinceChange(this,'householdCity')"   lay-verify="required" lay-search=""></select>
                             </td>
                             <td colspan="6">
                                     <select  id="householdCity" name="householdCity"  lay-verify="required" lay-search=""></select>
@@ -48,15 +47,15 @@
                             </td>
                             <td ><label class="layui-form-label">年龄:</label></td>
                             <td>
-                                <input id="customerAge" type="tel" style="width:60px;" name="age" autocomplete="off" class="layui-input" disabled=""/>
+                                <input id="customerAge" type="tel" style="width:60px;" name="age" autocomplete="off" class="layui-input layui-disabled" disabled=""/>
                             </td>
                             <td><label class="layui-form-label">生肖:</label></td>
                             <td>
-                                <input id="customerZodiac" type="tel" style="width:60px;" name="zodiac"  autocomplete="off" class="layui-input" disabled=""/>
+                                <input id="customerZodiac" type="tel" style="width:60px;" name="zodiac"  autocomplete="off" class="layui-input layui-disabled" disabled=""/>
                             </td>
                             <td><label class="layui-form-label">星座:</label></td>
                             <td>
-                                <input id="customerConstellation" type="tel" style="width:60px;" name="constellation"  autocomplete="off" class="layui-input" disabled=""/>
+                                <input id="customerConstellation" type="tel" style="width:60px;" name="constellation"  autocomplete="off" class="layui-input layui-disabled" disabled=""/>
                             </td>
                         </tr>
                         <tr>
@@ -129,10 +128,10 @@
     </div>
 </div>
 <script type="text/javascript">
-        var customerId=getUrlParam("customerId");
-        var formType=getUrlParam("type");
-        var form={};
-        $(function(){
+    var customerId=getUrlParam("customerId");
+    var formType=getUrlParam("type");
+    var layuiForm ={};
+    $(function(){
             // 获取前n年
             var newDate= new Date();
             var year = newDate.getFullYear()-30;
@@ -140,7 +139,9 @@
             var beginDate={year:year,month:"1",date:"1"};
             $("#birthdate").val(beginStr);
             dateChange(beginStr,beginDate);
-        })
+    })
 </script>
 @}
+<script type="text/javascript">
+</script>
 <script type="text/javascript" src="/pages/tydyzs/intermediary/marriage/js/peopleManageForm.js"></script>

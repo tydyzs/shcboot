@@ -115,7 +115,7 @@ function setDictSlelct(id,dictTypeCode){
     setDataSlelct(id,data);
 }
 //2.关闭窗口
-function closeWindow(){
+function closeWindow(state){
     var index=parent.layer.getFrameIndex(window.name); //获取当前窗口的name
     parent.layer.close(index);
 }

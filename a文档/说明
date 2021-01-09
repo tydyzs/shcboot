@@ -96,3 +96,18 @@ tydyzs/qwer1234
 2.表单赋值：
     layui.form.val('form1',data);
     <form id="egFormForm"  lay-filter="form1" class="layui-form" ></form>
+3.弹框关闭事件改造：
+    现有func.js中对layui.open 的end()做了改造，使得func.open中的end方法不起作用
+    目前在func.js中open方法加了函数closeEnd,在使用func.open时调用end如下：
+    func.open({
+        content:  Feng.ctxPath + "/customer/peopleManageForm?type=edit&customerId="+customerId,
+        closeEnd: function(){
+            alert("窗口被关闭！")
+        }
+    });
+4.弹出alert确定后执行：
+    layer.alert(res.msg,function(){
+        alert("alert已确定");
+        layer.closeAll();//关闭所有层（包含此alert）
+        //closeWindow();
+    })

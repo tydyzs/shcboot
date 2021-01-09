@@ -79,7 +79,7 @@ layui.define(['jquery', 'layer', 'admin', 'table', 'ax', 'form'], function (expo
             param.type = 2;
 
             admin.putTempData('formOk', false);
-            param.end = function () {
+           param.end = function () {
                 layer.closeAll('tips');
                 if (param.tableId) {
                     admin.getTempData('formOk') && table.reload(param.tableId);
@@ -87,6 +87,9 @@ layui.define(['jquery', 'layer', 'admin', 'table', 'ax', 'form'], function (expo
 
                 if (param.endCallback) {
                     admin.getTempData('formOk') && param.endCallback();
+                }
+                if(param.closeEnd){
+                    param.closeEnd();
                 }
             };
 

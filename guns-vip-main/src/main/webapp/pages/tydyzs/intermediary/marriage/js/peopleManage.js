@@ -4,7 +4,7 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
     var $ax = layui.ax;
     var admin = layui.admin;
     var func = layui.func;
-    search();
+    //search();
     // 操作
     table.on('tool(' + 'egFormTable' + ')', function (obj) {
         var data = obj.data;
@@ -23,7 +23,7 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
         func.open({
             height: 780,
             width: "65%",
-            title: '新增客户',
+            title: '查看客户',
             content:  Feng.ctxPath + "/customer/peopleManageForm?type=view&customerId="+customerId,
             tableId: "peopleManageAdd"
         });
@@ -39,9 +39,13 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
         func.open({
             height: 780,
             width: "65%",
-            title: '新增客户',
+            title: '编辑客户',
             content:  Feng.ctxPath + "/customer/peopleManageForm?type=edit&customerId="+customerId,
-            tableId: "peopleManageAdd"
+            tableId: "peopleManageAdd",
+            closeEnd: function(){
+                //location.reload();
+                search();
+            }
         });
     }
 
@@ -53,7 +57,11 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
             width: "65%",
             title: '新增客户',
             content:  Feng.ctxPath + "/customer/peopleManageForm?type=add",
-            tableId: "peopleManageAdd"
+            tableId: "peopleManageAdd",
+            closeEnd: function(){
+                //location.reload();
+                search();
+            }
         });
     });
 
