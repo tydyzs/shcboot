@@ -30,8 +30,27 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
     }
     //删除
     function deleteCustomer(customerId){
-        layer.confirm('真的删除行么', function(index){
-            layer.close(index);
+        layer.confirm('确定删除此数据？', function(index){
+            var data={customerId:customerId}
+            var json=objToStr(data);
+            $.ajax({
+                url:Feng.ctxPath + "/customer/delCustomer",
+                data:json,
+                type:'POST',
+                contentType:'application/json',
+                dataType:"json",
+                success:function(res){
+                    if(res.state=="0"){
+                        layer.msg("删除成功！")
+                        search();
+                    }else{
+                        alert("删除失败！")
+                    }
+                },
+                error:function(){
+                    alert("服务器异常")
+                }
+            });
         });
     }
     //编辑

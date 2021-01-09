@@ -27,7 +27,7 @@ select * from sys_dict
 select * from sys_dict_type
 
 
-/////////////////////////////////////////记录/////////////////////////////////
+/////////////////////////////////////////系统记录/////////////////////////////////
 0.base:
 0.1:登入页面：pages/login.html
 0.2：登入（退出登入）接口：\guns-sys\src\main\java\cn\stylefeng\guns\sys\modular\system\controller\LoginController.java
@@ -84,30 +84,3 @@ tydyzs/qwer1234
 7.引入js顺序问题：将js放在最下面才能获取layui对象
 
 
-
-
-
-//////////////////////////////////////////////////////layui:
-0.表单重新渲染：
-    layui.form.render();//渲染所有
-    layui.form.render("select");//渲染select控件
-1.开关动态赋值：
-    $("#room").prop("checked",true);
-2.表单赋值：
-    layui.form.val('form1',data);
-    <form id="egFormForm"  lay-filter="form1" class="layui-form" ></form>
-3.弹框关闭事件改造：
-    现有func.js中对layui.open 的end()做了改造，使得func.open中的end方法不起作用
-    目前在func.js中open方法加了函数closeEnd,在使用func.open时调用end如下：
-    func.open({
-        content:  Feng.ctxPath + "/customer/peopleManageForm?type=edit&customerId="+customerId,
-        closeEnd: function(){
-            alert("窗口被关闭！")
-        }
-    });
-4.弹出alert确定后执行：
-    layer.alert(res.msg,function(){
-        alert("alert已确定");
-        layer.closeAll();//关闭所有层（包含此alert）
-        //closeWindow();
-    })

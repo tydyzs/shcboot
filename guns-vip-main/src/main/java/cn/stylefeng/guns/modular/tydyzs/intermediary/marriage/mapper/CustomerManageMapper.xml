@@ -42,6 +42,7 @@
         <if test="param.name != null and param.name != ''">
             and t1.name like CONCAT('%',#{param.name},'%')
         </if>
+        order by CREATE_DATE desc
     </select>
     <!--客户列表(所有：此时直接写参数名，无需写“param.”）-->
     <select id="queryCustomerAll" parameterType="map" resultType="cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.entity.CustomerManage">

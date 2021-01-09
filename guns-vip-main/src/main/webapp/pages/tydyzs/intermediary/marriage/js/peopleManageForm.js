@@ -45,11 +45,23 @@ layui.use(['form', 'admin', 'ax', 'upload', 'laydate', 'selectPlus'], function (
     //layui禁用表单
     function disabledForm(){
         var formObj = layuiForm.val("egFormForm");
-        for(var i in formObj){//遍历json
+        for(var name in formObj){//遍历json
             //alert(i+"="+formObj[i]);
-            $("#"+i).addClass("layui-disabled");
-            $("#"+i).css("disabled",true);
+            $("#"+name).addClass("layui-disabled");
+            $("#"+name).attr('disabled', 'disabled');
+            //单选设置禁用
+           $("input[name="+name+" ][type='radio']").attr("disabled","disabled");
+            //开关
+            //开关禁用
+            $("#room").prop("disabled",true);
+            $("#vehicle").prop("disabled",true);
+            //按钮禁用：
+            /*$("#picBtn").attr('disabled', 'disabled');
+            $("#picBtn").addClass("layui-disabled");*/
+            $("#picBtn").remove();
+            $("#saveButton").remove();
         }
+        layuiForm.render();
     }
 
     //初始化时间选择器

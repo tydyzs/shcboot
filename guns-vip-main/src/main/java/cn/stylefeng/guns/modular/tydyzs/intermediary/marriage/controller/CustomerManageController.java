@@ -1,24 +1,15 @@
 package cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.controller;
 
-import cn.hutool.db.Page;
 import cn.stylefeng.guns.base.pojo.page.LayuiPageInfo;
-import cn.stylefeng.guns.modular.common.util.CommonUtil;
 import cn.stylefeng.guns.modular.common.util.Result;
-import cn.stylefeng.guns.modular.form.model.EgFormParam;
 import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.entity.CustomerManage;
 import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.service.ICustomerManageService;
 import cn.stylefeng.roses.core.base.controller.BaseController;
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -107,6 +98,18 @@ public class CustomerManageController extends BaseController {
 		Result result=new Result();
 		result.setState("0");
 		result.setData(customerManage);
+		return result;
+	}
+	/**
+	 * 删除客户
+	 */
+	@ResponseBody
+	@RequestMapping("/delCustomer")
+	public Result delCustomer(@RequestParam CustomerManage customer) {
+		customer.setIsDelete("0");
+		iCustomerManageService.saveOrUpdate(customer);
+		Result result=new Result();
+		result.setState("0");
 		return result;
 	}
 

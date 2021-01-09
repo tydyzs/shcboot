@@ -106,8 +106,6 @@ public class CustomerManageImpl extends ServiceImpl<CustomerManageMapper, Custom
      * @return
      */
     public LayuiPageInfo queryCustomerAll(Map param){
-        //查询条件
-        QueryWrapper<CustomerManage> objectQueryWrapper = new QueryWrapper<>();
         //获取所有查询结果
         List data = baseMapper.queryCustomerAll(param);
         LayuiPageInfo result=new LayuiPageInfo();
