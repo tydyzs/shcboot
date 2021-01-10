@@ -1,10 +1,12 @@
 @layout("/common/_container.html",{js:[],css:[]}){
 <script src="${ctxPath}/assets/expand/plugins/jquery/jquery-3.2.1.min.js?v=${constants.getReleaseVersion()}"></script>
+<script src="${ctxPath}/assets/common/util/js/common.js"></script>
+<script src="${ctxPath}/assets/common/util/js/projectCommon.js"></script>
 <div class="layui-body-header">
     <span class="layui-body-header-title">客户管理</span>
 </div>
 <script type="text/javascript">
-    //值重构
+    //表格值重构
     function restructureValue(data,key){
         var str="";
         var value=data[key];
@@ -33,6 +35,35 @@
             <div class="layui-card">
                 <div class="layui-card-body">
                     <div class="layui-form toolbar">
+                        <div class="layui-row" >
+                            <div id="xzqyDl" class="filter-section" style="overflow:scroll;height:160px;">
+                                <dl class="clear addClick">
+                                    <dt class="left">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</dt>
+                                    <div style="width:100%;" id="SEX">
+                                        <dd class="active left mr20" value="">全部</dd>
+                                    </div>
+                                </dl>
+                                <dl class="clear addClick">
+                                    <dt class="left">学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历：</dt>
+                                    <div style="width:100%;" id="education">
+                                        <dd class="active left mr20" value="">全部</dd>
+                                    </div>
+                                </dl>
+                                <dl class="clear addClick">
+                                    <dt class="left">婚&nbsp;姻&nbsp;状&nbsp;况：</dt>
+                                    <div style="width:100%;" id="maritalStatus">
+                                        <dd class="active left mr20" value="">全部</dd>
+                                    </div>
+                                </dl>
+                                <dl class="clear addClick" style="z-index:99;">
+                                    <dt class="left">常&nbsp;住&nbsp;地&nbsp;址：</dt>
+                                    <span style="width:100%;">
+                                        <select class="left mr20"  id="addressProvince"  onchange="provinceChange(this)" lay-search=""></select>
+                                        <select class="left mr20"  id="addressCity"  onchange="addressChange()"lay-search=""></select>
+                                    </span>
+                                </dl>
+                            </div>
+                        </div>
                         <div class="layui-form-item">
                             <div class="layui-inline">
                                 <input id="condition" class="layui-input" type="text" placeholder="请输入姓名..."/>
@@ -43,7 +74,7 @@
                             </div>
                         </div>
                     </div>
-                    <table class="layui-table" id="egFormTable"  lay-data="{url:'${ctxPath}/customer/list',page: true,height: 'full-98',cellMinWidth: 100}" lay-filter="egFormTable" >
+                    <table class="layui-table" id="egFormTable"  lay-data="{url:'${ctxPath}/customer/list',page: true,height: 'full-50',cellMinWidth: 50}" lay-filter="egFormTable" >
                         <thead>
                             <tr>
                                 <th lay-data="{field: 'name', align: 'center', sort: true, minWidth: 40}">姓名</th>

@@ -1,10 +1,29 @@
-layui.use(['table', 'admin', 'ax', 'func'], function () {
+var layuiForm={};
+layui.use(['form','table', 'admin', 'ax', 'func','selectPlus'], function () {
     var $ = layui.$;
     var table = layui.table;
     var $ax = layui.ax;
     var admin = layui.admin;
     var func = layui.func;
+    layuiForm=layui.form;
+
+    initCity();
+    $("#addressProvince").val("");
     //search();
+
+
+
+    //初始化函数
+    function initCity(){
+        //省份下拉初始化
+        var json='{dictTypeCode:"city",dictParentId:"0"}';
+        province=queryDict(json);
+        setDataSlelct("addressProvince",province);
+        var id=setTimeout(function(){
+            layuiForm.render();
+        },500);
+    }
+
     // 操作
     table.on('tool(' + 'egFormTable' + ')', function (obj) {
         var data = obj.data;
@@ -96,4 +115,27 @@ function search(){
             where: queryData
         });
 }
-
+$(function(){
+    init();
+});
+//初始化条件字典
+function init(){
+    ajaxMethodDict("SEX",$('#SEX'));
+    ajaxMethodDict("education",$('#education'));
+    ajaxMethodDict("maritalStatus",$('#maritalStatus'));
+}
+//省市下钻
+function provinceChange(obj){
+    var id="addressCity";
+    //var id="householdCity";var id="addressCity";
+    var value=$(obj).val();
+    var json='{dictParentId:"'+value+'"}';
+    //setParamSlelct(id,json);
+    getCityOption(id,json)
+    $("#"+id).val("");
+    layuiForm.render('select');
+    search();
+}
+function addressChange(){
+    search();
+}

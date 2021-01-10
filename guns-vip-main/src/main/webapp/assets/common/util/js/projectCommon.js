@@ -41,7 +41,7 @@ function getOption(objList,nameName,valueName){
 }
 
 /**
- * 字典数据获取单选
+ * 字典数据获取“单选”
  * @param objList
  * @param nameName
  * @param valueName
@@ -93,14 +93,14 @@ function getCityOption(id,json){
     $("#"+id).html(str);
 }
 /**
- * 1.2根据标签id，字典数据（listObj)，直接初始化字典标签
+ * 1.2根据select标签id，字典数据（listObj)，直接初始化字典标签
  */
 function setDataSlelct(id,listObj){
     var str=getOption(listObj,"DICT_NAME","DICT_CODE");
     $("#"+id).html(str);
 }
 /**
- * 1.3根据标签id，字典查询条件param(json字符串），直接初始化字典标签
+ * 1.3根据select标签id，字典查询条件param(json字符串），直接初始化字典标签
  */
 function setParamSlelct(id,json){
     var listObj=queryDict(json);
@@ -119,4 +119,25 @@ function closeWindow(state){
     var index=parent.layer.getFrameIndex(window.name); //获取当前窗口的name
     parent.layer.close(index);
 }
+
+/////////////////////////////////////条件相关函数/////////////////////////////////////////////
+//4.获取字典并生成条件
+function ajaxMethodDict(parameter,obj){
+    var json='{dictTypeCode:"'+parameter+'"}';
+    var data=queryDict(json);
+    for(var i=0;i<data.length;i++){
+        obj.append('<dd class="left mr20" value="'+ data[i].DICT_CODE +'">'+ data[i].DICT_NAME +'</dd>');
+    };
+    initSearch(obj);
+}
+//条件事件,ajaxMethodDict函数中被调用
+function initSearch(obj){
+    obj.find("dd").click(function () {
+        $(this).addClass('active').siblings().removeClass('active');
+        search();
+    });
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
