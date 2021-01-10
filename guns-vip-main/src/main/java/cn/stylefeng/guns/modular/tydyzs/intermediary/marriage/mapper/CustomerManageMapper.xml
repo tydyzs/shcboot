@@ -42,6 +42,21 @@
         <if test="param.name != null and param.name != ''">
             and t1.name like CONCAT('%',#{param.name},'%')
         </if>
+        <if test="param.sex != null and param.sex != ''">
+            and t1.GENDER =#{param.sex}
+        </if>
+        <if test="param.education != null and param.education != ''">
+            and t1.EDUCATION=#{param.education}
+        </if>
+        <if test="param.maritalStatus != null and param.maritalStatus != ''">
+            and t1.MARITAL_STATUS=#{param.maritalStatus}
+        </if>
+        <if test="param.addressProvince != null and param.addressProvince != ''">
+            and t1.ADDRESS_PROVINCE=#{param.addressProvince}
+        </if>
+        <if test="param.addressCity != null and param.addressCity != ''">
+            and t1.ADDRESS_CITY=#{param.addressCity}
+        </if>
         order by CREATE_DATE desc
     </select>
     <!--客户列表(所有：此时直接写参数名，无需写“param.”）-->

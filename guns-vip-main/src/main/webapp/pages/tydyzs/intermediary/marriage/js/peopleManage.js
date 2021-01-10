@@ -8,7 +8,6 @@ layui.use(['form','table', 'admin', 'ax', 'func','selectPlus'], function () {
     layuiForm=layui.form;
 
     initCity();
-    $("#addressProvince").val("");
     //search();
 
 
@@ -19,6 +18,10 @@ layui.use(['form','table', 'admin', 'ax', 'func','selectPlus'], function () {
         var json='{dictTypeCode:"city",dictParentId:"0"}';
         province=queryDict(json);
         setDataSlelct("addressProvince",province);
+        var optionStr='<option value="">全国</option>';
+        var addressObj=$("#addressProvince");
+        addressObj.html(optionStr+addressObj.html());
+
         var id=setTimeout(function(){
             layuiForm.render();
         },500);
@@ -106,9 +109,19 @@ layui.use(['form','table', 'admin', 'ax', 'func','selectPlus'], function () {
 });
 //查询方法
 function search(){
-    var table = layui.table;
     var queryData = {};
+    var sex = getQueryParam("SEX");
+    var education = getQueryParam("education");
+    var maritalStatus = getQueryParam("maritalStatus");
+    var addressProvince=$("#addressProvince").val();
+    var addressCity=$("#addressCity").val();
+    queryData.sex=sex;
+    queryData.education=education;
+    queryData.maritalStatus=maritalStatus;
+    queryData.addressProvince=addressProvince;
+    queryData.addressCity=addressCity;
     queryData['name'] = $("#condition").val();
+    var table = layui.table;
     table.reload("egFormTable",
         {
             url:Feng.ctxPath + '/customer/list',
@@ -127,15 +140,38 @@ function init(){
 //省市下钻
 function provinceChange(obj){
     var id="addressCity";
-    //var id="householdCity";var id="addressCity";
-    var value=$(obj).val();
-    var json='{dictParentId:"'+value+'"}';
-    //setParamSlelct(id,json);
-    getCityOption(id,json)
-    $("#"+id).val("");
-    layuiForm.render('select');
+    var addressProvinceValue=$("#addressProvince").val();
+    if(checkNull(addressProvinceValue)){
+        debugger;
+        $("#"+id).html("");
+        layuiForm.render('select');
+    }else{
+        var value=$(obj).val();
+        var json='{dictParentId:"'+value+'"}';
+        //setParamSlelct(id,json);
+        getCityOption(id,json)
+        //余外元素追加
+        var optionStr='<option value="">全部</option>';
+        var addressObj=$("#"+id);
+        addressObj.html(optionStr+addressObj.html());
+
+        $("#"+id).val("");
+        layuiForm.render('select');
+    }
     search();
 }
+//选择市
 function addressChange(){
+    search();
+}
+//重置条件
+function reset(){
+    $("#addressProvince").val("");
+    $("#addressCity").val("");
+    $("#addressCity").html("");
+    resetQueryParam("SEX");
+    resetQueryParam("education");
+    resetQueryParam("maritalStatus");
+    layuiForm.render('select');
     search();
 }

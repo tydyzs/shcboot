@@ -34,9 +34,9 @@
         <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
             <div class="layui-card">
                 <div class="layui-card-body">
-                    <div class="layui-form toolbar">
+                    <div class="layui-form toolbar" >
                         <div class="layui-row" >
-                            <div id="xzqyDl" class="filter-section" style="overflow:scroll;height:160px;">
+                            <div id="xzqyDl" class="filter-section" style="height:140px;">
                                 <dl class="clear addClick">
                                     <dt class="left">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</dt>
                                     <div style="width:100%;" id="SEX">
@@ -57,9 +57,18 @@
                                 </dl>
                                 <dl class="clear addClick" style="z-index:99;">
                                     <dt class="left">常&nbsp;住&nbsp;地&nbsp;址：</dt>
-                                    <span style="width:100%;">
+                                    <span style="width: 10%;">
                                         <select class="left mr20"  id="addressProvince"  onchange="provinceChange(this)" lay-search=""></select>
+                                    </span>
+                                    <span style="width: 2%;">
+                                        &nbsp;&nbsp;-&nbsp;-&nbsp;&nbsp;
+                                    </span>
+                                    <span style="width: 20%;">
                                         <select class="left mr20"  id="addressCity"  onchange="addressChange()"lay-search=""></select>
+                                    </span>
+                                    <span style="width: 20%;">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <button type="button" onclick="reset()" class="layui-btn layui-btn-sm layui-btn-normal"><i class="layui-icon"></i> 重置</button>
                                     </span>
                                 </dl>
                             </div>

@@ -137,7 +137,14 @@ function initSearch(obj){
         search();
     });
 }
-
+//获取条件值：
+function getQueryParam(id){
+    return jQuery("#"+id+" dd[class*='active']").first().attr('value');
+}
+//重置条件值：
+function resetQueryParam(id){
+    $("#"+id).children().eq(0).addClass('active').siblings().removeClass('active');
+}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
