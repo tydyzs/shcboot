@@ -103,8 +103,7 @@ layui.use(['form', 'admin', 'ax', 'upload', 'laydate', 'selectPlus'], function (
             });
         }
         , done: function (res) {
-            fileRefresh(customPhoto,"customPhoto");
-            layuiForm.render();
+            fileRefresh(customPhoto,"customPhoto",isDle);
             Feng.success(res.message);
         }
         , error: function () {
@@ -171,7 +170,7 @@ function setFormData(){
                 $("#vehicle").prop("checked", data.vehicle=="on");
                 layuiForm.render();
                 customPhoto=data.photo;
-                fileRefresh(customPhoto,"customPhoto");
+                fileRefresh(customPhoto,"customPhoto",isDle);
                 console.log(data)
             }else{
                 alert("保存失败！")

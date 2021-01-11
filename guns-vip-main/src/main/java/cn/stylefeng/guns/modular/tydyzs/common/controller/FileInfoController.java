@@ -1,6 +1,5 @@
 package cn.stylefeng.guns.modular.tydyzs.common.controller;
 
-import cn.stylefeng.guns.base.pojo.page.LayuiPageInfo;
 import cn.stylefeng.guns.modular.common.util.CommonUtil;
 import cn.stylefeng.guns.modular.common.util.Result;
 import cn.stylefeng.guns.modular.tydyzs.common.entity.FileInfo;
@@ -110,6 +109,22 @@ public class FileInfoController extends BaseController {
 			out.write(buffer,0,len);//将缓冲区的数据输入到客户端浏览器
 		}
 		in.close();
+	}
+
+	/**
+	 * 删除文件
+	 */
+	@ResponseBody
+	@RequestMapping("/delFile")
+	public Result delFile(@RequestBody FileInfo fileInfo) {
+		QueryWrapper<FileInfo> queryWrapper=new QueryWrapper(fileInfo);
+		fileInfo=iService.getOne(queryWrapper);
+		String filePath=fileInfo.getFilePath();
+		CommonUtil.deleteFile(filePath);
+		iService.removeById(fileInfo.getFileId());
+		Result result=new Result();
+		result.setState("0");
+		return result;
 	}
 }
 

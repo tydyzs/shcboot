@@ -135,6 +135,7 @@
 <script type="text/javascript">
     var customerId=getUrlParam("customerId");
     var formType=getUrlParam("type");
+    var isDle=formType=="view"?false:true;
     var layuiForm ={};
     var customPhoto="";//图片分类id
     $(function(){

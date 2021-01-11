@@ -5,5 +5,12 @@
 
     <!--获取文件数据-->
     <select id="queryFileInfo" parameterType="map" resultType="map">
+        select * from sys_file_info t1 where 1=1
+        <if test="fileId != null and fileId != ''">
+            and t1.file_id =#{fileId}
+        </if>
+        <if test="fileType != null and fileType != ''">
+            and t1.file_type =#{fileType}
+        </if>
     </select>
 </mapper>

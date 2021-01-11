@@ -14,5 +14,5 @@ import java.util.Map;
  * @since 2019-10-21
  */
 public interface IFileInfoMapper extends BaseMapper<FileInfo> {
-	List<Map> queryFileInfo(Map param);
+	List<Map> queryFileInfo(FileInfo param);
 }

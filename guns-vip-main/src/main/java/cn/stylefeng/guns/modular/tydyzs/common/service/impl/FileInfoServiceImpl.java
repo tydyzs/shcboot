@@ -11,11 +11,15 @@ import cn.stylefeng.roses.kernel.model.exception.ServiceException;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.io.File;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -24,8 +28,10 @@ import java.math.BigDecimal;
  * @author git
  * @since 2019-10-21
  */
+@Slf4j
 @Service
 public class FileInfoServiceImpl extends ServiceImpl<IFileInfoMapper, FileInfo> implements IFileInfoService {
+
     /**
      * 上传文件（指定上传路径）
      *

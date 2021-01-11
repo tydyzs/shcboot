@@ -1,7 +1,11 @@
 package cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.controller;
 
 import cn.stylefeng.guns.base.pojo.page.LayuiPageInfo;
+import cn.stylefeng.guns.modular.common.util.CommonUtil;
 import cn.stylefeng.guns.modular.common.util.Result;
+import cn.stylefeng.guns.modular.tydyzs.common.entity.FileInfo;
+import cn.stylefeng.guns.modular.tydyzs.common.service.IFileInfoService;
+import cn.stylefeng.guns.modular.tydyzs.common.service.impl.FileInfoServiceImpl;
 import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.entity.CustomerManage;
 import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.service.ICustomerManageService;
 import cn.stylefeng.roses.core.base.controller.BaseController;
@@ -10,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.Map;
 
 
@@ -27,6 +33,8 @@ public class CustomerManageController extends BaseController {
 
 	@Autowired
 	private ICustomerManageService iCustomerManageService;
+	@Autowired
+	private IFileInfoService iFileInfoService;
 
 	/**
 	 * 跳转到主页面
@@ -105,9 +113,21 @@ public class CustomerManageController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping("/delCustomer")
-	public Result delCustomer(@RequestParam CustomerManage customer) {
+	public Result delCustomer(@RequestBody CustomerManage customer) {
+		CustomerManage data=iCustomerManageService.getById(customer.getCustomerId());
+		String fileType=data.getPhoto();
 		customer.setIsDelete("0");
 		iCustomerManageService.saveOrUpdate(customer);
+		//删除照片文件
+		FileInfo fileInfo=new FileInfo();
+		fileInfo.setFileType(fileType);
+		QueryWrapper<FileInfo> queryWrapper=new QueryWrapper(fileInfo);//customer为实体类
+		List<FileInfo> fileData=iFileInfoService.list(queryWrapper);
+		for(FileInfo f:fileData){
+			String filePath=f.getFilePath();
+			iFileInfoService.removeById(f.getFileId());
+			CommonUtil.deleteFile(filePath);
+		}
 		Result result=new Result();
 		result.setState("0");
 		return result;
