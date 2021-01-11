@@ -46,6 +46,7 @@ layui.use(['form','table', 'admin', 'ax', 'func','selectPlus'], function () {
             height: 780,
             width: "65%",
             title: '查看客户',
+            maxmin:true,
             content:  Feng.ctxPath + "/customer/peopleManageForm?type=view&customerId="+customerId,
             tableId: "peopleManageAdd"
         });
@@ -81,6 +82,7 @@ layui.use(['form','table', 'admin', 'ax', 'func','selectPlus'], function () {
             height: 780,
             width: "65%",
             title: '编辑客户',
+            maxmin:true,
             content:  Feng.ctxPath + "/customer/peopleManageForm?type=edit&customerId="+customerId,
             tableId: "peopleManageAdd",
             closeEnd: function(){
@@ -97,6 +99,7 @@ layui.use(['form','table', 'admin', 'ax', 'func','selectPlus'], function () {
             height: 780,
             width: "65%",
             title: '新增客户',
+            maxmin:true,
             content:  Feng.ctxPath + "/customer/peopleManageForm?type=add",
             tableId: "peopleManageAdd",
             closeEnd: function(){

@@ -26,6 +26,9 @@ select * from sys_file_info
 select * from sys_dict
 select * from sys_dict_type
 
+//////////////////////////////////////新系统部署事项///////////////////////////////
+1.将上传目录清空：
+D:\Work\wodexitong\shcboot\guns-vip-main\target\classes\META-INF\resources\upload
 
 /////////////////////////////////////////系统记录/////////////////////////////////
 0.base:

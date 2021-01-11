@@ -1,16 +1,16 @@
 var province=[];//省直辖市字典数据
 layuiForm=layui.form;
+var layuiUpload={};
 layui.use(['form', 'admin', 'ax', 'upload', 'laydate', 'selectPlus'], function () {
     var $ = layui.jquery;
     var $ax = layui.ax;
     var admin = layui.admin;
     var upload = layui.upload;
     var laydate = layui.laydate;
+    layuiUpload = layui.laydate;
     var selectPlus = layui.selectPlus;
     layuiForm=layui.form;
-    $(function(){
-        init();
-    })
+    init();
     //初始化函数
     function init(){
         //省份下拉初始化
@@ -31,6 +31,7 @@ layui.use(['form', 'admin', 'ax', 'upload', 'laydate', 'selectPlus'], function (
             var cityObj=queryDict(json1);
             setDataSlelct("householdCity",cityObj);
             setDataSlelct("addressCity",cityObj);
+            customPhoto=getUuid();
         }
         if(formType=="view"){
             disabledForm();
@@ -76,7 +77,7 @@ layui.use(['form', 'admin', 'ax', 'upload', 'laydate', 'selectPlus'], function (
     //上传文件
     upload.render({
         elem: '#fileBtn'
-        , url: Feng.ctxPath + '/system/upload?fileType=customPhoto'
+        , url: Feng.ctxPath + '/system/upload?fileType='+customPhoto
         , accept: 'file'
         , before: function (obj) {
             obj.preview(function (index, file, result) {
@@ -91,20 +92,19 @@ layui.use(['form', 'admin', 'ax', 'upload', 'laydate', 'selectPlus'], function (
             Feng.error("上传图片失败！");
         }
     });
-
     //普通图片上传
     upload.render({
         elem: '#picBtn'
-        , url: Feng.ctxPath + '/myFileInfo/upload?fileType=customPhoto'
+        , url: Feng.ctxPath + '/myFileInfo/layuiUploadImg?fileType='+customPhoto
         , before: function (obj) {
-            /*obj.preview(function (index, file, result) {
-                $('#img1').attr('src', result);
-            });*/
+            obj.preview(function (index, file, result) {
+                /*var str='<img src="'+result+'" style="margin-right:10px;" class="layui-upload-img" width="92px" height="92px">';
+                $("#customPhoto").append(str);*/
+            });
         }
         , done: function (res) {
-            $("#pictureInputHidden").val(res.data.fileId);
-            var url=Feng.ctxPath + '/myFileInfo/getFile?fileId='+res.data.fileId+"&345234523";
-            $("#img1").attr("src",url);
+            fileRefresh(customPhoto,"customPhoto");
+            layuiForm.render();
             Feng.success(res.message);
         }
         , error: function () {
@@ -124,6 +124,7 @@ function saveData(){
 //保存数据
 function save(data){
     data.customerId=customerId;
+    data.photo=customPhoto;
     var json=JSON.stringify(data);
     $.ajax({
         url:Feng.ctxPath + "/customer/saveData",
@@ -155,6 +156,7 @@ function setFormData(){
         data:json,
         type:'POST',
         dataType:"json",
+        async:false,
         contentType:'application/json',
         success:function(res){
             if(res.state=="0"){
@@ -168,6 +170,9 @@ function setFormData(){
                 $("#room").prop("checked", data.room=="on");
                 $("#vehicle").prop("checked", data.vehicle=="on");
                 layuiForm.render();
+                customPhoto=data.photo;
+                fileRefresh(customPhoto,"customPhoto");
+                console.log(data)
             }else{
                 alert("保存失败！")
             }
