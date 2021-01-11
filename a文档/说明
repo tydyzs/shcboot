@@ -77,10 +77,20 @@ tydyzs/qwer1234
 
 6.静态资源配置：
     1.静态资源放开过滤：
-    cn.stylefeng.guns.config.security.WebSecurityConfig：98行（"/pages/**",）
+        cn.stylefeng.guns.config.security.WebSecurityConfig.java：98行（"/pages/**",）
     2.静态资源映射：
-    cn.stylefeng.guns.config.web.WebConfig：
-    添加：registry.addResourceHandler("/pages/**").addResourceLocations("classpath:/pages/");
-7.引入js顺序问题：将js放在最下面才能获取layui对象
+        cn.stylefeng.guns.config.web.WebConfig：
+        添加：registry.addResourceHandler("/pages/**").addResourceLocations("classpath:/pages/");
+    3.配置后静态资源无法访问：
+        右侧Maven刷新文件夹
+7.引入js顺序问题：
+    1.将js放在最下面才能获取layui对象；
+    2.layui.use执行顺序：
+        var layuiForm={};
+        layui.use(['form','table', 'admin', 'ax', 'func','selectPlus'], function () {
+             layuiForm=layui.form；
+            //此处函数内代码在其他js代码延后执行，
+            //所以初始化时，若需要用到layui的内置对象如layuiForm，需将初始化代码写在此处,或从新写layui.form
+        })
 
 

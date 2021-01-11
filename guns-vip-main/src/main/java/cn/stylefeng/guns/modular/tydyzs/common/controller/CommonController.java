@@ -15,7 +15,7 @@ import java.util.Map;
 
 
 /**
- * 客户管理
+ * 个人业务公共类
  */
 @Controller
 @RequestMapping("/myCommon")

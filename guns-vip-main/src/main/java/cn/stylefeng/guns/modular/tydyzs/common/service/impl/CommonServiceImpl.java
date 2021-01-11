@@ -1,11 +1,9 @@
 package cn.stylefeng.guns.modular.tydyzs.common.service.impl;
 
 import cn.stylefeng.guns.base.pojo.page.LayuiPageInfo;
-import cn.stylefeng.guns.modular.common.util.CommonUtil;
 import cn.stylefeng.guns.modular.tydyzs.common.entity.Dict;
 import cn.stylefeng.guns.modular.tydyzs.common.mapper.CommonMapper;
 import cn.stylefeng.guns.modular.tydyzs.common.service.ICommonService;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

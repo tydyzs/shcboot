@@ -76,7 +76,7 @@ layui.use(['form', 'admin', 'ax', 'upload', 'laydate', 'selectPlus'], function (
     //上传文件
     upload.render({
         elem: '#fileBtn'
-        , url: Feng.ctxPath + '/system/upload'
+        , url: Feng.ctxPath + '/system/upload?fileType=customPhoto'
         , accept: 'file'
         , before: function (obj) {
             obj.preview(function (index, file, result) {
@@ -95,14 +95,16 @@ layui.use(['form', 'admin', 'ax', 'upload', 'laydate', 'selectPlus'], function (
     //普通图片上传
     upload.render({
         elem: '#picBtn'
-        , url: Feng.ctxPath + '/system/upload'
+        , url: Feng.ctxPath + '/myFileInfo/upload?fileType=customPhoto'
         , before: function (obj) {
-            obj.preview(function (index, file, result) {
+            /*obj.preview(function (index, file, result) {
                 $('#img1').attr('src', result);
-            });
+            });*/
         }
         , done: function (res) {
             $("#pictureInputHidden").val(res.data.fileId);
+            var url=Feng.ctxPath + '/myFileInfo/getFile?fileId='+res.data.fileId+"&345234523";
+            $("#img1").attr("src",url);
             Feng.success(res.message);
         }
         , error: function () {

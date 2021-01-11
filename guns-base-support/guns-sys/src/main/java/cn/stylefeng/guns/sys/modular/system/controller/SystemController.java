@@ -42,10 +42,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -289,8 +291,8 @@ public class SystemController extends BaseController {
      */
     @RequestMapping(method = RequestMethod.POST, path = "/upload")
     @ResponseBody
-    public ResponseData layuiUpload(@RequestPart("file") MultipartFile file) {
-
+    public ResponseData layuiUpload(@RequestPart("file") MultipartFile file, HttpServletRequest request) {
+        String realPath = request.getSession().getServletContext().getRealPath("/");
         UploadResult uploadResult = this.fileInfoService.uploadFile(file);
         String fileId = uploadResult.getFileId();
 
