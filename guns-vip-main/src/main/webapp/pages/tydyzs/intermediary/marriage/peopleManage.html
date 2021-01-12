@@ -21,8 +21,11 @@
                 str='<p style="font-size:18px; color:#aaa;">'+value+'</p>';
             }
         }else if(key=='photo'){
-           /* var url = '';
-            str= '<img src="' + url + '" class="tdImg" />';*/
+            var fileId=data.fileId;
+            if(!checkNull(fileId)){
+                var url=Feng.ctxPath + '/myFileInfo/getFile?fileId='+fileId;
+                return '<img width="50px;" height="50px;"   src="'+url+'">';
+            }
         }
         return str;
     }
@@ -55,16 +58,16 @@
                                 </dl>
                                 <dl class="clear addClick" style="z-index:99;">
                                     <dt class="left">常&nbsp;住&nbsp;地&nbsp;址：</dt>
-                                    <span style="width: 10%;">
-                                        <select class="left mr20"  id="addressProvince"  onchange="provinceChange(this)" lay-search=""></select>
+                                    <span style="width: 10%;height:3px;">
+                                        <select  class="left mr20"  id="addressProvince"  onchange="provinceChange(this)" lay-search=""></select>
                                     </span>
-                                    <span style="width: 2%;">
+                                    <span class="ele" style="width: 2%;position:relative;top:3px;">
                                         &nbsp;&nbsp;-&nbsp;-&nbsp;&nbsp;
                                     </span>
                                     <span style="width: 20%;">
                                         <select class="left mr20"  id="addressCity"  onchange="addressChange()"lay-search=""></select>
                                     </span>
-                                    <span style="width: 20%;">
+                                    <span style="width: 20%;position:relative;top:3px;">
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <button type="button" onclick="reset()" class="layui-btn layui-btn-sm layui-btn-normal"><i class="layui-icon"></i> 重置</button>
                                     </span>
@@ -81,22 +84,22 @@
                             </div>
                         </div>
                     </div>
-                    <table class="layui-table" id="egFormTable"  lay-data="{url:'${ctxPath}/customer/list',page: true,height: 'full-50',cellMinWidth: 50}" lay-filter="egFormTable" >
+                    <table class="layui-table" id="egFormTable"  lay-data="{url:'${ctxPath}/customer/list',page: true,height: 'full-240',cellMinWidth: 40}" lay-filter="egFormTable" >
                         <thead>
                             <tr>
                                 <th lay-data="{field: 'name', align: 'center', sort: true, minWidth: 40}">姓名</th>
                                 <th lay-data="{field: 'genderValue', align: 'center',templet:function (d){return restructureValue(d,'genderValue');} , minWidth: 20}">性别</th>
-                                <th lay-data="{field: 'birthdate', align: 'center', minWidth: 120}">出生日期</th>
+                                <th lay-data="{field: 'birthdate', align: 'center', minWidth: 120 ,templet:'<div>{{ layui.util.toDateString(d.birthdate,&quot;yyyy-MM-dd&quot;) }}</div>'}">出生日期</th>
                                 <th lay-data="{field: 'age', align: 'center'}">年龄</th>
                                 <th lay-data="{field: 'householdValue', align: 'center', minWidth: 150}">户口所在地</th>
                                 <th lay-data="{field: 'addressValue', align: 'center', minWidth: 150}">常驻地</th>
-                                <th lay-data="{field: 'photo', align: 'center', templet:function (d){return restructureValue(d,'photo');} , width: 150, unresize: true}">头像</th>
+                                <th lay-data="{field: 'photo', align: 'center', templet:function (d){return restructureValue(d,'photo');} , width: 100, unresize: true}">头像</th>
                                 <th lay-data="{field: 'maritalStatusValue', align: 'center'}">婚姻状况</th>
                                 <th lay-data="{field: 'educationValue', align: 'center'}">学历</th>
                                 <th lay-data="{field: 'roomValue', align: 'center' ,templet:function (d){return restructureValue(d,'roomValue');}}">是否有房</th>
                                 <th lay-data="{field: 'vehicleValue', align: 'center',templet:function (d){return restructureValue(d,'vehicleValue');}}">是否有车</th>
-                                <th lay-data="{field: 'createDate', align: 'center', minWidth: 120}">登记日期</th>
-                                <th lay-data="{align: 'center', toolbar: '#tableBar', minWidth: 200}">操作</th>
+                                <th lay-data="{field: 'createDate', align: 'center', minWidth: 120,  templet:'<div>{{ layui.util.toDateString(d.createDate,&quot;yyyy-MM-dd&quot;) }}</div>'}">登记日期</th>
+                                <th lay-data="{align: 'center', toolbar: '#tableBar', minWidth: 160}">操作</th>
                             </tr>
                         </thead>
                     </table>

@@ -137,6 +137,8 @@ $(function(){
 //初始化条件字典
 function init(){
     ajaxMethodDict("SEX",$('#SEX'));
+    $("#SEX dd").eq(1).css("color","#22a");
+    $("#SEX dd").eq(2).css("color","#a22");
     ajaxMethodDict("education",$('#education'));
     ajaxMethodDict("maritalStatus",$('#maritalStatus'));
 }

@@ -37,6 +37,7 @@
         (select d1.name from sys_dict d1,sys_dict_type d2 where d2.dict_type_id=d1.dict_type_id and d1.code=t1.ADDRESS_CITY and d2.code='city')
         ) ADDRESS_VALUE,
         date_format(t1.create_date, '%Y-%m-%d') CREATE_DATE,
+        (select FILE_ID from sys_file_info f where f.file_type=t1.photo order by create_time desc limit 0,1) FILE_ID,
         t1.*
         from BLIND_DATE_CUSTOMER t1 where is_delete = '1'
         <if test="param.name != null and param.name != ''">

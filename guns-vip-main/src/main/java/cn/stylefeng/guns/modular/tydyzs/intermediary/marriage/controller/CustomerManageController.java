@@ -118,16 +118,7 @@ public class CustomerManageController extends BaseController {
 		String fileType=data.getPhoto();
 		customer.setIsDelete("0");
 		iCustomerManageService.saveOrUpdate(customer);
-		//删除照片文件
-		FileInfo fileInfo=new FileInfo();
-		fileInfo.setFileType(fileType);
-		QueryWrapper<FileInfo> queryWrapper=new QueryWrapper(fileInfo);//customer为实体类
-		List<FileInfo> fileData=iFileInfoService.list(queryWrapper);
-		for(FileInfo f:fileData){
-			String filePath=f.getFilePath();
-			iFileInfoService.removeById(f.getFileId());
-			CommonUtil.deleteFile(filePath);
-		}
+		iFileInfoService.delFileType(fileType);//删除文件数据和文件
 		Result result=new Result();
 		result.setState("0");
 		return result;

@@ -1,6 +1,4 @@
 
-问题：字典运用；前端缓存获取；文档上传下载；
-
 官方文档：
 https://doc.stylefeng.cn/guns_layui/
 
@@ -95,5 +93,26 @@ tydyzs/qwer1234
             //此处函数内代码在其他js代码延后执行，
             //所以初始化时，若需要用到layui的内置对象如layuiForm，需将初始化代码写在此处,或从新写layui.form
         })
+8.权限：
+    8.1接口权限@Permission('角色名')：
+        ******只有指定的角色菜能访问路径*******
+        例如：
+            @Permission(Const.ADMIN_NAME)
+            @RequestMapping(value = "/listTree")
+            @ResponseBody
+            public Object listTree() {
 
-
+    8.2.放开权限校验：
+    NoneAuthedResources.java
+    8.3,功能权限控制：
+        例如“添加”按钮权限控制
+        @if(shiro.hasPermission("/menu/add")){
+        <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加</button>
+        @}
+9.更换主页（首页）：
+    index.html
+    index.loadHome({
+                //menuPath: $("#firstPageAction").attr('lay-href'),
+                menuPath: "/customer",
+                menuName: '<i class="layui-icon layui-icon-home"></i>'
+            });

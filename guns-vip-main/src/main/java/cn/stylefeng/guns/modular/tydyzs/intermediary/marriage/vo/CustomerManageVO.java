@@ -40,6 +40,7 @@ public class CustomerManageVO extends CustomerManage {
 	private String vehicleValue;//是否有车字典
 	private String householdValue;//户口所在地字典
 	private String addressValue;//常驻地址字典
+	private String fileId;//最近一次fileId
 
 
 

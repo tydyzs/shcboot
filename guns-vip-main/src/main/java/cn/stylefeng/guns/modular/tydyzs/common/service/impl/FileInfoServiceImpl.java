@@ -1,6 +1,7 @@
 package cn.stylefeng.guns.modular.tydyzs.common.service.impl;
 
 import cn.hutool.core.io.FileUtil;
+import cn.stylefeng.guns.modular.common.util.CommonUtil;
 import cn.stylefeng.guns.modular.tydyzs.common.entity.FileInfo;
 import cn.stylefeng.guns.modular.tydyzs.common.mapper.IFileInfoMapper;
 import cn.stylefeng.guns.modular.tydyzs.common.service.IFileInfoService;
@@ -103,6 +104,24 @@ public class FileInfoServiceImpl extends ServiceImpl<IFileInfoMapper, FileInfo> 
         queryWrapper.eq("final_name", finalName);
 
         return this.getOne(queryWrapper);
+    }
+
+
+    /**
+     * 根据文件类型删除文件
+     * @param fileType
+     */
+    public void delFileType(String fileType){
+        //删除照片文件
+        FileInfo fileInfo=new FileInfo();
+        fileInfo.setFileType(fileType);
+        QueryWrapper<FileInfo> queryWrapper=new QueryWrapper(fileInfo);//customer为实体类
+        List<FileInfo> fileData=baseMapper.selectList(queryWrapper);
+        for(FileInfo f:fileData){
+            String filePath=f.getFilePath();
+            baseMapper.deleteById(f.getFileId());
+            CommonUtil.deleteFile(filePath);
+        }
     }
 
 }

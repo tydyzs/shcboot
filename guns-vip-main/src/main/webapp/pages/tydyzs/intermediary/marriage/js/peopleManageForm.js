@@ -95,6 +95,7 @@ layui.use(['form', 'admin', 'ax', 'upload', 'laydate', 'selectPlus'], function (
     //普通图片上传
     upload.render({
         elem: '#picBtn'
+        ,multiple:true
         , url: Feng.ctxPath + '/myFileInfo/layuiUploadImg?fileType='+customPhoto
         , before: function (obj) {
             obj.preview(function (index, file, result) {
@@ -130,13 +131,12 @@ function save(data){
         data:json,
         type:'POST',
         dataType:"json",
-        //contentType:'text/json',
         contentType:'application/json',
         success:function(res){
             if(res.state=="0"){
                 layer.alert(res.msg,function(){
                     closeWindow();
-                })
+                });
             }else{
                 alert("保存失败！")
             }
@@ -171,9 +171,9 @@ function setFormData(){
                 layuiForm.render();
                 customPhoto=data.photo;
                 fileRefresh(customPhoto,"customPhoto",isDle);
-                console.log(data)
+                //console.log(data)
             }else{
-                alert("保存失败！")
+                alert("查询失败！")
             }
         },
         error:function(){
