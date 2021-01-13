@@ -43,7 +43,7 @@ layui.use(['form','table', 'admin', 'ax', 'func','selectPlus'], function () {
     //查看
     function view(customerId){
         func.open({
-            height: 780,
+            height: 810,
             width: "65%",
             title: '查看客户',
             maxmin:true,
@@ -79,7 +79,7 @@ layui.use(['form','table', 'admin', 'ax', 'func','selectPlus'], function () {
     //编辑
     function edit(customerId){
         func.open({
-            height: 780,
+            height: 810,
             width: "65%",
             title: '编辑客户',
             maxmin:true,
@@ -96,7 +96,7 @@ layui.use(['form','table', 'admin', 'ax', 'func','selectPlus'], function () {
     // 新增
     $('#btnAdd').click(function () {
         func.open({
-            height: 780,
+            height: 810,
             width: "65%",
             title: '新增客户',
             maxmin:true,

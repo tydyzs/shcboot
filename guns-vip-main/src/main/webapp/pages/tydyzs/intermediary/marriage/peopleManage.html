@@ -3,9 +3,16 @@
 <div class="layui-body-header">
     <span class="layui-body-header-title">客户管理</span>
 </div>
+<style>
+    .layui-table-cell{
+        height:35.5px;
+        line-height: 35.5px;
+    }
+</style>
 <script type="text/javascript">
     //表格值重构
     function restructureValue(data,key){
+        //console.log(data)
         var str="";
         var value=data[key];
         if(key=="genderValue"){
@@ -26,6 +33,8 @@
                 var url=Feng.ctxPath + '/myFileInfo/getFile?fileId='+fileId;
                 return '<img width="50px;" height="50px;"   src="'+url+'">';
             }
+        }else if(key=='index'){
+           str = data.LAY_INDEX;
         }
         return str;
     }
@@ -57,7 +66,7 @@
                                     </div>
                                 </dl>
                                 <dl class="clear addClick" style="z-index:99;">
-                                    <dt class="left">常&nbsp;住&nbsp;地&nbsp;址：</dt>
+                                    <dt class="left" style="position:relative;top:4px;">常&nbsp;住&nbsp;地&nbsp;址：</dt>
                                     <span style="width: 10%;height:3px;">
                                         <select  class="left mr20"  id="addressProvince"  onchange="provinceChange(this)" lay-search=""></select>
                                     </span>
@@ -87,12 +96,14 @@
                     <table class="layui-table" id="egFormTable"  lay-data="{url:'${ctxPath}/customer/list',page: true,height: 'full-240',cellMinWidth: 40}" lay-filter="egFormTable" >
                         <thead>
                             <tr>
+                                <th lay-data="{field: 'index',width:60,templet:function (d){return restructureValue(d,'index');} }">序号</th>
                                 <th lay-data="{field: 'name', align: 'center', sort: true, minWidth: 40}">姓名</th>
-                                <th lay-data="{field: 'genderValue', align: 'center',templet:function (d){return restructureValue(d,'genderValue');} , minWidth: 20}">性别</th>
+                                <th lay-data="{field: 'genderValue', align: 'center',templet:function (d){return restructureValue(d,'genderValue');} , width: 70}">性别</th>
+                                <th lay-data="{field: 'age', align: 'center',width: 70}">年龄</th>
                                 <th lay-data="{field: 'birthdate', align: 'center', minWidth: 120 ,templet:'<div>{{ layui.util.toDateString(d.birthdate,&quot;yyyy-MM-dd&quot;) }}</div>'}">出生日期</th>
-                                <th lay-data="{field: 'age', align: 'center'}">年龄</th>
-                                <th lay-data="{field: 'householdValue', align: 'center', minWidth: 150}">户口所在地</th>
+                                <!--<th lay-data="{field: 'householdValue', align: 'center', minWidth: 150}">户口所在地</th>-->
                                 <th lay-data="{field: 'addressValue', align: 'center', minWidth: 150}">常驻地</th>
+                                <th lay-data="{field: 'occupation', align: 'center', minWidth: 150}">职业</th>
                                 <th lay-data="{field: 'photo', align: 'center', templet:function (d){return restructureValue(d,'photo');} , width: 100, unresize: true}">头像</th>
                                 <th lay-data="{field: 'maritalStatusValue', align: 'center'}">婚姻状况</th>
                                 <th lay-data="{field: 'educationValue', align: 'center'}">学历</th>

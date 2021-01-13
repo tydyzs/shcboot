@@ -50,6 +50,9 @@ public class CustomerManage implements Serializable {
 	private String assetsexplain;
 	private String remarks;
 	private String photo;
+	private String income;
+	private String occupation;
+
 	@TableField("CREATE_USER_ID")
 	private String createUserId;
 	@TableField("CREATE_ORG_ID")

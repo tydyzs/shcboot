@@ -11,7 +11,7 @@
     <div class="layui-card">
         <div class="layui-card-body">
             <form id="egFormForm"  lay-filter="egFormForm" disabled class="layui-form" >
-                <div class="layui-form-item">
+                <div class="layui-form-item" style="height:645px;overflow:auto">
                     <table style="width:100%;height:100%;border-collapse:separate; border-spacing:10px;" >
                         <tr>
                             <td ><label class="layui-form-label"><span style="color: red;">*</span>姓名:</label></td>
@@ -61,7 +61,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td ><label class="layui-form-label"><span style="color: red;">*</span>婚姻状况</label></td>
+                            <td ><label class="layui-form-label"><span style="color: red;">*</span>婚姻状况:</label></td>
                             <td colspan="5" id="maritalStatusTd">
                             </td>
                             <td ><label class="layui-form-label">身高（CM):</label></td>
@@ -88,19 +88,29 @@
                             </td>
                         </tr>
                         <tr>
-                            <td ><label class="layui-form-label">车房资产：</label></td>
+                            <td ><label class="layui-form-label">车房资产:</label></td>
                             <td colspan="5">
                                 <input type="checkbox" id="room" name="room" style="margin: auto;" lay-skin="switch" lay-text="有房|无房"/>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 <input type="checkbox" id="vehicle" name="vehicle" lay-skin="switch" lay-text="有车|无车"/>
                             </td>
-                            <td ><label class="layui-form-label">资产说明：</label></td>
+                            <td ><label class="layui-form-label">资产说明:</label></td>
                             <td colspan="5">
                                 <input type="tel" id="assetsexplain" name="assetsexplain"  autocomplete="off" class="layui-input">
                             </td>
                         </tr>
                         <tr>
-                            <td ><label class="layui-form-label">照片：</label></td>
+                            <td ><label class="layui-form-label">收入:</label></td>
+                            <td colspan="5">
+                                <input type="text" id="income" name="income"   placeholder="请输入收入情况" autocomplete="off" class="layui-input">
+                            </td>
+                            <td ><label class="layui-form-label">职业:</label></td>
+                            <td colspan="5">
+                                <input type="text" id="occupation" name="occupation"   placeholder="请输入职业" autocomplete="off" class="layui-input">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td ><label class="layui-form-label">照片:</label></td>
                             <td colspan="11">
                                 <input id="pictureInputHidden"  type="hidden" class="layui-input"/>
                                 <div class="over"></div><!--背景层-->
@@ -112,20 +122,18 @@
                             </td>
                         </tr>
                         <tr>
-                            <td ><label class="layui-form-label">备注：</label></td>
+                            <td ><label class="layui-form-label">备注:</label></td>
                             <td colspan="11">
                                 <textarea id="remarks" name="remarks" placeholder="请输入备注说明..." class="layui-textarea"></textarea>
                             </td>
                         </tr>
-                        <tr>
-                            <td colspan="12">
-                                <div style="float:right">
-                                    <button id="saveButton" class="layui-btn" onclick="saveData()" lay-submit lay-filter="formDemo">保存</button>
-                                    <button id="backuppage" onclick="closeWindow()" type="reset" class="layui-btn layui-btn-primary">关闭</button>
-                                </div>
-                            </td>
-                        </tr>
                     </table>
+                </div>
+                <div style="position: fixed;bottom: 5px;width:95%">
+                    <div style="float:right;">
+                        <button id="saveButton" class="layui-btn" onclick="saveData()" lay-submit lay-filter="formDemo">保存</button>
+                        <button id="backuppage" onclick="closeWindow()" type="reset" class="layui-btn layui-btn-primary">关闭</button>
+                    </div>
                 </div>
             </form>
         </div>

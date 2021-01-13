@@ -41,7 +41,7 @@
         t1.*
         from BLIND_DATE_CUSTOMER t1 where is_delete = '1'
         <if test="param.name != null and param.name != ''">
-            and t1.name like CONCAT('%',#{param.name},'%')
+            and (t1.name like CONCAT('%',#{param.name},'%') or t1.REMARKS like CONCAT('%',#{param.name},'%'))
         </if>
         <if test="param.sex != null and param.sex != ''">
             and t1.GENDER =#{param.sex}
