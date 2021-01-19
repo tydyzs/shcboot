@@ -35,6 +35,11 @@ public class DictParam implements Serializable, BaseValidatingParam {
     private String code;
 
     /**
+     * 字典类型编码
+     */
+    private String dictTypeCode;
+
+    /**
      * 字典名称
      */
     private String name;

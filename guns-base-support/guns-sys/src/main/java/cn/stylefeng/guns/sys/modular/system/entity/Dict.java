@@ -31,6 +31,12 @@ public class Dict implements Serializable {
     private Long dictTypeId;
 
     /**
+     * 字典类型编码
+     */
+    @TableField("dict_type_code")
+    private String dictTypeCode;
+
+    /**
      * 字典编码
      */
     @TableField("code")
@@ -111,6 +117,14 @@ public class Dict implements Serializable {
 
     public void setDictTypeId(Long dictTypeId) {
         this.dictTypeId = dictTypeId;
+    }
+
+    public String getDictTypeCode() {
+        return dictTypeCode;
+    }
+
+    public void setDictTypeCode(String dictTypeCode) {
+        this.dictTypeCode = dictTypeCode;
     }
 
     public String getCode() {
@@ -206,6 +220,7 @@ public class Dict implements Serializable {
         return "Dict{" +
         "dictId=" + dictId +
         ", dictTypeId=" + dictTypeId +
+        ", dictTypeCode=" + dictTypeCode +
         ", code=" + code +
         ", name=" + name +
         ", parentId=" + parentId +

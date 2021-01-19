@@ -14,8 +14,8 @@ import java.util.Date;
  * @since 2019-10-21
  */
 @Data
-@ApiModel(value = "客户对象", description = "客户对象")
-@TableName("BLIND_DATE_CUSTOMER")
+@ApiModel(value = "字典", description = "字典")
+@TableName("SYS_DICT")
 public class Dict implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -31,6 +31,12 @@ public class Dict implements Serializable {
 	 */
 	@TableField("dict_type_id")
 	private Long dictTypeId;
+
+	/**
+	 * 字典类型编码
+	 */
+	@TableField("dict_type_code")
+	private String dictTypeCode;
 
 	/**
 	 * 字典编码

@@ -55,6 +55,7 @@ layui.use(['form', 'ax', 'admin'], function () {
             area: ['300px', '400px'],
             content: Feng.ctxPath + '/system/commonTree?formName=' + formName + "&formId=" + formId + "&treeUrl=" + treeUrl,
             end: function () {
+                console.log(DictInfoDlg.data);
                 $("#parentId").val(DictInfoDlg.data.parentId);
                 $("#parentName").val(DictInfoDlg.data.parentName);
             }

@@ -75,7 +75,7 @@ public class DictController extends BaseController {
         if (dictType == null) {
             throw new RequestEmptyException();
         }
-
+        model.addAttribute("dictTypeCode", dictType.getCode());
         model.addAttribute("dictTypeName", dictType.getName());
         return PREFIX + "/dict_add.html";
     }
@@ -102,6 +102,7 @@ public class DictController extends BaseController {
         }
 
         model.addAttribute("dictTypeId", dict.getDictTypeId());
+        model.addAttribute("dictTypeCode", dictType.getCode());
         model.addAttribute("dictTypeName", dictType.getName());
 
         return PREFIX + "/dict_edit.html";

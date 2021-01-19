@@ -15,7 +15,7 @@ import java.util.Date;
  */
 @Data
 @ApiModel(value = "客户对象", description = "客户对象")
-@TableName("BLIND_DATE_CUSTOMER")
+@TableName("TB_MATCHMAKING_CUSTOMER")
 public class CustomerManage implements Serializable {
 
 	private static final long serialVersionUID = 1L;
