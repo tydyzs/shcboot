@@ -1,0 +1,127 @@
+
+1.引入webgl函数库js：
+   webgl-utils.js   ;   webgl-debug.js   ;   cuon-utils.js
+   
+2.canvas标签：绘图区域标签
+  <canvas id="example" width="400" height="400">
+             该浏览器不支持 "canvas"
+  </canvas>
+  
+3.绘制二维图形的三个步骤（通过二维绘图上下文绘制）：
+  a。获取<canvas>标签元素（dm元素）：
+     var canvas=document.getElementById('example');
+     if(!canvas){浏览器不支持webgl。或通过try-catch判断浏览器是否支持webgl}
+  b。根据a元素获取二维绘图上下文
+     var ctx=canvas.getContext('2d');
+  c.开始绘图。
+     ctx.fillStyle='rgba(0,0,255,1.0)';//设置颜色以及透明度
+     ctx.fillRect(120,10,150,150);//设置为矩形，前面两个是相对canvas区域的坐标
+   
+      
+4.获取三维的上下文：
+	 var canvas=document.getElementById('example');
+	 var gl=getWebGLContext(canvas,[,true]);//[,true]开启调试，可不写   
+      1.设置<canvas>的颜色；
+      ctx.clearColor(0.0,0.0,0.0,1.0);
+      2.清空<canvas>
+      ctx.clear(gl.COLOR_BUFFER_BIT);
+5.通过着色器绘制图形	 
+	    	   //顶点着色器程序
+	    	   （定点着色器：负责将物体的坐标转换成2D显示区域中的坐标）
+	    	     var VSHADER_SOURCE='void main(){'+
+	    	   ' gl_Position=vec4(0.0,0.0,0.0,1.0);'+  //设置坐标
+	    	   ' gl_PointSize=10.0;\n'+//设置尺寸
+	        '}';
+	          //片元着色器程序
+	          （片元着色器负责计算转换好的顶点像素的最终颜色输出）
+	             var FSHADER_SOURCE='void main(){'+
+	        	  ' gl_FragColor=vec4(1.0,0.0,0.0,1.0);'+//设置颜色
+	        	  '}';
+
+	    	 
+	    	 //初始化着色器(初始化函数范围值如果是folse，则表示初始化失败)
+	    	 if(!initShaders(gl,VSHADER_SOURCE,FSHADER_SOURCE)){
+	    		 alert("初始化着色器失败！");
+	    		 return;
+	    	 }
+	    	 //绘制一个点
+	    	 gl.drawArrays(gl.POINTS,0,1);//64页。1.绘制方式2.第一个顶点开始画3.绘制要用到多少个顶点
+  
+  
+6.wegbl默认采用 “右手坐标”  
+7.着色器动态设置坐标和颜色（day03.jsp)
+
+   //一，获取并设置三维绘图区域  
+		    	  var canvas=document.getElementById('webgl');
+		    	  if(!canvas){浏览器不支持webgl}  
+		    	  var gl=getWebGLContext(canvas);
+		    	  //设置绘图区域背景
+		    	  gl.clearColor(0.5, 0.2, 0.2, 1.0);
+		    	  //清空绘图区（清空后，画图板内容为空）
+		    	  gl.clear(gl.COLOR_BUFFER_BIT);
+		    	 // gl.clear(gl.buffer);
+	    	 
+	    //二.通过着色器绘制图形	 
+	    	   //顶点着色器程序
+	    	     var VSHADER_SOURCE=
+	    	    	 'attribute vec4 a_Position;'+
+	    	    	 'attribute float a_PointSize;'+
+	    	    	 'void main(){'+
+	    	   ' gl_Position=a_Position;'+  //设置坐标
+	    	   ' gl_PointSize=a_PointSize;\n'+//设置尺寸
+	        '}';
+	          //片元着色器程序
+	             var FSHADER_SOURCE=
+	            	 'precision mediump float;'+
+	            	 'uniform vec4 u_colors;'+
+	            	 'void main(){'+
+	        	  ' gl_FragColor=u_colors;'+//设置颜色
+	        	  '}';
+
+	    	 
+	    	 //初始化着色器(初始化函数范围值如果是false，则表示初始化失败)
+	    	 if(!initShaders(gl,VSHADER_SOURCE,FSHADER_SOURCE)){
+	    		 alert("初始化着色器失败！");
+	    		 return;
+	    	 }
+	    	 
+	    	 
+	    	//获取attribute变量的储存位置
+	    	var a_Position=gl.getAttribLocation(gl.program,'a_Position');
+	    	var a_PointSize=gl.getAttribLocation(gl.program,'a_PointSize');
+	    	var u_color=gl.getUniformLocation(gl.program,'u_colors');
+	    	if(a_Position<0){//-1:attribute变量不存在，或命名前缀是gl_或webgl_
+	    		console.log('未能获得a_position存储位置');
+	    		return;
+	    	}
+	     	
+	    	//鼠标点击事件
+	    	//$("#webgl").click(function(ev){
+	    	//	huatu(ev,gl,canvas,a_Position,u_color,a_PointSize);
+	    	//})
+	    	
+	    	
+	    	
+	    	
+	    	//将顶点位置传输给attribute变量
+	    	gl.vertexAttrib4f(a_Position,0.0,0.0,0.0,1.0);
+	    	gl.vertexAttrib1f(a_PointSize,10.0);
+	    	gl.uniform4f(u_color,1.0,0.0,0.0,1.0);
+	    	 
+	    	 //绘制一个点
+	    	 gl.drawArrays(gl.POINTS,0,1);
+
+
+
+**********************   绘制三角形     *************************************
+
+1.一次性绘制三个点（day04.jsp）
+2.绘制三角型（day05.jsp   将绘制三个点的第一个参数改了）
+
+   
+   
+   
+   
+   
+   
+   

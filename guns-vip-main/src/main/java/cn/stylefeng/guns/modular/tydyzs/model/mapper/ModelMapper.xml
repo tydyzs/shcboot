@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.tydyzs.model.mapper.ModelMapper">
+
+    <!--模型列表，因为有分页参数，所以查询参数加“param.”-->
+    <select id="queryModelValue" parameterType="map" resultType="cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.vo.ModelVO">
+        select * from TB_EXHIBITION3D_MODEL t1
+    </select>
+
+</mapper>

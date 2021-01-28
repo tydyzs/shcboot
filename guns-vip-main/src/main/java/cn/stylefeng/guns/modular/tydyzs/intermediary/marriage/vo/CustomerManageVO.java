@@ -29,7 +29,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@ApiModel(value = "CrdProductVO对象", description = "CrdProductVO对象")
+@ApiModel(value = "CustomerManageVO对象", description = "CustomerManageVO对象")
 public class CustomerManageVO extends CustomerManage {
 	private static final long serialVersionUID = 1L;
 

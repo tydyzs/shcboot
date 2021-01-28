@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf8"/>
+	<title>线（虚线）材质（LineDashedMaterial）</title>
+</head>
+
+ <script type="text/javascript" src="../../js/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="../../js/three.js"></script>
+<script type="text/javascript" src="../../js/SceneUtils.js"></script>
+<script type="text/javascript" src="../../js/Stats.js"></script>
+<script type="text/javascript" src="../../js/TrackballControls.js"></script>
+<script type="text/javascript" src="../../js/dat.gui.js"></script>
+
+<script type="text/javascript">
+$(function(){
+	var  version=THREE.REVISION;	
+	$("#version").html("three版本:"+version);
+})
+</script>
+<body>
+<div>
+<span id="version" style="position:relative;left:200px;top:2px;"></span></div>
+<br/>
+<div id="fps" style="position:relative;left:1500px;top:2px;">132</div>
+<div id="div1"></div>
+</body>
+<script type="text/javascript">
+//三大组件
+
+var scene;//场景
+var camera;//相机
+var renderer;//渲染器
+var axes;//坐标
+//球形轨道控制器
+var controls;
+var stats;
+var wuti_boj;//自定义物体
+$(function(){
+	 inits();//初始化组件
+     add_plane();//平面
+   //场景中添加元素
+    var line=add_line();
+ 	var axes=add_axes();//坐标
+ 	
+ 	//add_spollight();//聚光灯
+ 	add_ambient();//环境光
+ 	add_directionallight();//平行光
+     //自定义物体：
+	 shc_start();//开始渲染
+	 
+})
+//初始化组件：
+function inits(){
+	 //场景（所有图形存在的空间）
+	 scene = new THREE.Scene();
+	   // 透视相机
+     camera = new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight,0.1,1000);
+     camera.position.set(-40,45,40);
+     camera.lookAt(0,4,0);
+	   // 渲染器
+     renderer = new THREE.WebGLRenderer();
+    // 设置渲染器的大小为窗口的内宽度，也就是内容区的宽度
+    renderer.setClearColor(0xeeeeee);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.shadowMapEnabled;
+    renderer.shadowMapEnabled = true;
+    //渲染器加入html
+    $("#div1").append(renderer.domElement); 
+    
+    //添加坐标
+    axes=new THREE.AxisHelper(20);
+    scene.add(axes);
+    //加入fps
+	stats = new Stats();
+    $("#fps").html(stats.dom);
+}      
+function shc_start(){
+	 //渲染
+    renderer.render(scene, camera);
+  //animate();
+}     
+//动态函数
+function animate(){
+	//cube_mesh.opacity=Math.random();
+    requestAnimationFrame(animate);
+    renderer.render(scene,camera);
+
+}
+
+///&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&7
+//添加物体方法	
+//添加一条直线
+function add_line(){
+	//首先，我们声明了一个几何体geometry，如下：
+	   var geometry = new THREE.Geometry();
+	   //定义一种线条的材质
+	   var material = new THREE.LineDashedMaterial({
+           vertexColors: true,
+           color: 0xffffff,
+           dashSize: 0.05,
+           gapSize: 0.05,
+           scale: 0.1
+       });
+	   //定义2个顶点的位置，并放到几何体geometry中
+	    var p1 = new THREE.Vector3( 10,10, 0 );
+		var p2 = new THREE.Vector3( -10,10, 0 );
+		var p3 = new THREE.Vector3( -10,-10, 0 );
+		var p4 = new THREE.Vector3( 10,-10, 0 );
+		geometry.vertices.push(p1,p2,p3,p4);
+		//为定义的2个顶点，设置不同的颜色，代码如下所示：
+		var color1 = new THREE.Color( 0x444444 ),
+			color2 = new THREE.Color( 0xFF0000 );
+		geometry.colors.push( color1, color2 ,color1, color2);
+		//、定义一条线
+		var line = new THREE.Line( geometry, material);
+		line.computeLineDistances();
+		//将线条放入场景中
+		scene.add(line);
+		return line;
+}
+//添加一条直线
+function add_line1(){
+	var points=gosper(2,30);
+	var lines=new THREE.Geometry();
+	var colors=[];
+	var i=0;
+	points.forEach(function (e){
+		lines.vertices.push(new THREE.Vector3(e.x,e.z,e.y));
+		colors[i]=new THREE.Color("#fff");
+		colors[i].setHSL(e.x/100+0.5,(e.y*20)/300,0.8);
+		i++;
+	});
+	lines.colors=colors;
+	var material = new THREE.LineBasicMaterial( 
+			   { 
+				   opacity:1.0,
+				   linewidth:1,
+				   vertexColors: THREE.VertexColors
+				   } );
+		//、定义一条线
+		var line = new THREE.Line( lines, material);
+		//将线条放入场景中
+		scene.add(line);
+		return line;
+}
+function gosper(a, b) {
+
+    var turtle = [0, 0, 0];
+    var points = [];
+    var count = 0;
+
+    rg(a, b, turtle);
+
+
+    return points;
+
+    function rt(x) {
+        turtle[2] += x;
+    }
+
+    function lt(x) {
+        turtle[2] -= x;
+    }
+
+    function fd(dist) {
+//        ctx.beginPath();
+        points.push({x: turtle[0], y: turtle[1], z: Math.sin(count) * 5});
+//        ctx.moveTo(turtle[0], turtle[1]);
+
+        var dir = turtle[2] * (Math.PI / 180);
+        turtle[0] += Math.cos(dir) * dist;
+        turtle[1] += Math.sin(dir) * dist;
+
+        points.push({x: turtle[0], y: turtle[1], z: Math.sin(count) * 5});
+//        ctx.lineTo(turtle[0], turtle[1]);
+//        ctx.stroke();
+
+    }
+
+    function rg(st, ln, turtle) {
+
+        st--;
+        ln = ln / 2.6457;
+        if (st > 0) {
+//            ctx.strokeStyle = '#111';
+            rg(st, ln, turtle);
+            rt(60);
+            gl(st, ln, turtle);
+            rt(120);
+            gl(st, ln, turtle);
+            lt(60);
+            rg(st, ln, turtle);
+            lt(120);
+            rg(st, ln, turtle);
+            rg(st, ln, turtle);
+            lt(60);
+            gl(st, ln, turtle);
+            rt(60);
+        }
+        if (st == 0) {
+            fd(ln);
+            rt(60);
+            fd(ln);
+            rt(120);
+            fd(ln);
+            lt(60);
+            fd(ln);
+            lt(120);
+            fd(ln);
+            fd(ln);
+            lt(60);
+            fd(ln);
+            rt(60)
+        }
+    }
+
+    function gl(st, ln, turtle) {
+        st--;
+        ln = ln / 2.6457;
+        if (st > 0) {
+//            ctx.strokeStyle = '#555';
+            lt(60);
+            rg(st, ln, turtle);
+            rt(60);
+            gl(st, ln, turtle);
+            gl(st, ln, turtle);
+            rt(120);
+            gl(st, ln, turtle);
+            rt(60);
+            rg(st, ln, turtle);
+            lt(120);
+            rg(st, ln, turtle);
+            lt(60);
+            gl(st, ln, turtle);
+        }
+        if (st == 0) {
+            lt(60);
+            fd(ln);
+            rt(60);
+            fd(ln);
+            fd(ln);
+            rt(120);
+            fd(ln);
+            rt(60);
+            fd(ln);
+            lt(120);
+            fd(ln);
+            lt(60);
+            fd(ln);
+        }
+    }
+}
+//添加一平面	
+function add_plane(){
+	var plane=new THREE.PlaneGeometry(100,60);
+	var plane_mesh=new THREE.MeshLambertMaterial({color:"#9f9"});
+	var plane_obj=new THREE.Mesh(plane,plane_mesh);
+	plane_obj.rotation.x=-0.5*Math.PI;
+	plane_obj.position.x=15;
+	plane_obj.position.y=0;
+	plane_obj.position.z=0;
+	plane_obj.receiveShadow=true;//接受阴影
+	
+	plane_mesh.transparent=true;
+	plane_mesh.opacity=0.2;//（0-1）
+	scene.add(plane_obj);
+	return plane_obj;
+}
+//方向光
+function add_directionallight(){
+	  var directionalLight = new THREE.DirectionalLight("#fff",0.5);
+	  directionalLight.position.set(0,20,-10);
+	  directionalLight.castShadow = true;
+	  
+	
+	  directionalLight.shadow.camera.left = -20;
+	  directionalLight.shadow.camera.right = 40;
+	  directionalLight.shadow.camera.far = 50;
+	  directionalLight.shadow.camera.top = 10;
+	  
+	/*   directionalLight.shadow.camera.near = 2;
+	  directionalLight.shadow.camera.bottom = -30;
+	  directionalLight.intensity = 0.5;
+	  directionalLight.shadow.mapSize.width = 1024;
+	  directionalLight.shadow.mapSize.height = 1024;  */
+	  scene.add(directionalLight);
+}
+//添加环境光：
+function add_ambient(){
+	var ambientLight=new THREE.AmbientLight("#000");
+	scene.add(ambientLight);
+}
+//添加坐标
+function add_axes(){
+	var axes=new THREE.AxisHelper(20);
+	scene.add(axes);
+	return axes;
+}
+</script>
+</html>

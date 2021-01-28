@@ -1,30 +1,13 @@
 package cn.stylefeng.guns.modular.common.util;
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.charset.Charset;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 
-
-
-
-
-
-
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 
 /**
  * 
@@ -66,10 +49,7 @@ public class CommonUtil {
 		String dateStr=sdf.format(date);
 		return dateStr;
 	}
-	
-	
-	
-	
+
 	/**
 	 * 空置校验
 	 * @return
@@ -108,9 +88,38 @@ public class CommonUtil {
 	public static String getUuid(){
 		return UUID.randomUUID().toString().replace("-", "");
 	}
+
 	/**
-	 * 获取机构板块查询条件
+	 * 字符串转Map
 	 */
+	public static Map strToMap(String json){
+		Map map = new HashMap();
+		JSONObject jsonObj = JSONObject.parseObject(json);
+		map=jsonObj.getInnerMap();
+		//map=jsonToMap(jsonObj,map);
+		return map;
+	}
+	public static Map jsonToMap(JSONObject jsonObj,Map map){
+		for(String key:jsonObj.keySet()){
+			Object obj1=jsonObj.get(key);
+			String typeName=obj1.getClass().getName();
+			if("java.lang.String".equals(typeName)){
+				map.put(key, obj1.toString());
+			}
+			if("net.sf.json.JSONObject".equals(typeName)){
+				JSONObject json1=(JSONObject)obj1;
+				int size=json1.size();
+				if(size>0){
+					Map newMap = new HashMap();
+					Map data1=jsonToMap(json1,newMap);
+					map.put(key, data1);
+				}
+			}
+		}
+		return map;
+	}
+
+
 
 	
 

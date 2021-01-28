@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf8"/>
+<title>物体移动</title>
+</head>
+
+<script type="text/javascript" src="../../js/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="../../js/three.js"></script>
+<script type="text/javascript">
+$(function(){
+	var  version=THREE.REVISION;	
+	$("#version").html("three版本："+version);
+})
+</script>
+<body>
+<span id="version"></span><br/><br/>
+控制台：<input value="" id="input1"/><br/><br/>
+球体移动速度：<input value="0.02" id="input2"/>
+<div id="div1"></div>
+</body>
+<script type="text/javascript">
+//三大组件
+
+       //场景（所有图形存在的空间）
+	   var scene = new THREE.Scene();
+	   // 透视相机
+       var camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 1000);
+	   // 渲染器
+       var renderer = new THREE.WebGLRenderer();
+	   
+       // 设置渲染器的大小为窗口的内宽度，也就是内容区的宽度
+       //renderer.setClearColor(0xeeeeee);
+       renderer.setSize(window.innerWidth, window.innerHeight);
+       var axes=new THREE.AxisHelper(20);
+       scene.add(axes);
+       //相机设置
+        camera.position.x=-30;
+		camera.position.y=40;
+		camera.position.z=30;
+		/* camera.lookAt({
+	           x : 0,
+	           y : 0,
+	           z : 0
+	       }); */
+		camera.lookAt(scene.position);
+		
+        
+	 //向场景中添加物体(反方返回物体，方便操作)：
+         //add_line(scene);//直线
+		 var plane_obj=add_plane(scene);//平面
+		 var cube_obj=add_cube(scene);//立方体
+		 var sphere_obj=add_sphere(scene);//球体
+		 var spollight_obj=add_spollight(scene);//光源
+         
+       //添加阴影4步骤：
+         //1.场景允许阴影
+         renderer.shadowMapEnabled=true;
+         //2.加入的物体允许阴影（方法中）
+         //3，光源允许阴影（添加的光源的方法中）
+         //4，平面接受阴影（添加平面的方法中）
+         
+		//渲染
+       /*  renderer.render(scene, camera);
+		$("#div1").append(renderer.domElement); */
+		
+		$("#div1").append(renderer.domElement);
+		//动画
+		donghua();
+		
+	//添加物体方法	
+	//添加一条直线
+	function add_line(scene){
+		  //首先，我们声明了一个几何体geometry，如下：
+		   var geometry = new THREE.Geometry();
+		   //定义一种线条的材质
+		   var material = new THREE.LineLambertMaterial( { vertexColors: THREE.VertexColors } );
+		   //定义2个顶点的位置，并放到几何体geometry中
+		    var p1 = new THREE.Vector3( -100, 0, 100 );
+			var p2 = new THREE.Vector3( 100, 0, -100 );
+			geometry.vertices.push(p1);
+			geometry.vertices.push(p2);
+			//为定义的2个顶点，设置不同的颜色，代码如下所示：
+			var color1 = new THREE.Color( 0x444444 ),
+				color2 = new THREE.Color( 0xFF0000 );
+			geometry.colors.push( color1, color2 );
+			//、定义一条线
+			var line = new THREE.Line( geometry, material, THREE.LinePieces );
+			//将线条放入场景中
+			scene.add(line);
+			return line;
+	}
+
+//添加一平面	
+	function add_plane(scene){
+	var plane=new THREE.PlaneGeometry(60,40);
+	var plane_mesh=new THREE.MeshLambertMaterial({color:0xffffff});
+	var plane_obj=new THREE.Mesh(plane,plane_mesh);
+	plane_obj.rotation.x=-0.5*Math.PI;
+	
+	plane_obj.position.x=15;
+	plane_obj.position.y=0;
+	plane_obj.position.z=0;
+	plane_obj.receiveShadow=true;//接受阴影
+	scene.add(plane_obj);
+	return plane_obj;
+	}
+//添加一个立方体：P
+function add_cube(scene){
+	var cube=new THREE.CubeGeometry(4,4,4);
+	var cube_mesh=new THREE.MeshLambertMaterial({color:0xff0000});
+	var cube_obj=new THREE.Mesh(cube,cube_mesh);
+	cube_obj.position.x=-4;
+	cube_obj.position.y=3;
+	cube_obj.position.z=0;
+	cube_obj.castShadow=true;//允许阴影
+	scene.add(cube_obj);
+	return cube_obj;
+}
+//添加一个球体
+function add_sphere(scene){
+	var sphere=new THREE.SphereGeometry(4,20,20);
+	var sphere_mesh=new THREE.MeshLambertMaterial({color:0x7777ff});
+	var sphere_obj=new THREE.Mesh(sphere,sphere_mesh);
+	sphere_obj.position.x=16;
+	sphere_obj.position.y=4;
+	sphere_obj.position.z=0;
+	sphere_obj.castShadow=true;//允许阴影
+	scene.add(sphere_obj);
+	return sphere_obj;
+}
+//场景中添加光源：
+function add_spollight(scene){
+	var spotlight=new THREE.SpotLight(0xffffff);
+	spotlight.position.set(-40,60,-10);
+	spotlight.castShadow=true;//允许阴影
+	scene.add(spotlight);
+	return spotlight;
+}
+
+//**********  动画****************
+function donghua(){
+	donghua1();
+	donghua2();
+	donghua3();
+}
+//动画1；移动方块
+	var kaiguan=1;//控制位移方向
+	var nums=0.03;//每一步位移距离
+	var juli=10;//位移总距离
+function donghua1(){
+	kaiguan=kaiguan==null?1:kaiguan;
+	nums=nums==null?1:nums;
+	var num_x=cube_obj.position.x;
+	$("#input1").val(num_x);
+	requestAnimationFrame(donghua1);
+	if((kaiguan==1&&num_x>=juli)||(kaiguan==-1&&num_x<=-juli)){
+		kaiguan=-kaiguan;
+		nums=-nums;
+	}
+	cube_obj.position.x+=nums;
+	cube_obj.position.y+=nums;
+	cube_obj.position.z+=nums;
+	renderer.render(scene,camera);
+}
+	
+//动画2：旋转方块
+function donghua2(){
+	cube_obj.rotation.x+=0.02;
+	cube_obj.rotation.y+=0.02;
+	cube_obj.rotation.z+=0;
+	requestAnimationFrame(donghua2);
+	renderer.render(scene,camera);	
+}	
+//动画3：球体弹跳
+var step=0;
+var sudu=parseFloat($("#input2").val());
+function donghua3(){
+	sudu=parseFloat($("#input2").val());
+	step+=sudu;
+	sphere_obj.position.x=20+(10*(Math.cos(step)));
+	sphere_obj.position.y=2+(10*Math.abs(Math.sin(step)));
+	requestAnimationFrame(donghua3);
+	renderer.render(scene,camera);	
+}
+
+</script>
+</html>
