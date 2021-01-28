@@ -46,9 +46,9 @@
                 <div class="layui-card-body">
                     <div class="layui-form toolbar" >
                         <div class="layui-row" >
-                            <div id="xzqyDl" class="filter-section" style="height:140px;">
+                            <div id="xzqyDl" class="filter-section" style="height:40px;">
                                 <dl class="clear addClick">
-                                    <dt class="left">模型类型：</dt>
+                                    <dt class="left">模&nbsp;型&nbsp;类&nbsp;型：</dt>
                                     <div style="width:100%;" id="modelType">
                                         <dd class="active left mr20" value="">全部</dd>
                                     </div>
@@ -57,7 +57,7 @@
                         </div>
                         <div class="layui-form-item">
                             <div class="layui-inline">
-                                <input id="condition" class="layui-input" type="text" placeholder="请输入模型名称或备注..."/>
+                                <input id="condition" class="layui-input" type="text" style="width:200px;" placeholder="请输入模型名称或备注..."/>
                             </div>
                             <div class="layui-inline">
                                 <button id="btnSearch" class="layui-btn icon-btn" onclick="search()"><i class="layui-icon">&#xe615;</i>搜索</button>
@@ -68,11 +68,11 @@
                     <table class="layui-table" id="egFormTable"  lay-data="{url:'${ctxPath}/model/list',page: true,height: 'full-240',cellMinWidth: 40}" lay-filter="egFormTable" >
                         <thead>
                             <tr>
-                                <th lay-data="{field: 'index',width:60,templet:function (d){return restructureValue(d,'index');} }">序号</th>
-                                <th lay-data="{field: 'name', align: 'center', sort: true, minWidth: 40}">模型名称</th>
-                                <th lay-data="{field: 'genderValue', align: 'center',templet:function (d){return restructureValue(d,'genderValue');} , width: 70}">模型类型</th>
-                                <th lay-data="{field: 'createDate', align: 'center', minWidth: 120,  templet:'<div>{{ layui.util.toDateString(d.createDate,&quot;yyyy-MM-dd&quot;) }}</div>'}">登记日期</th>
-                                <th lay-data="{align: 'center', toolbar: '#tableBar', minWidth: 160}">操作</th>
+                                <th lay-data="{field: 'index',width:100,templet:function (d){return restructureValue(d,'index');} }">序号</th>
+                                <th lay-data="{field: 'name', align: 'center'}">模型名称</th>
+                                <th lay-data="{field: 'genderValue', sort: true, align: 'center',templet:function (d){return restructureValue(d,'genderValue');} }">模型类型</th>
+                                <th lay-data="{field: 'createDate', align: 'center', templet:'<div>{{ layui.util.toDateString(d.createDate,&quot;yyyy-MM-dd&quot;) }}</div>'}">登记日期</th>
+                                <th lay-data="{align: 'center', toolbar: '#tableBar'}">操作</th>
                             </tr>
                         </thead>
                     </table>
@@ -87,7 +87,7 @@
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
 </script>
 @}
-<!--<script type="text/javascript" src="/pages/tydyzs/model3D/js/modelManage.js"></script>-->
+<script type="text/javascript" src="/pages/tydyzs/model3D/js/modelManage.js"></script>
 <script type="text/javascript">
     $(function(){
     })

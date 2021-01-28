@@ -49,15 +49,15 @@
                             </td>
                             <td ><label class="layui-form-label">年龄:</label></td>
                             <td>
-                                <input id="customerAge" type="tel" style="width:60px;" name="age" autocomplete="off" class="layui-input layui-disabled" disabled=""/>
+                                <input id="modelAge" type="tel" style="width:60px;" name="age" autocomplete="off" class="layui-input layui-disabled" disabled=""/>
                             </td>
                             <td><label class="layui-form-label">生肖:</label></td>
                             <td>
-                                <input id="customerZodiac" type="tel" style="width:60px;" name="zodiac"  autocomplete="off" class="layui-input layui-disabled" disabled=""/>
+                                <input id="modelZodiac" type="tel" style="width:60px;" name="zodiac"  autocomplete="off" class="layui-input layui-disabled" disabled=""/>
                             </td>
                             <td><label class="layui-form-label">星座:</label></td>
                             <td>
-                                <input id="customerConstellation" type="tel" style="width:60px;" name="constellation"  autocomplete="off" class="layui-input layui-disabled" disabled=""/>
+                                <input id="modelConstellation" type="tel" style="width:60px;" name="constellation"  autocomplete="off" class="layui-input layui-disabled" disabled=""/>
                             </td>
                         </tr>
                         <tr>
@@ -141,7 +141,7 @@
 </div>
 @}
 <script type="text/javascript">
-    var customerId=getUrlParam("customerId");
+    var modelId=getUrlParam("modelId");
     var formType=getUrlParam("type");
     var isDle=formType=="view"?false:true;
     var layuiForm ={};
