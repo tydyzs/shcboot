@@ -1,9 +1,9 @@
 /**
  * 文件分类id，标签id,是否允许删除
-//刷新图片
+//刷新图片div
 */
 var imgObjList={};
-function fileRefresh(fileType,id,isDle){
+function imgRefresh(fileType,id,isDle){
     var delStr="";
     if(checkNull(imgObjList[id+"Obj"])){
         imgObjList[id+"Obj"]=$("#"+id);
@@ -33,6 +33,38 @@ function fileRefresh(fileType,id,isDle){
     //imgObj.viewer('update');
     var viewer=imgObj.data('viewer');
     imgObj.viewer('update');
+}
+/**
+ * 文件分类id，标签id,是否允许删除
+//刷新文件div（根据各格式文档展示不同图标文件）
+*/
+var fileTypeImgPath={
+    stl:"/assets/common/util/img/stl.png"
+}
+function fileRefresh(fileType,id,isDle){
+    var fileObj=$("#"+id);
+    fileObj.html("");
+    var delStr="";
+    var json='{fileType:"'+fileType+'"}';
+    var data=getFileInfo(json);
+    for(var i=0;i<data.length;i++){
+        var fileId=data[i].fileId;
+        var fileSuffix=data[i].fileSuffix;
+        var fileIdParam="'"+data[i].fileId+"'";
+        if(isDle){
+            delStr='<div style="width: 20px;height:20px;float: right;">\n' +
+                '\t<a href="javascript:void(0)" onclick="deleteFjFile(this,'+fileIdParam+')" \n' +
+                '\tstyle="width: 20px;height:20px;float: left;background:url('+Feng.ctxPath+'/assets/common/util/img/f_delete.png) no-repeat;background-size:contain;">\n' +
+                '\t</a>\n' +
+                '</div>'
+        }
+        var url=Feng.ctxPath+fileTypeImgPath[fileSuffix];
+        var str='<li style="width:110px;float: left;margin-right:10px;">' +
+            '<img width="90px" height=90px" src="'+url+'">' +
+            delStr+
+            '</li>';
+        fileObj.append($(str));
+    }
 }
 
 /**

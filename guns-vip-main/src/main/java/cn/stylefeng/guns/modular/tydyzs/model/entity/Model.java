@@ -20,13 +20,13 @@ public class Model implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@TableId(value = "MODE_ID", type = IdType.UUID)
-	private String modeId;
+	@TableId(value = "MODEL_ID", type = IdType.UUID)
+	private String modelId;
 
-	@TableField("MODE_NAME")
-	private String modeName;
-	@TableField("MODE_TYPE")
-	private String modeType;
+	@TableField("MODEL_NAME")
+	private String modelName;
+	@TableField("MODEL_TYPE")
+	private String modelType;
 	@TableField("MODEL_FILE")
 	private String modelFile;
 	private String remarks;

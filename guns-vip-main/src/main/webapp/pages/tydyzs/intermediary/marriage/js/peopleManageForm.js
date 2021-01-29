@@ -73,25 +73,6 @@ layui.use(['form', 'admin', 'ax', 'upload', 'laydate', 'selectPlus'], function (
             dateChange(value,date)
         }
     });
-
-    //上传文件
-    upload.render({
-        elem: '#fileBtn'
-        , url: Feng.ctxPath + '/system/upload?fileType='+customPhoto
-        , accept: 'file'
-        , before: function (obj) {
-            obj.preview(function (index, file, result) {
-                $("#fileNameTip").html(file.name);
-            });
-        }
-        , done: function (res) {
-            $("#fileInputHidden").val(res.data.fileId);
-            Feng.success(res.message);
-        }
-        , error: function () {
-            Feng.error("上传图片失败！");
-        }
-    });
     //普通图片上传
     upload.render({
         elem: '#picBtn'
@@ -104,7 +85,7 @@ layui.use(['form', 'admin', 'ax', 'upload', 'laydate', 'selectPlus'], function (
             });
         }
         , done: function (res) {
-            fileRefresh(customPhoto,"customPhoto",isDle);
+            imgRefresh(customPhoto,"customPhoto",isDle);
             Feng.success(res.message);
         }
         , error: function () {
@@ -171,7 +152,7 @@ function setFormData(){
                 $("#vehicle").prop("checked", data.vehicle=="on");
                 layuiForm.render();
                 customPhoto=data.photo;
-                fileRefresh(customPhoto,"customPhoto",isDle);
+                imgRefresh(customPhoto,"customPhoto",isDle);
                 //console.log(data)
             }else{
                 alert("查询失败！")

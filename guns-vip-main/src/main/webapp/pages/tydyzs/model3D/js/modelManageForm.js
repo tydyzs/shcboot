@@ -19,7 +19,7 @@ layui.use(['form', 'admin', 'ax', 'upload', 'laydate', 'selectPlus'], function (
             setFormData();
         }else{
             //新增时给市区默认值
-            modelFile=getUuid();
+            modelFile="modelFile-"+getUuid();
         }
         if(formType=="view"){
             disabledForm();
@@ -57,7 +57,7 @@ layui.use(['form', 'admin', 'ax', 'upload', 'laydate', 'selectPlus'], function (
     //上传文件
     upload.render({
         elem: '#fileBtn'
-        , url: Feng.ctxPath + '/system/upload?fileType='+modelFile
+        , url: Feng.ctxPath + '/myFileInfo/upload?fileType='+modelFile
         , accept: 'file'
         , before: function (obj) {
             obj.preview(function (index, file, result) {
@@ -65,9 +65,8 @@ layui.use(['form', 'admin', 'ax', 'upload', 'laydate', 'selectPlus'], function (
             });
         }
         , done: function (res) {
-            /*$("#fileInputHidden").val(res.data.fileId);
-            Feng.success(res.message);*/
-            fileRefresh(customPhoto,"customPhoto",isDel);
+            fileRefresh(modelFile,"modelFile",isDel);
+            console.log(fileData)
             Feng.success(res.message);
         }
         , error: function () {
@@ -86,11 +85,12 @@ function saveData(){
 }
 //保存数据
 function save(data){
-    data.customerId=customerId;
-    data.photo=customPhoto;
+    data.modelId=modelId;
+    data.modelFile=modelFile;
     var json=JSON.stringify(data);
+    alert(json)
     $.ajax({
-        url:Feng.ctxPath + "/customer/saveData",
+        url:Feng.ctxPath + "/model/saveData",
         data:json,
         type:'POST',
         dataType:"json",
@@ -98,6 +98,7 @@ function save(data){
         success:function(res){
             if(res.state=="0"){
                 layer.alert(res.msg,function(){
+                    saveFileType(modelFile);
                     closeWindow();
                 });
             }else{
@@ -111,7 +112,8 @@ function save(data){
 }
 //获取表单数据
 function setFormData(){
-    var data={customerId:customerId};
+    return;
+    var data={modelId:modelId};
     var json=JSON.stringify(data);
     $.ajax({
         url:Feng.ctxPath + "/customer/getCustomer",
@@ -132,8 +134,8 @@ function setFormData(){
                 $("#room").prop("checked", data.room=="on");
                 $("#vehicle").prop("checked", data.vehicle=="on");
                 layuiForm.render();
-                customPhoto=data.photo;
-                fileRefresh(customPhoto,"customPhoto",isDel);
+                modelFile=data.modelFile;
+                fileRefresh(modelFile,"modelFile",isDel);
                 //console.log(data)
             }else{
                 alert("查询失败！")
