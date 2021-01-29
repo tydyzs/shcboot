@@ -91,6 +91,12 @@ public class FileInfo implements Serializable {
     @TableField(value = "update_user", fill = FieldFill.UPDATE)
     private Long updateUser;
 
+    /**
+     * '删除状态（0删除，1未删除）' ;
+     */
+    @TableField(value = "is_delete")
+    private String isDelete;
+
 
 
     @Override

@@ -42,7 +42,6 @@ public class FileInfoController extends BaseController {
 
 	/**
 	 * layui上传组件 通用文件上传接口
-	 *
 	 * @author fengshuonan
 	 * @Date 2019-2-23 10:48:29
 	 */
@@ -78,9 +77,18 @@ public class FileInfoController extends BaseController {
 		map.put("fileId", fileId);
 		return ResponseData.success(0, "上传成功", map);
 	}
+
+	/**
+	 * 查询文件
+	 * @param fileInfo
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping("/queryFileData")
 	public Result queryFileData(@RequestBody FileInfo fileInfo) {
+		/*if(CommonUtil.checknull(fileInfo)){//可查询还未保存的数据，若不传默认查询已保存
+			fileInfo.setIsDelete("1");
+		}*/
 		QueryWrapper<FileInfo> queryWrapper=new QueryWrapper(fileInfo);
 		List data = iService.list(queryWrapper);
 		Result res=new Result();
@@ -122,6 +130,28 @@ public class FileInfoController extends BaseController {
 		String filePath=fileInfo.getFilePath();
 		CommonUtil.deleteFile(filePath);
 		iService.removeById(fileInfo.getFileId());
+		Result result=new Result();
+		result.setState("0");
+		return result;
+	}
+	/**
+	 * 保存文件（根据文件分类保存）
+	 */
+	@ResponseBody
+	@RequestMapping("/saveFileType")
+	public Result saveFileType(String fileType) {
+		iService.saveFileType(fileType);
+		Result result=new Result();
+		result.setState("0");
+		return result;
+	}
+	/**
+	 * 删除文件（根据文件分类删除）
+	 */
+	@ResponseBody
+	@RequestMapping("/delFileType")
+	public Result delFileType(String fileType) {
+		iService.delFileType(fileType);
 		Result result=new Result();
 		result.setState("0");
 		return result;

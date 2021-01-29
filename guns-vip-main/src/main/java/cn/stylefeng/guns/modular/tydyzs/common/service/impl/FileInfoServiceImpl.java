@@ -78,6 +78,7 @@ public class FileInfoServiceImpl extends ServiceImpl<IFileInfoMapper, FileInfo> 
             fileInfo.setFilePath(fileSavePath + finalName);
             fileInfo.setFinalName(finalName);
             fileInfo.setFileType(fileType);
+            fileInfo.setIsDelete("0");
             //计算文件大小kb
             long kb = new BigDecimal(file.getSize())
                     .divide(BigDecimal.valueOf(1024))
@@ -112,7 +113,7 @@ public class FileInfoServiceImpl extends ServiceImpl<IFileInfoMapper, FileInfo> 
      * @param fileType
      */
     public void delFileType(String fileType){
-        //删除照片文件
+        //删除文件
         FileInfo fileInfo=new FileInfo();
         fileInfo.setFileType(fileType);
         QueryWrapper<FileInfo> queryWrapper=new QueryWrapper(fileInfo);//customer为实体类
@@ -121,6 +122,20 @@ public class FileInfoServiceImpl extends ServiceImpl<IFileInfoMapper, FileInfo> 
             String filePath=f.getFilePath();
             baseMapper.deleteById(f.getFileId());
             CommonUtil.deleteFile(filePath);
+        }
+    }
+    /**
+     * 保存文件(将isDelete为0的数据改为1）
+     * @param fileType
+     */
+    public void saveFileType(String fileType){
+        FileInfo fileInfo=new FileInfo();
+        fileInfo.setFileType(fileType);
+        QueryWrapper<FileInfo> queryWrapper=new QueryWrapper(fileInfo);//customer为实体类
+        List<FileInfo> fileData=baseMapper.selectList(queryWrapper);
+        for(FileInfo f:fileData){
+            f.setIsDelete("1");
+            baseMapper.updateById(f);
         }
     }
 

@@ -64,7 +64,7 @@ layui.use(['form','table', 'admin', 'ax', 'func','selectPlus'], function () {
                 dataType:"json",
                 success:function(res){
                     if(res.state=="0"){
-                        layer.msg("删除成功！")
+                        layer.msg("删除成功！");
                         search();
                     }else{
                         alert("删除失败！")

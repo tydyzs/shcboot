@@ -61,10 +61,10 @@ function getFileInfo(json){
 }
 
 
-//删除文件
+//删除展示的文件
 function deleteFjFile(obj,fileId){
     layer.confirm('删除后无法恢复，确认删除此文件？', function(index){
-        var data={fileId:fileId}
+        var data={fileId:fileId};
         var json=objToStr(data);
         $.ajax({
             url:Feng.ctxPath + "/myFileInfo/delFile",
@@ -86,3 +86,34 @@ function deleteFjFile(obj,fileId){
         });
     });
 }
+//删除文件(根据文件分类删除）
+function delFileType(fileType){
+    var data={fileType:fileType}
+    $.ajax({
+        url:Feng.ctxPath + "/myFileInfo/delFileType",
+        data:data,
+        type:'POST',
+        dataType:"json",
+        success:function(res){
+        },
+        error:function(){
+            alert("删除文件失败")
+        }
+    });
+}
+//保存文件(根据文件分类保存）
+function saveFileType(fileType){
+    var data={"fileType":fileType};
+    $.ajax({
+        url:Feng.ctxPath + "/myFileInfo/saveFileType",
+        data:data,
+        type:'POST',
+        dataType:"json",
+        success:function(res){
+        },
+        error:function(){
+            alert("保存文件失败")
+        }
+    });
+}
+

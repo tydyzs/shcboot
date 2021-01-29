@@ -83,11 +83,11 @@ layui.use(['form','table', 'admin', 'ax', 'func','selectPlus'], function () {
     // 新增
     $('#btnAdd').click(function () {
         func.open({
-            height: 810,
-            width: "65%",
+            height: 460,
+            width: "45%",
             title: '新增模型',
             maxmin:true,
-            content:  Feng.ctxPath + "/model/modelManageForm.html?type=add",
+            content:  Feng.ctxPath + "/model/modelManageForm?type=add",
             tableId: "modelAdd",
             closeEnd: function(){
                 //location.reload();

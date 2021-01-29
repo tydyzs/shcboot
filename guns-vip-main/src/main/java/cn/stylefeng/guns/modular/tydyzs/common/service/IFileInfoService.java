@@ -16,4 +16,5 @@ import java.util.Map;
 public interface IFileInfoService extends IService<FileInfo> {
 	public UploadResult uploadFile(MultipartFile file, String fileSavePath,String fileType);//上传文件公共类
 	public void delFileType(String fileType);//根据文件类型删除文件
+	public void saveFileType(String fileType);//保存未保存的文件
 }

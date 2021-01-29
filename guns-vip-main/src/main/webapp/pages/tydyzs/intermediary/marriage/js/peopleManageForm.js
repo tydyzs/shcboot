@@ -135,6 +135,7 @@ function save(data){
         success:function(res){
             if(res.state=="0"){
                 layer.alert(res.msg,function(){
+                    saveFileType(customPhoto);
                     closeWindow();
                 });
             }else{
