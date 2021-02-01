@@ -14,7 +14,7 @@
  *  this software without specific prior written permission.
  *  Author: Chill 庄骞 (smallchill@163.com)
  */
-package cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.vo;
+package cn.stylefeng.guns.modular.tydyzs.model.vo;
 
 import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.entity.CustomerManage;
 import cn.stylefeng.guns.modular.tydyzs.model.entity.Model;
@@ -33,7 +33,7 @@ import lombok.EqualsAndHashCode;
 @ApiModel(value = "ModelVO对象", description = "ModelVO对象")
 public class ModelVO extends Model {
 	private static final long serialVersionUID = 1L;
-
+	private String modelTypeValue;
 
 
 }

@@ -39,6 +39,7 @@ function imgRefresh(fileType,id,isDle){
 //刷新文件div（根据各格式文档展示不同图标文件）
 */
 var fileTypeImgPath={
+    file:"/assets/common/util/img/file.png",
     stl:"/assets/common/util/img/stl.png"
 }
 function fileRefresh(fileType,id,isDle){
@@ -49,6 +50,7 @@ function fileRefresh(fileType,id,isDle){
     var data=getFileInfo(json);
     for(var i=0;i<data.length;i++){
         var fileId=data[i].fileId;
+        var fileName=data[i].fileName;
         var fileSuffix=data[i].fileSuffix;
         var fileIdParam="'"+data[i].fileId+"'";
         if(isDle){
@@ -58,9 +60,15 @@ function fileRefresh(fileType,id,isDle){
                 '\t</a>\n' +
                 '</div>'
         }
-        var url=Feng.ctxPath+fileTypeImgPath[fileSuffix];
+        fileSuffix=fileSuffix.toLowerCase();
+        var filePath=fileTypeImgPath[fileSuffix];
+        if(checkNull(filePath)){
+            filePath=fileTypeImgPath.file;
+        }
+        var url=Feng.ctxPath+filePath;
         var str='<li style="width:110px;float: left;margin-right:10px;">' +
-            '<img width="90px" height=90px" src="'+url+'">' +
+            '<img width="90px" height=90px"  src="'+url+'">' +
+            '<a width="90px" height=90px" style="">'+fileName+'</a>' +
             delStr+
             '</li>';
         fileObj.append($(str));

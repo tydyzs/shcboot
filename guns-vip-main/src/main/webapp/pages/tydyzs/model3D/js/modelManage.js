@@ -30,12 +30,12 @@ layui.use(['form','table', 'admin', 'ax', 'func','selectPlus'], function () {
     //查看
     function view(modelId){
         func.open({
-            height: 810,
-            width: "65%",
+            height: 500,
+            width: "45%",
             title: '查看客户',
             maxmin:true,
-            content:  Feng.ctxPath + "/model/modelManageForm.html?type=view&modelId="+modelId,
-            tableId: "modelAdd"
+            content:  Feng.ctxPath + "/model/modelManageForm?type=view&modelId="+modelId,
+            tableId: "modelView"
         });
     }
     //删除
@@ -44,7 +44,7 @@ layui.use(['form','table', 'admin', 'ax', 'func','selectPlus'], function () {
             var data={modelId:modelId}
             var json=objToStr(data);
             $.ajax({
-                url:Feng.ctxPath + "/model/delmodel",
+                url:Feng.ctxPath + "/model/delModel",
                 data:json,
                 type:'POST',
                 contentType:'application/json',
@@ -66,12 +66,12 @@ layui.use(['form','table', 'admin', 'ax', 'func','selectPlus'], function () {
     //编辑
     function edit(modelId){
         func.open({
-            height: 810,
-            width: "65%",
+            height: 500,
+            width: "45%",
             title: '编辑客户',
             maxmin:true,
-            content:  Feng.ctxPath + "/model/modelManageForm.html?type=edit&modelId="+modelId,
-            tableId: "modelAdd",
+            content:  Feng.ctxPath + "/model/modelManageForm?type=edit&modelId="+modelId,
+            tableId: "modelEdit",
             closeEnd: function(){
                 //location.reload();
                 search();
@@ -83,7 +83,7 @@ layui.use(['form','table', 'admin', 'ax', 'func','selectPlus'], function () {
     // 新增
     $('#btnAdd').click(function () {
         func.open({
-            height: 460,
+            height: 500,
             width: "45%",
             title: '新增模型',
             maxmin:true,
@@ -100,7 +100,7 @@ layui.use(['form','table', 'admin', 'ax', 'func','selectPlus'], function () {
 //查询方法
 function search(){
     var queryData = {};
-    var sex = getQueryParam("modelType");
+    var modelType = getQueryParam("modelType");
     queryData.modelType=modelType;
     queryData['name'] = $("#condition").val();
     var table = layui.table;

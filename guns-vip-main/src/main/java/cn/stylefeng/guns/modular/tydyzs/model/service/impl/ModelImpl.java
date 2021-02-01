@@ -1,15 +1,20 @@
 package cn.stylefeng.guns.modular.tydyzs.model.service.impl;
 
+import cn.stylefeng.guns.base.pojo.page.LayuiPageFactory;
+import cn.stylefeng.guns.base.pojo.page.LayuiPageInfo;
 import cn.stylefeng.guns.modular.common.util.CommonUtil;
 import cn.stylefeng.guns.modular.common.util.LoginUtil;
 import cn.stylefeng.guns.modular.common.util.Result;
 import cn.stylefeng.guns.modular.tydyzs.model.entity.Model;
 import cn.stylefeng.guns.modular.tydyzs.model.mapper.ModelMapper;
 import cn.stylefeng.guns.modular.tydyzs.model.service.IModelService;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Map;
 
 
 /**
@@ -49,6 +54,13 @@ public class ModelImpl extends ServiceImpl<ModelMapper, Model> implements IModel
         res.setState("0");
         res.setMsg("保存成功！");
         return res;
+    }
+
+    public LayuiPageInfo list(Map param){
+        Page pageContext = LayuiPageFactory.defaultPage();
+        IPage page = baseMapper.queryModelValue(pageContext, param);
+        LayuiPageInfo result=LayuiPageFactory.createPageInfo(page);
+        return result;
     }
 
 

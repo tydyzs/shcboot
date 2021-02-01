@@ -12,30 +12,11 @@
 <script type="text/javascript">
     //表格值重构
     function restructureValue(data,key){
-        //console.log(data)
+        console.log(data)
         var str="";
-        /*var value=data[key];
-        if(key=="genderValue"){
-            if(value=="男"){
-                str='<p  style="font-size:18px; color:#0000ff;">'+value+'</p>';
-            }else{
-                str='<p style="font-size:18px; color:#ff0000;">'+value+'</p>';
-            }
-        }else if(key=='roomValue'||key=='vehicleValue'){
-            if(value=="有"){
-                str='<p style="font-size:18px; color:#0a0;">'+value+'</p>';
-            }else{
-                str='<p style="font-size:18px; color:#aaa;">'+value+'</p>';
-            }
-        }else if(key=='photo'){
-            var fileId=data.fileId;
-            if(!checkNull(fileId)){
-                var url=Feng.ctxPath + '/myFileInfo/getFile?fileId='+fileId;
-                return '<img width="50px;" height="50px;"   src="'+url+'">';
-            }
-        }else if(key=='index'){
-           str = data.LAY_INDEX;
-        }*/
+        if(key=='index'){
+            str = data.LAY_INDEX;
+        }
         return str;
     }
 </script>
@@ -69,8 +50,8 @@
                         <thead>
                             <tr>
                                 <th lay-data="{field: 'index',width:100,templet:function (d){return restructureValue(d,'index');} }">序号</th>
-                                <th lay-data="{field: 'name', align: 'center'}">模型名称</th>
-                                <th lay-data="{field: 'genderValue', sort: true, align: 'center',templet:function (d){return restructureValue(d,'genderValue');} }">模型类型</th>
+                                <th lay-data="{field: 'modelName', align: 'center'}">模型名称</th>
+                                <th lay-data="{field: 'modelTypeValue', align: 'center'}">模型类型</th>
                                 <th lay-data="{field: 'createDate', align: 'center', templet:'<div>{{ layui.util.toDateString(d.createDate,&quot;yyyy-MM-dd&quot;) }}</div>'}">登记日期</th>
                                 <th lay-data="{align: 'center', toolbar: '#tableBar'}">操作</th>
                             </tr>

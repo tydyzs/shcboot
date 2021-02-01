@@ -14,7 +14,6 @@ layui.use(['form', 'admin', 'ax', 'upload', 'laydate', 'selectPlus'], function (
     function init(){
         //模型类型
         setDictSlelct("modelType","modelType");
-
         if(formType!="add"){//查看或编辑时先设置数据
             setFormData();
         }else{
@@ -38,17 +37,9 @@ layui.use(['form', 'admin', 'ax', 'upload', 'laydate', 'selectPlus'], function (
             //alert(i+"="+formObj[i]);
             $("#"+name).addClass("layui-disabled");
             $("#"+name).attr('disabled', 'disabled');
-            //单选设置禁用
-           $("input[name="+name+" ][type='radio']").attr("disabled","disabled");
-            //开关
-            //开关禁用
-            $("#room").prop("disabled",true);
-            $("#vehicle").prop("disabled",true);
-            //按钮禁用：
-            /*$("#picBtn").attr('disabled', 'disabled');
-            $("#picBtn").addClass("layui-disabled");*/
-            $("#picBtn").remove();
+            $("#fileBtn").remove();
             $("#saveButton").remove();
+            $("#titleUpload").remove();
         }
         layuiForm.render();
     }
@@ -59,6 +50,7 @@ layui.use(['form', 'admin', 'ax', 'upload', 'laydate', 'selectPlus'], function (
         elem: '#fileBtn'
         , url: Feng.ctxPath + '/myFileInfo/upload?fileType='+modelFile
         , accept: 'file'
+        ,exts: 'stl'
         , before: function (obj) {
             obj.preview(function (index, file, result) {
                 $("#fileNameTip").html(file.name);
@@ -66,7 +58,6 @@ layui.use(['form', 'admin', 'ax', 'upload', 'laydate', 'selectPlus'], function (
         }
         , done: function (res) {
             fileRefresh(modelFile,"modelFile",isDel);
-            console.log(fileData)
             Feng.success(res.message);
         }
         , error: function () {
@@ -88,7 +79,6 @@ function save(data){
     data.modelId=modelId;
     data.modelFile=modelFile;
     var json=JSON.stringify(data);
-    alert(json)
     $.ajax({
         url:Feng.ctxPath + "/model/saveData",
         data:json,
@@ -112,11 +102,10 @@ function save(data){
 }
 //获取表单数据
 function setFormData(){
-    return;
     var data={modelId:modelId};
     var json=JSON.stringify(data);
     $.ajax({
-        url:Feng.ctxPath + "/customer/getCustomer",
+        url:Feng.ctxPath + "/model/getModel",
         data:json,
         type:'POST',
         dataType:"json",
@@ -126,13 +115,6 @@ function setFormData(){
             if(res.state=="0"){
                 var data=res.data;
                 layuiForm.val('egFormForm',data);
-                //获取市区下拉框值
-                provinceChange($("#householdProvince").eq(0),"householdCity");
-                $("#householdCity").val(data.householdCity);
-                provinceChange($("#addressProvince").eq(0),"addressCity");
-                $("#addressCity").val(data.addressCity);
-                $("#room").prop("checked", data.room=="on");
-                $("#vehicle").prop("checked", data.vehicle=="on");
                 layuiForm.render();
                 modelFile=data.modelFile;
                 fileRefresh(modelFile,"modelFile",isDel);

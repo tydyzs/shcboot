@@ -147,7 +147,6 @@ function provinceChange(obj){
     var id="addressCity";
     var addressProvinceValue=$("#addressProvince").val();
     if(checkNull(addressProvinceValue)){
-        debugger;
         $("#"+id).html("");
         layuiForm.render('select');
     }else{

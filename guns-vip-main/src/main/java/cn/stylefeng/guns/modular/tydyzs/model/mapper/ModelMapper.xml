@@ -3,8 +3,17 @@
 <mapper namespace="cn.stylefeng.guns.modular.tydyzs.model.mapper.ModelMapper">
 
     <!--模型列表，因为有分页参数，所以查询参数加“param.”-->
-    <select id="queryModelValue" parameterType="map" resultType="cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.vo.ModelVO">
-        select * from TB_EXHIBITION3D_MODEL t1
+    <select id="queryModelValue" parameterType="map" resultType="cn.stylefeng.guns.modular.tydyzs.model.vo.ModelVO">
+        SELECT
+        (select name from sys_dict d where d.dict_type_code='modelType' and d.code=t1.model_Type) modelTypeValue,
+        t1.*
+         FROM TB_EXHIBITION3D_MODEL t1
+         where t1.is_delete='1'
+        <if test="param.name != null and param.name != ''">
+            and (t1.model_name like CONCAT('%',#{param.name},'%') or t1.REMARKS like CONCAT('%',#{param.name},'%'))
+        </if>
+        <if test="param.modelType != null and param.modelType != ''">
+            and t1.MODEL_TYPE =#{param.modelType}
+        </if>
     </select>
-
 </mapper>
