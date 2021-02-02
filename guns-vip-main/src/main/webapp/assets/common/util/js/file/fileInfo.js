@@ -35,17 +35,19 @@ function imgRefresh(fileType,id,isDle){
     imgObj.viewer('update');
 }
 /**
- * 文件分类id，标签id,是否允许删除
+ * 文件分类id，标签id,是否允许删除,是否允许下载,是否提供预览
 //刷新文件div（根据各格式文档展示不同图标文件）
 */
+//图标对应对象
 var fileTypeImgPath={
     file:"/assets/common/util/img/file.png",
     stl:"/assets/common/util/img/stl.png"
 }
-function fileRefresh(fileType,id,isDle){
+function fileRefresh(fileType,id,isDel,isDown,isPreview){
     var fileObj=$("#"+id);
     fileObj.html("");
     var delStr="";
+    var previewStr="";
     var json='{fileType:"'+fileType+'"}';
     var data=getFileInfo(json);
     for(var i=0;i<data.length;i++){
@@ -53,28 +55,53 @@ function fileRefresh(fileType,id,isDle){
         var fileName=data[i].fileName;
         var fileSuffix=data[i].fileSuffix;
         var fileIdParam="'"+data[i].fileId+"'";
-        if(isDle){
-            delStr='<div style="width: 20px;height:20px;float: right;">\n' +
+        fileSuffix=fileSuffix.toLowerCase();
+        var fileSuffixParam="'"+fileSuffix+"'";
+        var iconPath=fileTypeImgPath[fileSuffix];//获取展示文件的图标路径
+        if(isDel){
+            delStr='<div title="删除" style="width: 20px;height:20px;float: right;">\n' +
                 '\t<a href="javascript:void(0)" onclick="deleteFjFile(this,'+fileIdParam+')" \n' +
                 '\tstyle="width: 20px;height:20px;float: left;background:url('+Feng.ctxPath+'/assets/common/util/img/f_delete.png) no-repeat;background-size:contain;">\n' +
                 '\t</a>\n' +
                 '</div>'
         }
-        fileSuffix=fileSuffix.toLowerCase();
-        var filePath=fileTypeImgPath[fileSuffix];
-        if(checkNull(filePath)){
-            filePath=fileTypeImgPath.file;
+        if(isPreview){
+            previewStr='<div title="预览" style="width: 20px;height:20px;float: right;">\n' +
+                '\t<a href="javascript:void(0)" onclick="previewFjFile('+fileIdParam+','+fileSuffixParam+')" \n' +
+                '\tstyle="width: 20px;height:20px;float: left;background:url('+Feng.ctxPath+'/assets/common/util/img/view.png) no-repeat;background-size:contain;">\n' +
+                '\t</a>\n' +
+                '</div>'
         }
-        var url=Feng.ctxPath+filePath;
+
+        if(checkNull(iconPath)){
+            iconPath=fileTypeImgPath.file;
+        }
+        var iconUrl=Feng.ctxPath+iconPath;
+        var fileNameStr= '<p width="90px" height=90px" style="">'+fileName+'</p>';
+        if(isDown){
+            fileNameStr= '<a width="90px" title="下载" height=90px" onclick="downloadFile('+fileIdParam+')" style="cursor:pointer;">'+fileName+'</a>';
+        }
         var str='<li style="width:110px;float: left;margin-right:10px;">' +
-            '<img width="90px" height=90px"  src="'+url+'">' +
-            '<a width="90px" height=90px" style="">'+fileName+'</a>' +
+            '<img width="90px" height=90px"  src="'+iconUrl+'">' +
+            fileNameStr +
             delStr+
+            previewStr+
             '</li>';
         fileObj.append($(str));
     }
 }
-
+//文件下载
+function downloadFile(fileId){
+    var url=Feng.ctxPath + '/myFileInfo/getFile?fileId='+fileId;
+    window.open(url);
+}
+//文件预览
+function previewFjFile(fileId,fileSuffix){
+    if(fileSuffix=="stl"){
+        var url=Feng.ctxPath + '/model/stlView?fileId='+fileId;
+        window.open(url);
+    }
+}
 /**
  * 获取文件数据
  * @param obj

@@ -31,7 +31,7 @@ layui.use(['form', 'admin', 'ax', 'upload', 'laydate', 'selectPlus'], function (
             var cityObj=queryDict(json1);
             setDataSlelct("householdCity",cityObj);
             setDataSlelct("addressCity",cityObj);
-            customPhoto=getUuid();
+            customPhoto="customPhoto"+getUuid();
         }
         if(formType=="view"){
             disabledForm();

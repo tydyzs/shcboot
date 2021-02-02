@@ -48,6 +48,7 @@ layui.use(['form', 'admin', 'ax', 'upload', 'laydate', 'selectPlus'], function (
     //上传文件
     upload.render({
         elem: '#fileBtn'
+        ,multiple:true
         , url: Feng.ctxPath + '/myFileInfo/upload?fileType='+modelFile
         , accept: 'file'
         ,exts: 'stl'
@@ -57,7 +58,7 @@ layui.use(['form', 'admin', 'ax', 'upload', 'laydate', 'selectPlus'], function (
             });
         }
         , done: function (res) {
-            fileRefresh(modelFile,"modelFile",isDel);
+            fileRefresh(modelFile,"modelFile",isDel,isDown,isPreview);
             Feng.success(res.message);
         }
         , error: function () {
@@ -117,7 +118,7 @@ function setFormData(){
                 layuiForm.val('egFormForm',data);
                 layuiForm.render();
                 modelFile=data.modelFile;
-                fileRefresh(modelFile,"modelFile",isDel);
+                fileRefresh(modelFile,"modelFile",isDel,isDown,isPreview);
                 //console.log(data)
             }else{
                 alert("查询失败！")

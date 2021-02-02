@@ -49,7 +49,7 @@ function getUuid(){
 
 //2.校验空值
 function checkNull(str){
-    if(str==""||str=="null"||str==null||str==undefined){
+    if(str===""||str==="null"||str===null||str===undefined||str==={}||str===[]){
         return true;
     }else{
         return false;

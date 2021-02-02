@@ -32,7 +32,7 @@ layui.use(['form','table', 'admin', 'ax', 'func','selectPlus'], function () {
         func.open({
             height: 500,
             width: "45%",
-            title: '查看客户',
+            title: '查看模型',
             maxmin:true,
             content:  Feng.ctxPath + "/model/modelManageForm?type=view&modelId="+modelId,
             tableId: "modelView"
@@ -68,7 +68,7 @@ layui.use(['form','table', 'admin', 'ax', 'func','selectPlus'], function () {
         func.open({
             height: 500,
             width: "45%",
-            title: '编辑客户',
+            title: '编辑模型',
             maxmin:true,
             content:  Feng.ctxPath + "/model/modelManageForm?type=edit&modelId="+modelId,
             tableId: "modelEdit",

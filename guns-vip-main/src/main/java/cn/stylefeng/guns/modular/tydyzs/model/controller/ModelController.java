@@ -51,6 +51,16 @@ public class ModelController extends BaseController {
 	public String form(String type) {
 		return PREFIX + "/modelManageForm.html";
 	}
+
+	/**
+	 * stl文件预览窗口
+	 */
+	@RequestMapping("/stlView")
+	public String stlView(String type) {
+		return PREFIX + "/stlView.html";
+	}
+
+
 	/**
 	 * sql分页列表
 	 */

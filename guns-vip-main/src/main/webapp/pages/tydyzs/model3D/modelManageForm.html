@@ -64,7 +64,9 @@
 <script type="text/javascript">
     var modelId=getUrlParam("modelId");
     var formType=getUrlParam("type");
-    var isDel=formType=="view"?false:true;
+    var isDel=formType=="view"?false:true;//文件是否允许删除
+    var isDown=true;//是否允许下载
+    var isPreview=true;//是否提供预览功能
     var layuiForm ={};
     var modelFile="";//模型文件分类id
     $(function(){
