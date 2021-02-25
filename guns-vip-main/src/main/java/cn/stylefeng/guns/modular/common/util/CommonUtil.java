@@ -1,8 +1,10 @@
 package cn.stylefeng.guns.modular.common.util;
 
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -119,7 +121,23 @@ public class CommonUtil {
 		return map;
 	}
 
-
+	/**
+	 * 创建多级目录文件
+	 * @param path
+	 * @throws IOException
+	 */
+	public static void createFile(String path){
+		if (StringUtils.isNotEmpty(path)) {
+			File file = new File(path);
+			if (!file.getParentFile().exists()) {
+				file.getParentFile().mkdirs();
+			}
+			try {
+				file.createNewFile();
+			}catch(Exception e){
+			}
+		}
+	}
 
 	
 

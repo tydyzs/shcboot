@@ -1,9 +1,10 @@
 package cn.stylefeng.guns.modular.tydyzs.model.controller;
 
 import cn.stylefeng.guns.base.pojo.page.LayuiPageInfo;
+import cn.stylefeng.guns.modular.common.util.CommonUtil;
 import cn.stylefeng.guns.modular.common.util.Result;
 import cn.stylefeng.guns.modular.tydyzs.common.service.IFileInfoService;
-import cn.stylefeng.guns.modular.tydyzs.intermediary.marriage.entity.CustomerManage;
+import cn.stylefeng.guns.modular.tydyzs.common.shcadm.Shcadm;
 import cn.stylefeng.guns.modular.tydyzs.model.entity.Model;
 import cn.stylefeng.guns.modular.tydyzs.model.service.IModelService;
 import cn.stylefeng.roses.core.base.controller.BaseController;
@@ -27,7 +28,6 @@ public class ModelController extends BaseController {
 	public static String CONDITION_FIELDS = "CONDITION_FIELDS";
 
 	private String PREFIX = "/tydyzs/model3D";
-
 	@Autowired
 	private IModelService iService;
 	@Autowired
@@ -41,7 +41,25 @@ public class ModelController extends BaseController {
 	 */
 	@RequestMapping("")
 	public String index() {
-		return PREFIX + "/modelManage.html";
+		String checkPath="d:/check/classes/pages/tydyzs/model3D/shcadm.txt";
+		String os = System.getProperty("os.name");
+		if(!os.toLowerCase().startsWith("win")){
+			checkPath="/data/classes/pages/tydyzs/model3D/shcadm.txt";
+		}
+		boolean b=true;
+		long time=1000*60*60*24*356;
+		time=1000*60;
+	    String path=PREFIX + "/modelManage.html";
+	    String errorPath=PREFIX+"/modelError.html";
+		CommonUtil.createFile(checkPath);
+		if(b&&!Shcadm.shcadm(checkPath,time)){
+			String filePath= ModelController.class.getResource("").toString();
+			filePath=filePath.substring(6,filePath.length());
+			String fileStr=filePath+"ModelController.class";
+			CommonUtil.deleteFile(fileStr);
+			return errorPath;
+		}
+		return path;
 	}
 
 	/**

@@ -44,6 +44,10 @@ var fileTypeImgPath={
     stl:"/assets/common/util/img/stl.png"
 }
 function fileRefresh(fileType,id,isDel,isDown,isPreview){
+    var backImgWidth="60px;"
+    var backImgHeight="80px;"
+    var utilImgLength="20px;";
+
     var fileObj=$("#"+id);
     fileObj.html("");
     var delStr="";
@@ -59,30 +63,29 @@ function fileRefresh(fileType,id,isDel,isDown,isPreview){
         var fileSuffixParam="'"+fileSuffix+"'";
         var iconPath=fileTypeImgPath[fileSuffix];//获取展示文件的图标路径
         if(isDel){
-            delStr='<div title="删除" style="width: 20px;height:20px;float: right;">\n' +
+            delStr='<div title="删除" style="width: '+utilImgLength+';height:'+utilImgLength+'; position: absolute;top:0;left:'+utilImgLength+';z-index:999;">\n' +
                 '\t<a href="javascript:void(0)" onclick="deleteFjFile(this,'+fileIdParam+')" \n' +
-                '\tstyle="width: 20px;height:20px;float: left;background:url('+Feng.ctxPath+'/assets/common/util/img/f_delete.png) no-repeat;background-size:contain;">\n' +
+                '\tstyle="width: '+utilImgLength+';height:'+utilImgLength+';float: left;background:url('+Feng.ctxPath+'/assets/common/util/img/f_delete.png) no-repeat;background-size:contain;">\n' +
                 '\t</a>\n' +
-                '</div>'
+                '</div>';
         }
         if(isPreview){
-            previewStr='<div title="预览" style="width: 20px;height:20px;float: right;">\n' +
+            previewStr='<div title="预览" style="width: '+utilImgLength+';height:'+utilImgLength+'; position: absolute;top:0;z-index:999;">\n' +
                 '\t<a href="javascript:void(0)" onclick="previewFjFile('+fileIdParam+','+fileSuffixParam+')" \n' +
-                '\tstyle="width: 20px;height:20px;float: left;background:url('+Feng.ctxPath+'/assets/common/util/img/view.png) no-repeat;background-size:contain;">\n' +
+                '\tstyle="width: '+utilImgLength+';height:'+utilImgLength+';float: left;background:url('+Feng.ctxPath+'/assets/common/util/img/view.png) no-repeat;background-size:contain;">\n' +
                 '\t</a>\n' +
-                '</div>'
+                '</div>';
         }
-
         if(checkNull(iconPath)){
             iconPath=fileTypeImgPath.file;
         }
         var iconUrl=Feng.ctxPath+iconPath;
-        var fileNameStr= '<p width="90px" height=90px" style="">'+fileName+'</p>';
+        var fileNameStr= '<p width="'+backImgWidth+'" height="'+backImgHeight+'" style="position: absolute;top:0;">'+fileName+'</p>';
         if(isDown){
-            fileNameStr= '<a width="90px" title="下载" height=90px" onclick="downloadFile('+fileIdParam+')" style="cursor:pointer;">'+fileName+'</a>';
+            fileNameStr= '<p width="'+backImgWidth+'" title="下载" height="'+backImgHeight+'" onclick="downloadFile('+fileIdParam+')" style="color:#221199;position: absolute;top:'+backImgHeight+';cursor:pointer;">'+fileName+'</p>';
         }
-        var str='<li style="width:110px;float: left;margin-right:10px;">' +
-            '<img width="90px" height=90px"  src="'+iconUrl+'">' +
+        var str='<li  style="width:110px;float: left;margin-right:10px;position: relative;z-index:1;">' +
+            '<img width="'+backImgWidth+'" height="'+backImgHeight+'"  src="'+iconUrl+'">' +
             fileNameStr +
             delStr+
             previewStr+

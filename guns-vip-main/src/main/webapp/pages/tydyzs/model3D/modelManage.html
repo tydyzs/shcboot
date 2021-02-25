@@ -46,12 +46,13 @@
                             </div>
                         </div>
                     </div>
-                    <table class="layui-table" id="egFormTable"  lay-data="{url:'${ctxPath}/model/list',page: true,height: 'full-240',cellMinWidth: 40}" lay-filter="egFormTable" >
+                    <table class="layui-table" id="egFormTable"  lay-data="{url:'${ctxPath}/model/list',page: true,height: 'full-160',cellMinWidth: 40}" lay-filter="egFormTable" >
                         <thead>
                             <tr>
                                 <th lay-data="{field: 'index',width:100,templet:function (d){return restructureValue(d,'index');} }">序号</th>
                                 <th lay-data="{field: 'modelName', align: 'center'}">模型名称</th>
                                 <th lay-data="{field: 'modelTypeValue', align: 'center'}">模型类型</th>
+                                <th lay-data="{field: 'remarks', align: 'center'}">备注信息</th>
                                 <th lay-data="{field: 'createDate', align: 'center', templet:'<div>{{ layui.util.toDateString(d.createDate,&quot;yyyy-MM-dd&quot;) }}</div>'}">登记日期</th>
                                 <th lay-data="{align: 'center', toolbar: '#tableBar'}">操作</th>
                             </tr>
