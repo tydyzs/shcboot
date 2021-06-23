@@ -190,3 +190,27 @@ function objToStr(obj){
 function strToObj(str){
     return JSON.parse(str);
 }
+/**
+ * 19.对象数组排序
+ * @param objs：排序数组
+ * @param key：排序字段
+ * @param type：排序方式（desc倒序，默认asc升序）
+ */
+function orderBy(objs,key,type){
+    for(var i=0;i<objs.length-1;i++){
+        for(var j=0;j<objs.length-(i+1);j++){
+            var obj1=objs[j];
+            var obj2=objs[j+1];
+            var val1=obj1[key];
+            var val2=obj2[key];
+            var b=val1>val2;//true:不满足当前顺序
+            if(type=="desc"){
+                b=val1<val2;//true:不满足当前顺序
+            }
+            if(b){
+                objs[j]=obj2;
+                objs[j+1]=obj1;
+            }
+        }
+    }
+}

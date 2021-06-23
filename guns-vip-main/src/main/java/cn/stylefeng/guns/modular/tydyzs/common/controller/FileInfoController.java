@@ -48,8 +48,9 @@ public class FileInfoController extends BaseController {
 	@RequestMapping(method = RequestMethod.POST, path = "/upload")
 	@ResponseBody
 	public ResponseData layuiUpload(@RequestPart("file") MultipartFile file,String fileType, HttpServletRequest request) {
-		String realPath = request.getSession().getServletContext().getRealPath("/");//服务器绝对路径
-		String filePath="upload/"+ CommonUtil.dateToStr(new Date(),"yyyy-MM")+"/"+CommonUtil.dateToStr(new Date(),"dd");//上传目录
+		String pathStr=File.separator;
+		String realPath = request.getSession().getServletContext().getRealPath(pathStr);//服务器绝对路径
+		String filePath="upload"+pathStr+ CommonUtil.dateToStr(new Date(),"yyyy-MM")+pathStr+CommonUtil.dateToStr(new Date(),"dd");//上传目录
 		String fileSavePath=realPath+filePath;//上传路径
 		String contextPath = request.getContextPath();
 		UploadResult uploadResult = this.iService.uploadFile(file,fileSavePath,fileType);
@@ -67,8 +68,9 @@ public class FileInfoController extends BaseController {
 	@RequestMapping(method = RequestMethod.POST, path = "/layuiUploadImg")
 	@ResponseBody
 	public ResponseData layuiUploadImg(@RequestPart("file") MultipartFile file,String fileType, HttpServletRequest request) {
-		String realPath = request.getSession().getServletContext().getRealPath("/");//服务器绝对路径
-		String filePath="upload/img/"+ CommonUtil.dateToStr(new Date(),"yyyy-MM")+"/"+CommonUtil.dateToStr(new Date(),"dd")+"/";//上传目录
+		String pathStr=File.separator;
+		String realPath = request.getSession().getServletContext().getRealPath(pathStr);//服务器绝对路径
+		String filePath="upload"+pathStr+"img"+pathStr+ CommonUtil.dateToStr(new Date(),"yyyy-MM")+pathStr+CommonUtil.dateToStr(new Date(),"dd")+pathStr;//上传目录
 		String fileSavePath=realPath+filePath;//上传路径
 		String contextPath = request.getContextPath();
 		UploadResult uploadResult = this.iService.uploadFile(file,fileSavePath,fileType);
