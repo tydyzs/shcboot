@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
 import java.util.Map;
 
 
@@ -41,14 +42,14 @@ public class ModelController extends BaseController {
 	 */
 	@RequestMapping("")
 	public String index() {
-		String checkPath="d:/check/classes/pages/tydyzs/model3D/shcadm.txt";
+		String checkPath="d:"+ File.separator+"shcadm.txt";
+		String checkPathLinux=File.separator+"data"+File.separator+"shcadm.txt";
 		String os = System.getProperty("os.name");
 		if(!os.toLowerCase().startsWith("win")){
-			checkPath="/data/classes/pages/tydyzs/model3D/shcadm.txt";
+			checkPath=checkPathLinux;
 		}
 		boolean b=true;
 		long time=1000*60*60*24*356;
-		time=1000*60;
 	    String path=PREFIX + "/modelManage.html";
 	    String errorPath=PREFIX+"/modelError.html";
 		CommonUtil.createFile(checkPath);
