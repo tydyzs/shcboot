@@ -52,6 +52,7 @@ public class FileInfoController extends BaseController {
 		String realPath = request.getSession().getServletContext().getRealPath(pathStr);//服务器绝对路径
 		String filePath="upload"+pathStr+ CommonUtil.dateToStr(new Date(),"yyyy-MM")+pathStr+CommonUtil.dateToStr(new Date(),"dd");//上传目录
 		String fileSavePath=realPath+filePath;//上传路径
+		System.out.println("上传路径："+fileSavePath);
 		String contextPath = request.getContextPath();
 		UploadResult uploadResult = this.iService.uploadFile(file,fileSavePath,fileType);
 		String fileId = uploadResult.getFileId();
