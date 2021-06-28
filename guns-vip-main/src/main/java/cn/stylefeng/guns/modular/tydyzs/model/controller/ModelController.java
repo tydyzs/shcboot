@@ -9,11 +9,15 @@ import cn.stylefeng.guns.modular.tydyzs.model.entity.Model;
 import cn.stylefeng.guns.modular.tydyzs.model.service.IModelService;
 import cn.stylefeng.roses.core.base.controller.BaseController;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.Map;
 
@@ -24,6 +28,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/model")
 @Validated
+@Slf4j
 public class ModelController extends BaseController {
 
 	public static String CONDITION_FIELDS = "CONDITION_FIELDS";
@@ -34,6 +39,10 @@ public class ModelController extends BaseController {
 	@Autowired
 	private IFileInfoService iFileInfoService;
 
+
+
+	@Value("${myParam.shc}")
+	private String shc;
 	/**
 	 * 跳转到主页面
 	 *
@@ -41,13 +50,17 @@ public class ModelController extends BaseController {
 	 * @Date 2019-06-15
 	 */
 	@RequestMapping("")
-	public String index() {
-		String checkPath="d:"+ File.separator+"shcadm.txt";
-		String checkPathLinux=File.separator+"data"+File.separator+"shcadm.txt";
+	public String index( HttpServletRequest request) {
+		log.info(request.getContextPath());
+		log.info(this.shc);
+		String checkPath="d:"+ File.separator+"shcadm.txt";//windows目录：d:/shcadm.txt
+		String checkPathLinux=File.separator+"data"+File.separator+"shcadm.txt";//linux目录：/data/shcadm.txt
 		String os = System.getProperty("os.name");
+		log.info(os);
 		if(!os.toLowerCase().startsWith("win")){
 			checkPath=checkPathLinux;
 		}
+		log.info(checkPath);
 		boolean b=true;
 		long time=1000*60*60*24*356;
 	    String path=PREFIX + "/modelManage.html";
@@ -60,6 +73,10 @@ public class ModelController extends BaseController {
 			CommonUtil.deleteFile(fileStr);
 			return errorPath;
 		}
+		//字符串模板加载器
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("username","shc");
+		modelAndView.setViewName(path);
 		return path;
 	}
 
